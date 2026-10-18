@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
         <div className="flex items-center gap-1.5 text-slate/70 text-[11px] mt-8 pt-6 border-t border-champagne-border/80">
           <span>Crafted with</span>
           <Heart className="w-3 h-3 text-rose fill-rose" />
-          <span>for Vineeth &amp; Alida • 2026</span>
+          <span>for Vineeth &amp; Alida • 2027</span>
         </div>
       </div>
     </footer>

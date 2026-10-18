@@ -15,17 +15,17 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({ onOpen, guestName })
     if (isOpen) return;
     setIsOpen(true);
 
-    // Start background music immediately upon guest interaction
+    // Audio starts with gentle volume fade-in synchronised with the doors swinging open
     if (weddingConfig.audio.enabled) {
-      weddingAudio.play().catch(() => {});
+      weddingAudio.playWithFadeIn(2200, 0.65).catch(() => {});
     }
 
     onOpen();
 
-    // Remove doors from DOM once transition completes
+    // Cleanly unmount doors once perspective animation finishes
     setTimeout(() => {
       setIsRemoved(true);
-    }, 1150);
+    }, 1250);
   };
 
   if (isRemoved) return null;
@@ -41,79 +41,101 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({ onOpen, guestName })
           handleEnter();
         }
       }}
-      aria-label="Open wedding reception invitation"
-      className="fixed inset-0 z-50 overflow-hidden cursor-pointer select-none"
+      aria-label="Tap to enter wedding reception invitation"
+      style={{ perspective: '1400px' }}
+      className="fixed inset-0 z-50 overflow-hidden cursor-pointer select-none bg-transparent"
     >
       {/* =======================================================================
-          LEFT DOOR PANEL
+          LEFT DOOR (Swings open to the left on Y-axis with 3D perspective)
           ======================================================================= */}
       <div
         style={{
-          transform: isOpen ? 'translate3d(-100%, 0, 0)' : 'translate3d(0, 0, 0)',
-          transition: 'transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)',
+          transformOrigin: 'left center',
+          transform: isOpen
+            ? 'rotateY(-84deg) translate3d(-15%, 0, -60px)'
+            : 'rotateY(0deg) translate3d(0, 0, 0)',
+          opacity: isOpen ? 0 : 1,
+          transition:
+            'transform 1.15s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.05s cubic-bezier(0.76, 0, 0.24, 1)',
         }}
-        className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-br from-[#0F1E18] via-[#14261F] to-[#182E25] border-r border-gold/40 shadow-2xl flex items-center justify-end overflow-hidden will-change-transform"
+        className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#0C1914] via-[#12241C] to-[#152B21] border-r border-gold/50 shadow-2xl overflow-hidden will-change-transform"
       >
         {/* Subtle ambient botanical lighting */}
-        <div className="absolute top-1/4 right-0 w-80 h-80 rounded-full bg-gold/10 blur-3xl pointer-events-none" />
-        {/* Ornate corner flourish */}
-        <div className="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-gold/30 rounded-tl-sm pointer-events-none" />
-        <div className="absolute bottom-6 left-6 w-8 h-8 border-b-2 border-l-2 border-gold/30 rounded-bl-sm pointer-events-none" />
+        <div className="absolute top-1/4 right-0 w-72 h-72 rounded-full bg-gold/10 blur-3xl pointer-events-none" />
+        {/* Corner filigree accents */}
+        <div className="absolute top-6 left-6 w-7 h-7 border-t border-l border-gold/40 pointer-events-none" />
+        <div className="absolute bottom-6 left-6 w-7 h-7 border-b border-l border-gold/40 pointer-events-none" />
       </div>
 
       {/* =======================================================================
-          RIGHT DOOR PANEL
+          RIGHT DOOR (Swings open to the right on Y-axis with 3D perspective)
           ======================================================================= */}
       <div
         style={{
-          transform: isOpen ? 'translate3d(100%, 0, 0)' : 'translate3d(0, 0, 0)',
-          transition: 'transform 1.1s cubic-bezier(0.76, 0, 0.24, 1)',
+          transformOrigin: 'right center',
+          transform: isOpen
+            ? 'rotateY(84deg) translate3d(15%, 0, -60px)'
+            : 'rotateY(0deg) translate3d(0, 0, 0)',
+          opacity: isOpen ? 0 : 1,
+          transition:
+            'transform 1.15s cubic-bezier(0.76, 0, 0.24, 1), opacity 1.05s cubic-bezier(0.76, 0, 0.24, 1)',
         }}
-        className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-bl from-[#0F1E18] via-[#14261F] to-[#182E25] border-l border-gold/40 shadow-2xl flex items-center justify-start overflow-hidden will-change-transform"
+        className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[#0C1914] via-[#12241C] to-[#152B21] border-l border-gold/50 shadow-2xl overflow-hidden will-change-transform"
       >
-        {/* Subtle ambient botanical lighting */}
-        <div className="absolute bottom-1/4 left-0 w-80 h-80 rounded-full bg-peacock/10 blur-3xl pointer-events-none" />
-        {/* Ornate corner flourish */}
-        <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-gold/30 rounded-tr-sm pointer-events-none" />
-        <div className="absolute bottom-6 right-6 w-8 h-8 border-b-2 border-r-2 border-gold/30 rounded-br-sm pointer-events-none" />
+        {/* Subtle ambient lighting */}
+        <div className="absolute bottom-1/4 left-0 w-72 h-72 rounded-full bg-peacock/10 blur-3xl pointer-events-none" />
+        {/* Corner filigree accents */}
+        <div className="absolute top-6 right-6 w-7 h-7 border-t border-r border-gold/40 pointer-events-none" />
+        <div className="absolute bottom-6 right-6 w-7 h-7 border-b border-r border-gold/40 pointer-events-none" />
       </div>
 
       {/* =======================================================================
-          CENTER SEAM EMBLEM & TYPOGRAPHY
-          Seamlessly centered across the parting doors
+          CENTER GOLD SEAM LINE (The starting point for the parting reveal)
           ======================================================================= */}
       <div
         style={{
           opacity: isOpen ? 0 : 1,
-          transform: isOpen ? 'scale(0.95)' : 'scale(1)',
-          transition: 'opacity 0.45s ease, transform 0.45s ease',
+          transform: isOpen ? 'scaleY(0.7)' : 'scaleY(1)',
+          transition: 'opacity 0.4s ease, transform 0.5s ease',
         }}
-        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 text-center z-10"
+        className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1.5px] bg-gradient-to-b from-transparent via-gold-shimmer to-transparent pointer-events-none z-10"
+      />
+
+      {/* =======================================================================
+          CENTER EMBLEM & TYPOGRAPHY
+          ======================================================================= */}
+      <div
+        style={{
+          opacity: isOpen ? 0 : 1,
+          transform: isOpen ? 'scale(0.94) translateY(-10px)' : 'scale(1) translateY(0)',
+          transition: 'opacity 0.45s ease, transform 0.5s ease',
+        }}
+        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-6 text-center z-20"
       >
         {/* Monogram Crest */}
-        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-gold/60 bg-[#162920]/90 shadow-gold-glow flex items-center justify-center mb-4 sm:mb-6">
+        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-gold/70 bg-[#12241C]/95 shadow-gold-glow flex items-center justify-center mb-4 sm:mb-5">
           <span className="font-display font-semibold text-lg sm:text-xl text-gold-shimmer tracking-widest pl-1">
-            V&amp;A
+            {weddingConfig.couple.monogram}
           </span>
         </div>
 
         {/* Small tracked headline */}
-        <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-pearl-100/70 font-medium mb-2">
-          Wedding Reception Invitation
+        <p className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-pearl-100/70 font-medium mb-1.5 sm:mb-2">
+          The Wedding Reception of
         </p>
 
         {/* Couple Names */}
-        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light text-pearl tracking-tight leading-tight mb-2 sm:mb-3">
-          Vineeth{' '}
-          <span className="font-script text-3xl sm:text-5xl md:text-6xl text-gold px-1 font-normal">
+        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light text-pearl tracking-tight leading-tight mb-2 sm:mb-3 drop-shadow-md">
+          {weddingConfig.couple.groom.name}{' '}
+          <span className="font-script text-3xl sm:text-5xl md:text-6xl text-gold font-normal px-1">
             &amp;
           </span>{' '}
-          Alida
+          {weddingConfig.couple.bride.name}
         </h1>
 
-        {/* Date & Location preview */}
-        <p className="font-display italic text-sm sm:text-lg text-pearl/85 tracking-wide max-w-sm mb-6">
-          {weddingConfig.reception.formattedDate} • {weddingConfig.reception.city}
+        {/* Confirmed Date & Location preview */}
+        <p className="font-display italic text-sm sm:text-base text-pearl/85 tracking-wide max-w-sm mb-5 sm:mb-6">
+          {weddingConfig.reception.formattedDate}
         </p>
 
         {/* Guest Personalization Pill */}
@@ -123,11 +145,11 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({ onOpen, guestName })
           </div>
         )}
 
-        {/* Elegant Parting Cue */}
-        <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-black/40 border border-gold/50 text-gold-shimmer text-xs tracking-[0.2em] uppercase font-medium shadow-lg backdrop-blur-md animate-pulse">
-          <span>⟨</span>
-          <span className="text-[11px] font-sans">Tap to Enter</span>
-          <span>⟩</span>
+        {/* Subtle Parting Cue */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-gold/40 text-gold-shimmer text-xs tracking-[0.2em] uppercase font-medium shadow-md backdrop-blur-md animate-pulse">
+          <span className="text-[10px]">⟨</span>
+          <span className="text-[11px] font-sans">Tap to enter</span>
+          <span className="text-[10px]">⟩</span>
         </div>
       </div>
     </div>

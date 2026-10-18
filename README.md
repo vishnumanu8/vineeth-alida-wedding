@@ -129,13 +129,13 @@ You **do not** need to edit complex React code to update the wedding details! Al
 Open `src/config/weddingConfig.ts` and update:
 ```typescript
 reception: {
-  isoDateTime: "2026-11-29T18:00:00+05:30", // Your ISO date & time
-  formattedDate: "Sunday, 29 November 2026",
+  isoDateTime: "2027-01-07T18:00:00+05:30", // Confirmed ISO date & time
+  formattedDate: "Thursday, 7 January 2027",
   formattedTime: "6:00 PM Onwards",
-  venueName: "The Grand Pavilion",
-  venueHall: "Imperial Banquet Hall",
-  fullAddress: "The Grand Pavilion, Marine Drive Road, Kochi, Kerala 682011",
-  googleMapsUrl: "https://maps.google.com/?q=The+Grand+Pavilion+Kochi",
+  venueName: "Mangrove Aquaventures",
+  venueHall: "Backwater Lawns & Banquet",
+  fullAddress: "Vadakkemukku, Nedungolam, Paravoor, Kerala 691334",
+  googleMapsUrl: "https://share.google/lS2sSzxGjm4a2iZhD",
   ...
 },
 wishes: {

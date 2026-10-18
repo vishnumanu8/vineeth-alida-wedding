@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Sparkles } from 'lucide-react';
+import { Plane, Heart, Sparkles } from 'lucide-react';
 import { weddingConfig } from '../config/weddingConfig';
 import { WeddingImage } from './WeddingImage';
 
@@ -9,45 +9,65 @@ export const CoupleSection: React.FC = () => {
 
   return (
     <section
-      id="couple-profiles"
+      id="invitation-story"
       className="relative py-14 sm:py-24 px-4 sm:px-6 bg-pearl text-charcoal overflow-hidden"
     >
       {/* Subtle radiant background aura */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-champagne/40 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-champagne/45 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
-        {/* Section Headline */}
+        {/* ===================================================================
+            FAMILY INVITATION HEADLINE & MESSAGE
+            =================================================================== */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center mb-8 sm:mb-12"
+          className="flex flex-col items-center mb-8 sm:mb-12 max-w-xl mx-auto"
         >
-          <div className="flex items-center gap-2.5 mb-2">
+          <div className="flex items-center gap-2.5 mb-2.5">
             <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-r from-transparent to-gold" />
-            <span className="font-display italic text-xs sm:text-sm text-gold tracking-widest uppercase">
-              The Couple
+            <span className="font-display italic text-xs sm:text-sm text-gold tracking-widest uppercase font-medium">
+              {family.invitationHeadline}
             </span>
             <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-l from-transparent to-gold" />
           </div>
 
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-botanical tracking-tight">
-            Vineeth &amp; Alida
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-botanical tracking-tight leading-tight">
+            Our New Journey Begins
           </h2>
 
-          <p className="font-sans text-xs sm:text-sm text-slate max-w-md mx-auto mt-2 leading-relaxed">
-            Two lives, two journeys, and one shared promise of love, laughter, and companionship.
+          <p className="font-sans text-xs sm:text-sm md:text-base text-slate mt-3 leading-relaxed">
+            {family.invitationMessage}
           </p>
+
+          {/* Micro-Interaction: Dubai ✈ Kerala journey detail */}
+          {couple.originJourney && (
+            <div className="mt-5 inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-pearl border border-gold/40 shadow-sm text-xs text-botanical">
+              <span className="font-medium text-charcoal">{couple.originJourney.from}</span>
+              <div className="relative flex items-center justify-center text-gold">
+                <span className="w-6 sm:w-8 h-[1px] border-t border-gold/50" />
+                <Plane className="w-3.5 h-3.5 text-gold mx-1 rotate-45 transform" />
+                <span className="w-6 sm:w-8 h-[1px] border-t border-gold/50" />
+              </div>
+              <span className="font-medium text-charcoal">{couple.originJourney.to}</span>
+              <span className="text-slate/70 text-[11px] hidden sm:inline pl-1">
+                • {couple.originJourney.note}
+              </span>
+            </div>
+          )}
         </motion.div>
 
-        {/* Individual Profile Cards with Portraits & Subtle One-Liners */}
+        {/* ===================================================================
+            COUPLE PROFILE CARDS WITH PORTRAITS & SUBTLE ONE-LINERS
+            =================================================================== */}
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
           {/* Groom Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="p-6 sm:p-8 rounded-3xl bg-pearl border border-champagne-border/90 shadow-wedding flex flex-col items-center text-center relative overflow-hidden group hover:border-gold/50 transition-colors"
           >
@@ -84,7 +104,7 @@ export const CoupleSection: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="p-6 sm:p-8 rounded-3xl bg-pearl border border-champagne-border/90 shadow-wedding flex flex-col items-center text-center relative overflow-hidden group hover:border-gold/50 transition-colors"
           >
@@ -118,11 +138,13 @@ export const CoupleSection: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Heartfelt Families Note */}
+        {/* ===================================================================
+            FAMILY BLESSINGS NOTE
+            =================================================================== */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="mt-10 sm:mt-14 flex flex-col items-center"
         >
