@@ -1,11 +1,13 @@
-import React from 'react';
-import { Share2, Heart } from 'lucide-react';
+import React, { useState } from 'react';
+import { Share2, Heart, Download } from 'lucide-react';
 import { weddingConfig } from '../config/weddingConfig';
 
 export const Footer: React.FC = () => {
   const { couple, family, reception, metadata } = weddingConfig;
+  const [sharing, setSharing] = useState(false);
 
   const handleShareWhatsApp = async () => {
+    setSharing(true);
     const canonicalSiteUrl =
       metadata?.siteUrl || 'https://vishnumanu8.github.io/vineeth-alida-wedding/';
 
@@ -24,9 +26,45 @@ export const Footer: React.FC = () => {
     const shareTitle = `Wedding Reception Invitation — ${couple.combinedNames}`;
     const shareText = `*Wedding Reception Invitation — ${couple.combinedNames}* 💐\n\nYou are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} at ${reception.venueName}, ${reception.city}.\n\nView digital invitation & directions:\n${shareUrl}`;
 
-    // 1. Primary: Native Web Share API (iOS Safari, Android Chrome)
-    // Invokes the native share sheet directly with rich link preview, opening WhatsApp
-    // without launching an empty or black browser tab.
+    // Load actual invitation image file for native media sharing
+    const imageUrl = metadata?.ogImage || '/images/og-wedding.jpg';
+    let imageFile: File | null = null;
+    try {
+      const res = await fetch(imageUrl);
+      if (res.ok) {
+        const blob = await res.blob();
+        imageFile = new File([blob], 'Vineeth-Alida-Wedding-Invitation.jpg', {
+          type: blob.type || 'image/jpeg',
+        });
+      }
+    } catch {
+      // Image fetch fallback
+    }
+
+    // 1. Primary: Native Web Share API with REAL IMAGE FILE (iOS Safari, Android Chrome)
+    // Attaches the actual wedding invitation photo directly into WhatsApp with the invitation caption!
+    if (imageFile && navigator.canShare) {
+      try {
+        const fileShareData = {
+          files: [imageFile],
+          title: shareTitle,
+          text: shareText,
+        };
+        if (navigator.canShare(fileShareData)) {
+          await navigator.share(fileShareData);
+          setSharing(false);
+          return;
+        }
+      } catch (err) {
+        // If user cancelled the share dialog, do not open anything
+        if ((err as Error)?.name === 'AbortError') {
+          setSharing(false);
+          return;
+        }
+      }
+    }
+
+    // 2. Secondary: Native Share with Link (if file sharing not supported on this browser)
     if (navigator.share) {
       try {
         await navigator.share({
@@ -34,16 +72,18 @@ export const Footer: React.FC = () => {
           text: `You are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} at ${reception.venueName}, ${reception.city}.`,
           url: shareUrl,
         });
+        setSharing(false);
         return;
       } catch (err) {
         // If user cancelled the share dialog, do not open anything
         if ((err as Error)?.name === 'AbortError') {
+          setSharing(false);
           return;
         }
       }
     }
 
-    // 2. Direct WhatsApp Universal link fallback
+    // 3. Fallback: Direct WhatsApp Universal link
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
 
     const isMobile =
@@ -58,6 +98,7 @@ export const Footer: React.FC = () => {
     } else {
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     }
+    setSharing(false);
   };
 
   return (
@@ -77,15 +118,26 @@ export const Footer: React.FC = () => {
         </p>
 
         {/* Share Invitation Action */}
-        <div className="my-6">
+        <div className="my-6 flex flex-col sm:flex-row items-center justify-center gap-3">
           <button
             type="button"
             onClick={handleShareWhatsApp}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-pearl hover:bg-champagne-light border border-gold/40 text-xs sm:text-sm font-medium text-botanical shadow-sm transition-all hover:shadow cursor-pointer min-h-[44px]"
+            disabled={sharing}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-pearl hover:bg-champagne-light border border-gold/40 text-xs sm:text-sm font-medium text-botanical shadow-sm transition-all hover:shadow cursor-pointer min-h-[44px]"
           >
             <Share2 className="w-3.5 h-3.5 text-gold" />
-            <span>Share Invitation via WhatsApp</span>
+            <span>{sharing ? 'Preparing Invitation...' : 'Share Invitation via WhatsApp'}</span>
           </button>
+
+          <a
+            href="/images/og-wedding.jpg"
+            download="Vineeth-Alida-Wedding-Invitation.jpg"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-champagne-light/60 hover:bg-champagne border border-gold/25 text-xs font-medium text-slate hover:text-botanical transition-all cursor-pointer min-h-[44px]"
+            title="Download invitation card image"
+          >
+            <Download className="w-3.5 h-3.5 text-gold" />
+            <span>Save Invitation Card</span>
+          </a>
         </div>
 
         {/* Family Greeting */}
