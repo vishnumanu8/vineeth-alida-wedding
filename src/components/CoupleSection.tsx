@@ -1,11 +1,87 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Plane, Heart, Sparkles } from 'lucide-react';
+import { Heart, Sparkles } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { weddingConfig } from '../config/weddingConfig';
 import { WeddingImage } from './WeddingImage';
 
+gsap.registerPlugin(ScrollTrigger);
+
 export const CoupleSection: React.FC = () => {
   const { couple, family } = weddingConfig;
+
+  const flightRouteRef = useRef<HTMLDivElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
+  const planeRef = useRef<SVGGElement>(null);
+
+  // Scroll-Linked Dubai-to-Kerala Flight Animation
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const path = pathRef.current;
+      const plane = planeRef.current;
+      const container = flightRouteRef.current;
+      if (!path || !plane || !container) return;
+
+      const pathLength = path.getTotalLength();
+
+      // Initially line is drawn to 0% (offset = full length)
+      gsap.set(path, {
+        strokeDasharray: pathLength,
+        strokeDashoffset: pathLength,
+      });
+
+      // Place plane at Dubai start point
+      const startPt = path.getPointAtLength(0);
+      gsap.set(plane, {
+        x: startPt.x,
+        y: startPt.y,
+        rotation: -25,
+      });
+
+      const flightProgress = { val: 0 };
+
+      gsap.to(flightProgress, {
+        val: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: container,
+          start: 'top 85%',
+          end: 'bottom 45%',
+          scrub: 0.6,
+          onUpdate: (self) => {
+            const p = self.progress;
+
+            // Draw line from Dubai to Kerala
+            const currentOffset = pathLength * (1 - p);
+            path.style.strokeDashoffset = `${currentOffset}`;
+
+            // Move airplane along the trajectory arc
+            const currentLen = p * pathLength;
+            const pt = path.getPointAtLength(currentLen);
+
+            // Calculate tangent angle for smooth airplane banking
+            const sampleDist = 2;
+            const nextLen = Math.min(pathLength, currentLen + sampleDist);
+            const prevLen = Math.max(0, currentLen - sampleDist);
+            const nextPt = path.getPointAtLength(nextLen);
+            const prevPt = path.getPointAtLength(prevLen);
+            const angle =
+              Math.atan2(nextPt.y - prevPt.y, nextPt.x - prevPt.x) *
+              (180 / Math.PI);
+
+            gsap.set(plane, {
+              x: pt.x,
+              y: pt.y,
+              rotation: angle,
+            });
+          },
+        },
+      });
+    }, flightRouteRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
@@ -45,21 +121,151 @@ export const CoupleSection: React.FC = () => {
             {family.invitationMessage}
           </p>
 
-          {/* Micro-Interaction: Dubai ✈ Kerala journey detail */}
+          {/* ===================================================================
+              ANIMATED DUBAI ✈ KERALA FLIGHT ROUTE (Scroll-Linked Scrub)
+              =================================================================== */}
           {couple.originJourney && (
-            <div className="mt-5 inline-flex flex-col sm:flex-row items-center gap-1 sm:gap-2.5 px-4 py-2 sm:py-1.5 rounded-2xl sm:rounded-full bg-pearl border border-gold/40 shadow-sm text-xs text-botanical">
-              <div className="flex items-center gap-2">
-                <span className="font-medium text-charcoal">{couple.originJourney.from}</span>
-                <div className="relative flex items-center justify-center text-gold">
-                  <span className="w-5 sm:w-8 h-[1px] border-t border-gold/50" />
-                  <Plane className="w-3.5 h-3.5 text-gold mx-1 rotate-45 transform" />
-                  <span className="w-5 sm:w-8 h-[1px] border-t border-gold/50" />
-                </div>
-                <span className="font-medium text-charcoal">{couple.originJourney.to}</span>
-              </div>
-              <span className="text-slate/70 text-[11px] sm:pl-1 text-center sm:text-left">
-                • {couple.originJourney.note}
-              </span>
+            <div
+              ref={flightRouteRef}
+              className="mt-6 w-full max-w-xs sm:max-w-sm flex flex-col items-center select-none"
+              aria-label="Flight journey from Dubai to Kerala"
+            >
+              <svg
+                viewBox="0 0 320 80"
+                className="w-full h-auto overflow-visible drop-shadow-sm"
+              >
+                <defs>
+                  <linearGradient
+                    id="flightArcGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stopColor="#C89D54" />
+                    <stop offset="50%" stopColor="#F0D49E" />
+                    <stop offset="100%" stopColor="#C89D54" />
+                  </linearGradient>
+                </defs>
+
+                {/* Background Dotted Flight Path */}
+                <path
+                  d="M 35 52 Q 160 8 285 52"
+                  stroke="#E2CEB0"
+                  strokeWidth="1.5"
+                  strokeDasharray="4 4"
+                  fill="none"
+                />
+
+                {/* Animated Gold Flight Path (Progressively draws on scroll) */}
+                <path
+                  ref={pathRef}
+                  d="M 35 52 Q 160 8 285 52"
+                  stroke="url(#flightArcGradient)"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  fill="none"
+                  className="drop-shadow-[0_0_6px_rgba(240,212,158,0.85)]"
+                />
+
+                {/* Dubai Marker (Origin) */}
+                <g>
+                  <circle
+                    cx="35"
+                    cy="52"
+                    r="8"
+                    fill="none"
+                    stroke="#D4A359"
+                    strokeWidth="1"
+                    opacity="0.35"
+                  />
+                  <circle
+                    cx="35"
+                    cy="52"
+                    r="3.5"
+                    fill="#B88A45"
+                    stroke="#FFF9F1"
+                    strokeWidth="1.2"
+                  />
+                  <text
+                    x="35"
+                    y="38"
+                    textAnchor="middle"
+                    className="font-display italic text-[10px] fill-[#B88A45]"
+                  >
+                    Departure
+                  </text>
+                  <text
+                    x="35"
+                    y="72"
+                    textAnchor="middle"
+                    className="font-sans font-semibold text-[11px] fill-[#11211A] tracking-wider uppercase"
+                  >
+                    {couple.originJourney.from}
+                  </text>
+                </g>
+
+                {/* Kerala Marker (Destination / Home) */}
+                <g>
+                  <circle
+                    cx="285"
+                    cy="52"
+                    r="8"
+                    fill="none"
+                    stroke="#315B4B"
+                    strokeWidth="1"
+                    opacity="0.35"
+                  />
+                  <circle
+                    cx="285"
+                    cy="52"
+                    r="3.5"
+                    fill="#315B4B"
+                    stroke="#F0D49E"
+                    strokeWidth="1.2"
+                  />
+                  <text
+                    x="285"
+                    y="38"
+                    textAnchor="middle"
+                    className="font-display italic text-[10px] fill-[#315B4B]"
+                  >
+                    Destination
+                  </text>
+                  <text
+                    x="285"
+                    y="72"
+                    textAnchor="middle"
+                    className="font-sans font-semibold text-[11px] fill-[#11211A] tracking-wider uppercase"
+                  >
+                    {couple.originJourney.to}
+                  </text>
+                </g>
+
+                {/* Traveling Airplane Icon */}
+                <g
+                  ref={planeRef}
+                  className="will-change-transform pointer-events-none"
+                >
+                  {/* Subtle particle trail */}
+                  <circle cx="-10" cy="0" r="1.5" fill="#F0D49E" opacity="0.6" />
+                  <circle cx="-16" cy="0" r="1.0" fill="#D4A359" opacity="0.4" />
+
+                  {/* Airplane Body */}
+                  <path
+                    d="M 11 0 L -3 -6 L -1 -1.5 L -7 -1.5 L -9 -4 L -11 -4 L -10 0 L -11 4 L -9 4 L -7 1.5 L -1 1.5 L -3 6 Z"
+                    fill="#C89D54"
+                    stroke="#FFF9F1"
+                    strokeWidth="0.8"
+                    className="drop-shadow-[0_1px_4px_rgba(200,157,84,0.6)]"
+                  />
+                </g>
+              </svg>
+
+              {/* Note below flight trajectory */}
+              <p className="text-slate/75 text-[11px] sm:text-xs font-sans mt-1.5 tracking-wide font-light">
+                • {couple.originJourney.note} •
+              </p>
             </div>
           )}
         </motion.div>

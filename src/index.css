@@ -8,13 +8,11 @@
     --safe-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  html {
-    -webkit-tap-highlight-color: transparent;
-  }
-
+  html,
   body {
-    background-color: #FFF9F1;
+    background-color: #07130E;
     color: #282B2A;
+    -webkit-tap-highlight-color: transparent;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

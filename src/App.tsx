@@ -36,7 +36,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#102019] text-charcoal flex flex-col font-sans selection:bg-gold/20 selection:text-botanical-dark">
+    <div className="min-h-screen bg-[#07130E] text-charcoal flex flex-col font-sans selection:bg-gold/20 selection:text-botanical-dark">
       {/* 1. Cinematic Emerald Aperture Double-Door Parting Reveal */}
       {!hasOpenedDoors && (
         <OpeningDoors
