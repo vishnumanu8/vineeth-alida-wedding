@@ -12,6 +12,8 @@
   body {
     background-color: #07130E;
     color: #282B2A;
+    width: 100%;
+    overflow-x: hidden;
     -webkit-tap-highlight-color: transparent;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     text-rendering: optimizeLegibility;

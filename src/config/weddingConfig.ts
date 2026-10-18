@@ -16,6 +16,14 @@ export interface CoupleProfile {
   originCity: string;
 }
 
+export interface WishRecipient {
+  id: string;
+  name: string;
+  role: string;
+  phone: string; // WhatsApp number with country code, no + or spaces, e.g. "919876543210"
+  label?: string;
+}
+
 export interface WeddingConfig {
   couple: {
     groom: CoupleProfile;
@@ -70,7 +78,8 @@ export interface WeddingConfig {
 
   wishes: {
     enabled: boolean;
-    whatsappNumber: string;
+    recipients: WishRecipient[];
+    whatsappNumber: string; // Default / primary fallback number
     defaultRecipientName: string;
     presetMessages: string[];
   };
@@ -100,9 +109,9 @@ export const weddingConfig: WeddingConfig = {
   couple: {
     groom: {
       name: "Vineeth",
-      fullName: "Vineeth",
+      fullName: "Vineeth M",
       title: "The Groom",
-      familyNote: "Son of Mr. & Mrs. Family",
+      familyNote: "S/o Smt. Sobhana S. & Shri Madhavan Nair",
       oneLiner: "Balancing life's ledger with joy, heart & humor",
       portrait: "/images/groom-vineeth.jpg",
       originCity: "Dubai",
@@ -111,7 +120,7 @@ export const weddingConfig: WeddingConfig = {
       name: "Alida",
       fullName: "Alida",
       title: "The Bride",
-      familyNote: "Daughter of Mr. & Mrs. Family",
+      familyNote: "D/o Smt. . & Shri ",
       oneLiner: "Advocating for endless love, laughter & forever",
       portrait: "/images/bride-alida.jpg",
       originCity: "Kerala",
@@ -152,8 +161,10 @@ export const weddingConfig: WeddingConfig = {
     googleMapsUrl: "https://share.google/lS2sSzxGjm4a2iZhD",
     calendarDetails: {
       title: "Wedding Reception of Vineeth & Alida",
-      description: "Join Vineeth and Alida for an evening of celebration, dining, and blessings at their wedding reception.",
-      location: "Mangrove Aquaventures, Vadakkemukku, Nedungolam, Paravoor, Kerala 691334",
+      description:
+        "Join Vineeth and Alida for an evening of celebration, dining, and blessings at their wedding reception.",
+      location:
+        "Mangrove Aquaventures, Vadakkemukku, Nedungolam, Paravoor, Kerala 691334",
     },
   },
 
@@ -183,6 +194,22 @@ export const weddingConfig: WeddingConfig = {
 
   wishes: {
     enabled: true,
+    recipients: [
+      {
+        id: "vineeth",
+        name: "Vineeth",
+        role: "Groom",
+        phone: "919876543210", // Vineeth's WhatsApp Number (editable)
+        label: "Vineeth (Groom)",
+      },
+      {
+        id: "alida",
+        name: "Alida",
+        role: "Bride",
+        phone: "919876543211", // Alida's WhatsApp Number (editable)
+        label: "Alida (Bride)",
+      },
+    ],
     whatsappNumber: "919876543210",
     defaultRecipientName: "Vineeth & Alida",
     presetMessages: [

@@ -146,6 +146,18 @@ export const CoupleSection: React.FC = () => {
                     <stop offset="50%" stopColor="#F0D49E" />
                     <stop offset="100%" stopColor="#C89D54" />
                   </linearGradient>
+
+                  <linearGradient
+                    id="flightPlaneGrad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stopColor="#C89D54" />
+                    <stop offset="60%" stopColor="#F5E2B8" />
+                    <stop offset="100%" stopColor="#D4A359" />
+                  </linearGradient>
                 </defs>
 
                 {/* Background Dotted Flight Path */}
@@ -242,22 +254,35 @@ export const CoupleSection: React.FC = () => {
                   </text>
                 </g>
 
-                {/* Traveling Airplane Icon */}
+                {/* Traveling Authentic Passenger Airplane Icon */}
                 <g
                   ref={planeRef}
                   className="will-change-transform pointer-events-none"
                 >
-                  {/* Subtle particle trail */}
-                  <circle cx="-10" cy="0" r="1.5" fill="#F0D49E" opacity="0.6" />
-                  <circle cx="-16" cy="0" r="1.0" fill="#D4A359" opacity="0.4" />
+                  {/* Luminous engine trail / contrail */}
+                  <circle cx="-14" cy="-3" r="1.2" fill="#F0D49E" opacity="0.75" />
+                  <circle cx="-20" cy="-3" r="0.8" fill="#D4A359" opacity="0.45" />
+                  <circle cx="-14" cy="3" r="1.2" fill="#F0D49E" opacity="0.75" />
+                  <circle cx="-20" cy="3" r="0.8" fill="#D4A359" opacity="0.45" />
 
-                  {/* Airplane Body */}
+                  {/* Authentic Passenger Airliner Silhouette */}
                   <path
-                    d="M 11 0 L -3 -6 L -1 -1.5 L -7 -1.5 L -9 -4 L -11 -4 L -10 0 L -11 4 L -9 4 L -7 1.5 L -1 1.5 L -3 6 Z"
-                    fill="#C89D54"
-                    stroke="#FFF9F1"
-                    strokeWidth="0.8"
-                    className="drop-shadow-[0_1px_4px_rgba(200,157,84,0.6)]"
+                    d="M 15 0 C 14.2 -0.8 12.5 -1.8 8.5 -1.8 L 3 -1.8 L -2 -13 C -2.6 -13.8 -4 -13.8 -4.5 -12.8 L -3 -1.8 L -8.5 -1.8 L -11.5 -7 C -12 -7.7 -13.2 -7.6 -13.4 -6.8 L -12.5 -1.5 L -15.5 -1 C -16.2 -0.5 -16.2 0.5 -15.5 1 L -12.5 1.5 L -13.4 6.8 C -13.2 7.6 -12 7.7 -11.5 7 L -8.5 1.8 L -3 1.8 L -4.5 12.8 C -4 13.8 -2.6 13.8 -2 13 L 3 1.8 L 8.5 1.8 C 12.5 1.8 14.2 0.8 15 0 Z"
+                    fill="url(#flightPlaneGrad)"
+                    stroke="#FFFDF7"
+                    strokeWidth="0.85"
+                    strokeLinejoin="round"
+                    className="drop-shadow-[0_2px_8px_rgba(200,157,84,0.75)]"
+                  />
+
+                  {/* Twin Jet Engines under main wings */}
+                  <rect x="-2.2" y="-4.8" width="4.5" height="1.8" rx="0.9" fill="#B88A45" stroke="#FFFDF7" strokeWidth="0.5" />
+                  <rect x="-2.2" y="3.0" width="4.5" height="1.8" rx="0.9" fill="#B88A45" stroke="#FFFDF7" strokeWidth="0.5" />
+
+                  {/* Cockpit Window Accent */}
+                  <path
+                    d="M 10 -0.8 Q 12 0 10 0.8 Z"
+                    fill="#07130E"
                   />
                 </g>
               </svg>

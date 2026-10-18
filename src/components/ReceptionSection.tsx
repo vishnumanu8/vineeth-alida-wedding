@@ -111,7 +111,7 @@ export const ReceptionSection: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="relative rounded-3xl bg-pearl border-2 border-gold/40 shadow-wedding-lg overflow-hidden p-6 sm:p-10 text-center"
+        className="relative rounded-3xl bg-pearl border-2 border-gold/40 shadow-wedding-lg overflow-hidden p-4 sm:p-10 text-center max-w-full"
       >
         {/* Restrained Gilded Corner Filigree */}
         <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-gold pointer-events-none" />
@@ -123,8 +123,8 @@ export const ReceptionSection: React.FC = () => {
             PART 1: CALENDAR-INSPIRED DATE & TIME COMPOSITION
             Places "07" prominently beside "JANUARY 2027" and "6:00 PM onwards"
             =================================================================== */}
-        <div className="flex flex-col items-center">
-          <div className="inline-flex items-center gap-4 sm:gap-6 p-4 sm:p-6 rounded-2xl bg-champagne-light/60 border border-gold/30 shadow-sm">
+        <div className="flex flex-col items-center max-w-full">
+          <div className="inline-flex items-center gap-3 sm:gap-6 p-3 sm:p-6 rounded-2xl bg-champagne-light/60 border border-gold/30 shadow-sm max-w-full">
             {/* Prominent Day Number "07" */}
             <div className="font-display text-6xl sm:text-7xl font-light text-botanical leading-none tracking-tight select-none">
               07

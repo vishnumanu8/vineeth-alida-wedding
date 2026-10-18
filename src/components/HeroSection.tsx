@@ -156,7 +156,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
     <section
       ref={heroRef}
       onClick={triggerShimmer}
-      className="relative w-full h-screen min-h-[100dvh] flex flex-col justify-between items-center text-center p-4 sm:p-8 select-none overflow-hidden bg-[#07130E] cursor-pointer pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1.25rem,env(safe-area-inset-bottom))]"
+      style={{
+        height: '100dvh',
+        minHeight: '100dvh',
+        maxHeight: '100dvh',
+      }}
+      className="relative w-full h-[100dvh] min-h-[100dvh] max-h-[100dvh] flex flex-col justify-between items-center text-center px-4 sm:px-8 select-none overflow-hidden bg-[#07130E] cursor-pointer pt-[max(0.75rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
       aria-label="Vineeth & Alida Wedding Reception Hero"
     >
       {/* =======================================================================
@@ -208,7 +213,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
       {/* =======================================================================
           TOP BAR: REFINED MONOGRAM & OPTIONAL GUEST GREETING (ZERO UNNECESSARY FLOATING CONTROLS)
           ======================================================================= */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto flex items-center justify-between pointer-events-auto">
+      <div className="relative z-10 w-full max-w-5xl mx-auto flex items-center justify-between pointer-events-auto shrink-0">
         {/* Monogram Crest */}
         <div className="w-8 h-8 rounded-full border border-gold/40 bg-black/40 backdrop-blur-md flex items-center justify-center text-pearl font-display font-medium text-xs shadow-md">
           {couple.monogram}
@@ -230,13 +235,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
           ======================================================================= */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center my-auto px-4 pointer-events-none will-change-transform"
+        className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center my-auto py-1 px-2 pointer-events-none will-change-transform"
       >
         {/* Line 1: Refined Wedding Reception Label */}
-        <div className="overflow-hidden mb-2 sm:mb-2.5">
+        <div className="overflow-hidden mb-1.5 sm:mb-2.5">
           <div ref={labelLineRef} className="flex items-center gap-3">
             <span className="h-[1px] w-6 sm:w-10 bg-gradient-to-r from-transparent to-gold" />
-            <span className="font-display text-[11px] sm:text-xs uppercase tracking-[0.28em] text-gold-shimmer font-medium drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <span className="font-display text-[10px] sm:text-xs uppercase tracking-[0.28em] text-gold-shimmer font-medium drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               The Wedding Reception
             </span>
             <span className="h-[1px] w-6 sm:w-10 bg-gradient-to-l from-transparent to-gold" />
@@ -244,13 +249,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
         </div>
 
         {/* Line 2: Prominent Couple Names */}
-        <div className="overflow-hidden mb-2 sm:mb-3">
+        <div className="overflow-hidden mb-1.5 sm:mb-3">
           <h1
             ref={namesLineRef}
-            className="font-display text-4xl sm:text-6xl md:text-7xl font-light text-pearl tracking-tight leading-tight drop-shadow-[0_3px_14px_rgba(0,0,0,0.92)]"
+            className="font-display text-[clamp(2.1rem,7.5vw,4.5rem)] font-light text-pearl tracking-tight leading-tight drop-shadow-[0_3px_14px_rgba(0,0,0,0.92)]"
           >
             {couple.groom.name}{' '}
-            <span className="font-script text-3xl sm:text-5xl md:text-6xl text-gold font-normal px-1">
+            <span className="font-script text-2xl sm:text-5xl md:text-6xl text-gold font-normal px-1">
               &amp;
             </span>{' '}
             {couple.bride.name}
@@ -261,7 +266,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
         <div className="overflow-hidden">
           <p
             ref={dateLineRef}
-            className="font-display italic text-base sm:text-xl text-pearl/95 tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
+            className="font-display italic text-sm sm:text-xl text-pearl/95 tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
           >
             {reception.formattedDate}
           </p>
@@ -269,11 +274,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
       </div>
 
       {/* =======================================================================
-          SUBTLE ANIMATED SCROLL CUE
+          SUBTLE ANIMATED SCROLL CUE (Guaranteed Visible on All Mobile Devices)
           ======================================================================= */}
       <div
         ref={scrollCueRef}
-        className="relative z-10 pb-2 sm:pb-3 flex flex-col items-center pointer-events-auto"
+        className="relative z-10 pb-1 sm:pb-3 flex flex-col items-center pointer-events-auto shrink-0"
       >
         <button
           type="button"

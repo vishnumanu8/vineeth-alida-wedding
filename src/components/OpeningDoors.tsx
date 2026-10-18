@@ -282,11 +282,17 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       }}
       aria-label="Tap anywhere to open Vineeth & Alida's wedding invitation"
       style={{
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100%',
+        height: '100%',
         perspective: '1400px',
         WebkitPerspective: '1400px',
         touchAction: 'none',
       }}
-      className="fixed inset-0 z-50 overflow-hidden cursor-pointer select-none w-screen h-screen min-h-[100dvh]"
+      className="fixed inset-0 z-50 overflow-hidden cursor-pointer select-none w-full h-full min-h-[100dvh]"
     >
       {/* =======================================================================
           WARM IVORY & CHAMPAGNE MIST VEIL LAYERS (Visibly perceptible atmospheric reveal)
