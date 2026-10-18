@@ -11,22 +11,41 @@ interface WishesSectionProps {
 export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }) => {
   const { wishes, couple } = weddingConfig;
 
-  // Multi-recipient fallback guarantee
-  const recipients: WishRecipient[] =
-    wishes.recipients && wishes.recipients.length > 0
-      ? wishes.recipients
-      : [
-          {
-            id: 'default',
-            name: couple.combinedNames,
-            role: 'The Couple',
-            phone: wishes.whatsappNumber,
-            label: couple.combinedNames,
-          },
-        ];
+  // Dedicated phone mapping for Vineeth and Alida:
+  // Strictly prioritize their individual configured phone numbers
+  const groomPhone =
+    couple.groom.phone ||
+    wishes.recipients?.find(
+      (r) => r.id === 'vineeth' || r.role.toLowerCase().includes('groom')
+    )?.phone ||
+    '919876543210';
+
+  const bridePhone =
+    couple.bride.phone ||
+    wishes.recipients?.find(
+      (r) => r.id === 'alida' || r.role.toLowerCase().includes('bride')
+    )?.phone ||
+    '919876543211';
+
+  const recipients: WishRecipient[] = [
+    {
+      id: 'vineeth',
+      name: couple.groom.name,
+      role: 'Groom',
+      phone: groomPhone,
+      label: `${couple.groom.name} (Groom)`,
+    },
+    {
+      id: 'alida',
+      name: couple.bride.name,
+      role: 'Bride',
+      phone: bridePhone,
+      label: `${couple.bride.name} (Bride)`,
+    },
+  ];
 
   const [selectedRecipientId, setSelectedRecipientId] = useState<string>(
-    recipients[0]?.id || 'default'
+    recipients[0]?.id || 'vineeth'
   );
   const [senderName, setSenderName] = useState(initialGuestName || '');
   const [message, setMessage] = useState('');
@@ -46,9 +65,18 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
     // Format WhatsApp message with festive formatting
     const formattedText = `*Wedding Wishes for ${couple.combinedNames}* 💐\n\n"${finalMsg}"\n\n— *With love & blessings from ${finalName}*`;
 
+    // Strictly resolve the specific individual phone number (no generic fallback)
+    const targetPhone =
+      recipient.id === 'alida'
+        ? bridePhone
+        : recipient.id === 'vineeth'
+        ? groomPhone
+        : recipient.phone;
+
     // Clean phone number (digits only)
-    const cleanPhone = recipient.phone.replace(/[^0-9]/g, '');
-    // wa.me is the official WhatsApp universal link
+    const cleanPhone = (targetPhone || '').replace(/[^0-9]/g, '');
+
+    // wa.me is the official WhatsApp universal link targeting the exact recipient
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(
       formattedText
     )}`;
@@ -211,7 +239,7 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
                 className="w-full py-3.5 px-6 rounded-full bg-botanical hover:bg-botanical-light text-pearl font-medium text-sm sm:text-base tracking-wide transition-all shadow-md shadow-botanical/20 flex items-center justify-center gap-2 border border-gold/30 cursor-pointer group min-h-[48px]"
               >
                 <MessageCircleHeart className="w-4 h-4 text-rose fill-rose" />
-                <span>Send to {currentRecipient.name} via WhatsApp</span>
+                <span>Send to {currentRecipient.name} ({currentRecipient.role}) via WhatsApp</span>
                 <Send className="w-3.5 h-3.5 text-gold group-hover:translate-x-1 transition-transform" />
               </button>
 
@@ -225,7 +253,10 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
                       <button
                         key={other.id}
                         type="button"
-                        onClick={() => triggerSend(other)}
+                        onClick={() => {
+                          setSelectedRecipientId(other.id);
+                          triggerSend(other);
+                        }}
                         className="text-[11px] font-medium text-botanical hover:text-gold underline underline-offset-2 cursor-pointer flex items-center gap-1"
                       >
                         <span>{other.name} ({other.role})</span>

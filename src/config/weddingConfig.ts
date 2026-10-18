@@ -14,6 +14,7 @@ export interface CoupleProfile {
   oneLiner?: string;
   portrait: string;
   originCity: string;
+  phone?: string; // Direct WhatsApp number with country code, no + or spaces, e.g. "919876543210"
 }
 
 export interface WishRecipient {
@@ -100,6 +101,7 @@ export interface WeddingConfig {
   metadata: {
     siteTitle: string;
     siteDescription: string;
+    siteUrl?: string;
     ogImage: string;
     themeColor: string;
   };
@@ -115,15 +117,17 @@ export const weddingConfig: WeddingConfig = {
       oneLiner: "Balancing life's ledger with joy, heart & humor",
       portrait: "/images/groom-vineeth.jpg",
       originCity: "Dubai",
+      phone: "917025987500", // Vineeth's Direct WhatsApp Number
     },
     bride: {
       name: "Alida",
       fullName: "Alida",
       title: "The Bride",
-      familyNote: "D/o Smt. . & Shri ",
+      familyNote: "D/o Smt. Manjusha G . & Shri Vinod Kumar",
       oneLiner: "Advocating for endless love, laughter & forever",
       portrait: "/images/bride-alida.jpg",
       originCity: "Kerala",
+      phone: "917510165607", // Alida's Direct WhatsApp Number
     },
     monogram: "V & A",
     combinedNames: "Vineeth & Alida",
@@ -199,18 +203,18 @@ export const weddingConfig: WeddingConfig = {
         id: "vineeth",
         name: "Vineeth",
         role: "Groom",
-        phone: "919876543210", // Vineeth's WhatsApp Number (editable)
+        phone: "917025987500", // Vineeth's WhatsApp Number (editable)
         label: "Vineeth (Groom)",
       },
       {
         id: "alida",
         name: "Alida",
         role: "Bride",
-        phone: "919876543211", // Alida's WhatsApp Number (editable)
+        phone: "917510165607", // Alida's WhatsApp Number (editable)
         label: "Alida (Bride)",
       },
     ],
-    whatsappNumber: "919876543210",
+    whatsappNumber: "917025987500",
     defaultRecipientName: "Vineeth & Alida",
     presetMessages: [
       "Wishing you a lifetime of endless love, joyful laughter, and abundant blessings!",
@@ -237,6 +241,7 @@ export const weddingConfig: WeddingConfig = {
     siteTitle: "Vineeth & Alida — Wedding Reception Invitation",
     siteDescription:
       "Together with their families, Vineeth and Alida warmly invite you to celebrate their wedding reception on Thursday, 7 January 2027.",
+    siteUrl: "https://vineeth-alida.vercel.app/",
     ogImage: "/images/og-wedding.jpg",
     themeColor: "#11211A",
   },
