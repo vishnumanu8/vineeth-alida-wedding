@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Volume2, VolumeX, ChevronDown, Sparkles } from 'lucide-react';
+import { BlurText } from './BlurText';
 import { weddingConfig } from '../config/weddingConfig';
 import { weddingAudio } from '../utils/audioPlayer';
 
@@ -274,12 +275,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
         </div>
 
         {/* Couple's Names */}
-        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light text-pearl tracking-tight leading-tight drop-shadow-md mb-3">
-          {couple.groom.name}{' '}
+        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-light text-pearl tracking-tight leading-tight drop-shadow-md mb-3 flex items-center justify-center flex-wrap gap-x-2">
+          <BlurText text={couple.groom.name} delay={0.06} />
           <span className="font-script text-3xl sm:text-5xl md:text-6xl text-gold font-normal px-1">
             &amp;
-          </span>{' '}
-          {couple.bride.name}
+          </span>
+          <BlurText text={couple.bride.name} delay={0.06} />
         </h1>
 
         {/* Confirmed Date */}

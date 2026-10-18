@@ -10,7 +10,7 @@ export const CoupleSection: React.FC = () => {
   return (
     <section
       id="invitation-story"
-      className="relative py-14 sm:py-24 pl-12 pr-4 sm:pl-16 sm:pr-6 md:px-8 bg-pearl text-charcoal overflow-hidden"
+      className="relative py-14 sm:py-24 px-4 sm:px-6 md:pl-24 md:pr-8 lg:px-8 bg-pearl text-charcoal overflow-hidden"
     >
       {/* Subtle top transition gradient from hero dark emerald */}
       <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
@@ -47,15 +47,17 @@ export const CoupleSection: React.FC = () => {
 
           {/* Micro-Interaction: Dubai ✈ Kerala journey detail */}
           {couple.originJourney && (
-            <div className="mt-5 inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-pearl border border-gold/40 shadow-sm text-xs text-botanical">
-              <span className="font-medium text-charcoal">{couple.originJourney.from}</span>
-              <div className="relative flex items-center justify-center text-gold">
-                <span className="w-6 sm:w-8 h-[1px] border-t border-gold/50" />
-                <Plane className="w-3.5 h-3.5 text-gold mx-1 rotate-45 transform" />
-                <span className="w-6 sm:w-8 h-[1px] border-t border-gold/50" />
+            <div className="mt-5 inline-flex flex-col sm:flex-row items-center gap-1 sm:gap-2.5 px-4 py-2 sm:py-1.5 rounded-2xl sm:rounded-full bg-pearl border border-gold/40 shadow-sm text-xs text-botanical">
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-charcoal">{couple.originJourney.from}</span>
+                <div className="relative flex items-center justify-center text-gold">
+                  <span className="w-5 sm:w-8 h-[1px] border-t border-gold/50" />
+                  <Plane className="w-3.5 h-3.5 text-gold mx-1 rotate-45 transform" />
+                  <span className="w-5 sm:w-8 h-[1px] border-t border-gold/50" />
+                </div>
+                <span className="font-medium text-charcoal">{couple.originJourney.to}</span>
               </div>
-              <span className="font-medium text-charcoal">{couple.originJourney.to}</span>
-              <span className="text-slate/70 text-[11px] hidden sm:inline pl-1">
+              <span className="text-slate/70 text-[11px] sm:pl-1 text-center sm:text-left">
                 • {couple.originJourney.note}
               </span>
             </div>
