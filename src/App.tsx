@@ -12,6 +12,7 @@ import { ReceptionSection } from './components/ReceptionSection';
 import { MomentsSection } from './components/MomentsSection';
 import { WishesSection } from './components/WishesSection';
 import { Footer } from './components/Footer';
+import { AudioControl } from './components/AudioControl';
 
 export const App: React.FC = () => {
   const [hasOpenedDoors, setHasOpenedDoors] = useState(false);
@@ -92,6 +93,9 @@ export const App: React.FC = () => {
 
       {/* Elegant Footer */}
       <Footer />
+
+      {/* Unobtrusive Fixed Bottom-Right Audio Control */}
+      <AudioControl visible={hasOpenedDoors} />
     </div>
   );
 };

@@ -21,6 +21,9 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
   const rightDoorRef = useRef<HTMLDivElement>(null);
   const centerSeamRef = useRef<HTMLDivElement>(null);
   const apertureContentRef = useRef<HTMLDivElement>(null);
+  const mistRef = useRef<HTMLDivElement>(null);
+  const motesContainerRef = useRef<HTMLDivElement>(null);
+
   const [isOpening, setIsOpening] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
 
@@ -57,7 +60,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       return;
     }
 
-    // GSAP 3D Door Parting Timeline (~1.35s)
+    // GSAP 3D Door Parting & Mist-and-Light Reveal Timeline (~1.35s)
     const tl = gsap.timeline({
       onComplete: () => {
         setIsRemoved(true);
@@ -93,7 +96,57 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       0.05
     );
 
-    // 3. Left and Right emerald panels swing open along outer hinges in 3D
+    // 3. Delicate veil of warm ivory mist billows outward from the center seam
+    if (mistRef.current) {
+      tl.fromTo(
+        mistRef.current,
+        { opacity: 0, scaleX: 0.15, scaleY: 0.8 },
+        {
+          opacity: 0.85,
+          scaleX: 1.15,
+          scaleY: 1.05,
+          duration: 0.45,
+          ease: 'power2.out',
+        },
+        0.08
+      );
+      // Mist smoothly dissolves completely as doors open
+      tl.to(
+        mistRef.current,
+        {
+          opacity: 0,
+          scale: 1.35,
+          duration: 0.75,
+          ease: 'power2.inOut',
+        },
+        0.48
+      );
+    }
+
+    // 4. Subtle champagne-gold light motes drift outward and fade
+    if (motesContainerRef.current) {
+      tl.to(motesContainerRef.current, { opacity: 1, duration: 0.15 }, 0.08);
+      const motes = motesContainerRef.current.querySelectorAll('.mote-particle');
+      motes.forEach((mote, i) => {
+        const direction = i % 2 === 0 ? 1 : -1;
+        const xDist = 40 + i * 20;
+        const yDist = (i - 2.5) * 35;
+        tl.to(
+          mote,
+          {
+            x: direction * xDist,
+            y: yDist,
+            opacity: 0,
+            scale: 1.5,
+            duration: 1.05,
+            ease: 'power2.out',
+          },
+          0.12
+        );
+      });
+    }
+
+    // 5. Left and Right emerald panels swing open along outer hinges in 3D
     tl.to(
       leftDoorRef.current,
       {
@@ -122,12 +175,12 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       0.1
     );
 
-    // 4. Center seam smoothly fades out with the door swing
+    // 6. Center seam smoothly fades out
     tl.to(
       centerSeamRef.current,
       {
         opacity: 0,
-        duration: 0.4,
+        duration: 0.35,
         ease: 'power2.in',
       },
       0.35
@@ -155,6 +208,43 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       }}
       className="fixed inset-0 z-50 overflow-hidden cursor-pointer select-none bg-transparent h-[100dvh] w-full"
     >
+      {/* =======================================================================
+          WARM IVORY MIST VEIL (Emerges from center seam and dissolves completely)
+          ======================================================================= */}
+      <div
+        ref={mistRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-25 opacity-0 will-change-[opacity,transform]"
+        style={{
+          background:
+            'radial-gradient(ellipse 65% 85% at 50% 50%, rgba(254, 250, 242, 0.9) 0%, rgba(245, 235, 220, 0.5) 45%, rgba(212, 163, 89, 0.18) 75%, transparent 100%)',
+          mixBlendMode: 'screen',
+        }}
+      />
+
+      {/* =======================================================================
+          CHAMPAGNE-GOLD LIGHT MOTES (Drift outward gently on parting)
+          ======================================================================= */}
+      <div
+        ref={motesContainerRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-25 overflow-hidden opacity-0"
+      >
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="mote-particle absolute rounded-full bg-[#F5E2B8] shadow-[0_0_8px_#D4A359]"
+            style={{
+              width: `${3 + (i % 3) * 1.5}px`,
+              height: `${3 + (i % 3) * 1.5}px`,
+              left: '50%',
+              top: `${32 + i * 7}%`,
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+        ))}
+      </div>
+
       {/* =======================================================================
           LEFT EMERALD APERTURE PANEL (Hinged on the left edge)
           ======================================================================= */}

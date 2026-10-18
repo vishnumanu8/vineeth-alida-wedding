@@ -9,6 +9,8 @@ interface TouchToRevealMemoryProps {
   afterLabel?: string;
 }
 
+type GestureState = 'idle' | 'pending' | 'horizontal' | 'vertical';
+
 export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
   beforeImage = weddingConfig.photos.moments[0]?.url || '/images/moment-1.jpg',
   afterImage = weddingConfig.photos.moments[1]?.url || '/images/moment-2.jpg',
@@ -19,6 +21,14 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Gesture state tracking for directional gesture disambiguation
+  const gestureStateRef = useRef<GestureState>('idle');
+  const startCoordRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const activePointerIdRef = useRef<number | null>(null);
+  const targetElementRef = useRef<HTMLElement | null>(null);
+
+  const THRESHOLD = 8; // movement threshold in px before locking gesture direction
+
   const updatePosition = useCallback((clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
@@ -27,22 +37,75 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
     setSliderPosition(percentage);
   }, []);
 
+  // Pointer Down: Start tracking without capturing or blocking vertical scroll
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    setIsDragging(true);
-    (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
-    updatePosition(e.clientX);
+    activePointerIdRef.current = e.pointerId;
+    targetElementRef.current = e.currentTarget;
+    startCoordRef.current = { x: e.clientX, y: e.clientY };
+
+    if (e.pointerType === 'mouse') {
+      // Desktop mouse drag can commit immediately
+      gestureStateRef.current = 'horizontal';
+      setIsDragging(true);
+      (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+      updatePosition(e.clientX);
+    } else {
+      // Touch/pen devices: wait for movement to distinguish horizontal swipe vs vertical scroll
+      gestureStateRef.current = 'pending';
+    }
   };
 
+  // Pointer Move: Direction-aware detection
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging && e.buttons !== 1) return;
-    updatePosition(e.clientX);
+    if (activePointerIdRef.current !== e.pointerId || gestureStateRef.current === 'idle') return;
+
+    if (gestureStateRef.current === 'pending') {
+      const dx = Math.abs(e.clientX - startCoordRef.current.x);
+      const dy = Math.abs(e.clientY - startCoordRef.current.y);
+
+      if (dx < THRESHOLD && dy < THRESHOLD) {
+        // Still within threshold; do not commit
+        return;
+      }
+
+      if (dx >= THRESHOLD && dx > dy) {
+        // Confirmed horizontal swipe intent! Lock horizontal drag and capture pointer
+        gestureStateRef.current = 'horizontal';
+        setIsDragging(true);
+        targetElementRef.current?.setPointerCapture?.(e.pointerId);
+        updatePosition(e.clientX);
+      } else if (dy >= THRESHOLD && dy >= dx) {
+        // Confirmed vertical scroll intent! Release tracking so native page scroll continues
+        gestureStateRef.current = 'vertical';
+        activePointerIdRef.current = null;
+        targetElementRef.current = null;
+        return;
+      }
+    } else if (gestureStateRef.current === 'horizontal') {
+      // Actively dragging divider horizontally
+      updatePosition(e.clientX);
+    }
   };
 
-  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+  // Pointer Up / Cancel: Clean release
+  const handlePointerEnd = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (activePointerIdRef.current === e.pointerId) {
+      if (gestureStateRef.current === 'pending') {
+        // Quick tap without movement: glide divider to tapped position
+        updatePosition(e.clientX);
+      }
+      if (gestureStateRef.current === 'horizontal') {
+        targetElementRef.current?.releasePointerCapture?.(e.pointerId);
+      }
+    }
+
+    gestureStateRef.current = 'idle';
+    activePointerIdRef.current = null;
+    targetElementRef.current = null;
     setIsDragging(false);
-    (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId);
   };
 
+  // Keyboard accessibility: Left/Right arrow keys
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
@@ -82,12 +145,13 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
         </div>
       </div>
 
-      {/* Main Image Comparison Frame */}
+      {/* Main Image Comparison Frame with Direction-Aware Touch Action pan-y */}
       <div
         ref={containerRef}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
+        onPointerUp={handlePointerEnd}
+        onPointerCancel={handlePointerEnd}
         onKeyDown={handleKeyDown}
         role="slider"
         tabIndex={0}
@@ -95,7 +159,8 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label="Drag divider horizontally to reveal couple memory"
-        className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-wedding-lg border border-gold/40 cursor-ew-resize touch-none focus:outline-none focus:ring-2 focus:ring-gold bg-[#0C1712]"
+        style={{ touchAction: 'pan-y' }}
+        className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-wedding-lg border border-gold/40 cursor-ew-resize focus:outline-none focus:ring-2 focus:ring-gold bg-[#0C1712]"
       >
         {/* Layer 1: Revealed Image (Base Layer) */}
         <div className="absolute inset-0 w-full h-full">
@@ -143,7 +208,7 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
       {/* Subtle, Understated Instruction Cue */}
       <div className="mt-3 flex items-center gap-1.5 text-slate/75 text-xs font-sans tracking-wide">
         <Sparkles className="w-3.5 h-3.5 text-gold" />
-        <span>Slide divider to reveal our journey</span>
+        <span>Swipe horizontally to reveal • Swipe vertically to scroll</span>
       </div>
     </div>
   );

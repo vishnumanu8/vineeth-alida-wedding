@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Volume2, VolumeX, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { weddingConfig } from '../config/weddingConfig';
-import { weddingAudio } from '../utils/audioPlayer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +12,6 @@ interface HeroSectionProps {
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
   const { couple, reception } = weddingConfig;
-  const [isPlaying, setIsPlaying] = useState(weddingAudio.isPlaying);
 
   const heroRef = useRef<HTMLElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -25,18 +23,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
   const dateLineRef = useRef<HTMLParagraphElement>(null);
   const scrollCueRef = useRef<HTMLDivElement>(null);
 
-  // Sync audio state
-  useEffect(() => {
-    const unsubscribe = weddingAudio.subscribe((state) => {
-      setIsPlaying(state);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
   // =========================================================================
-  // LINE-MASKED TYPOGRAPHY ENTRANCE & DESKTOP PARALLAX
+  // LINE-MASKED TYPOGRAPHY ENTRANCE & PARALLAX MOTION
   // =========================================================================
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -156,11 +144,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
     );
   };
 
-  const toggleAudio = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    weddingAudio.toggle();
-  };
-
   const scrollToInvitation = (e: React.MouseEvent) => {
     e.stopPropagation();
     const el = document.getElementById('invitation-story');
@@ -210,7 +193,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
       </div>
 
       {/* =======================================================================
-          TOP BAR: DISCREET AUDIO TOGGLE & REFINED MONOGRAM
+          TOP BAR: REFINED MONOGRAM & OPTIONAL GUEST GREETING (ZERO UNNECESSARY FLOATING CONTROLS)
           ======================================================================= */}
       <div className="relative z-10 w-full max-w-5xl mx-auto flex items-center justify-between pointer-events-auto">
         {/* Monogram Crest */}
@@ -220,41 +203,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
 
         {/* Guest Greeting Pill (if customized via URL) */}
         {guestName ? (
-          <div className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-gold/40 text-gold-shimmer text-[11px] font-medium tracking-wide shadow-sm">
+          <div className="px-3.5 py-1 rounded-full bg-black/40 backdrop-blur-md border border-gold/40 text-gold-shimmer text-[11px] font-medium tracking-wide shadow-sm">
             Cordially Welcoming {guestName}
           </div>
         ) : <div />}
 
-        {/* Discreet Audio Control Button */}
-        {weddingConfig.audio.enabled && (
-          <button
-            type="button"
-            onClick={toggleAudio}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border backdrop-blur-md transition-all cursor-pointer ${
-              isPlaying
-                ? 'bg-botanical/90 text-pearl border-gold/60 shadow-sm'
-                : 'bg-black/30 text-pearl/80 border-white/20 hover:border-gold/40'
-            }`}
-            title={isPlaying ? 'Pause Music' : 'Play Music'}
-            aria-label={isPlaying ? 'Pause Music' : 'Play Music'}
-          >
-            {isPlaying ? (
-              <>
-                <Volume2 className="w-3.5 h-3.5 text-gold animate-pulse" />
-                <span className="flex items-end gap-0.5 h-3">
-                  <span className="w-0.5 h-2 bg-gold animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <span className="w-0.5 h-3 bg-gold animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <span className="w-0.5 h-1.5 bg-gold animate-bounce" style={{ animationDelay: '300ms' }} />
-                </span>
-              </>
-            ) : (
-              <>
-                <VolumeX className="w-3.5 h-3.5" />
-                <span className="text-[11px] font-medium hidden sm:inline">Music</span>
-              </>
-            )}
-          </button>
-        )}
+        <div className="w-8" />
       </div>
 
       {/* =======================================================================
