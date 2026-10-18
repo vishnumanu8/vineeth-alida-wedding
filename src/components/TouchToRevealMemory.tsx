@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { Sparkles, ChevronsLeftRight } from 'lucide-react';
+import { ChevronsLeftRight, Sparkles } from 'lucide-react';
 import { weddingConfig } from '../config/weddingConfig';
 
 interface TouchToRevealMemoryProps {
@@ -15,7 +15,7 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
   beforeLabel = 'The First Glance',
   afterLabel = 'Towards Forever',
 }) => {
-  const [sliderPosition, setSliderPosition] = useState(50); // 0 to 100 percentage
+  const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +29,7 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
 
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     setIsDragging(true);
-    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+    (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
     updatePosition(e.clientX);
   };
 
@@ -40,7 +40,7 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
 
   const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     setIsDragging(false);
-    (e.target as HTMLElement).releasePointerCapture?.(e.pointerId);
+    (e.currentTarget as HTMLElement).releasePointerCapture?.(e.pointerId);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -60,8 +60,29 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
-      {/* Interactive Reveal Frame */}
+    <div className="w-full flex flex-col items-center select-none">
+      {/* Both Captions Bar: Always visible & readable on mobile regardless of slider position */}
+      <div className="w-full max-w-sm sm:max-w-md flex items-center justify-between mb-3 px-2 text-xs font-medium">
+        <div className="flex items-center gap-1.5 text-left">
+          <span className="w-2 h-2 rounded-full bg-gold/70" />
+          <span className="text-[11px] uppercase tracking-wider text-gold font-semibold">
+            {beforeLabel}
+          </span>
+        </div>
+
+        <span className="text-slate/40 text-[10px] tracking-widest font-sans">
+          ⇄
+        </span>
+
+        <div className="flex items-center gap-1.5 text-right">
+          <span className="text-[11px] uppercase tracking-wider text-botanical font-semibold">
+            {afterLabel}
+          </span>
+          <span className="w-2 h-2 rounded-full bg-botanical/70" />
+        </div>
+      </div>
+
+      {/* Main Image Comparison Frame */}
       <div
         ref={containerRef}
         onPointerDown={handlePointerDown}
@@ -73,29 +94,20 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
         aria-valuenow={Math.round(sliderPosition)}
         aria-valuemin={0}
         aria-valuemax={100}
-        aria-label="Drag handle left or right to reveal wedding memory"
-        className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-wedding-lg border border-gold/40 cursor-ew-resize select-none touch-none focus:outline-none focus:ring-2 focus:ring-gold bg-[#0C1712]"
+        aria-label="Drag divider horizontally to reveal couple memory"
+        className="relative w-full max-w-sm sm:max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-wedding-lg border border-gold/40 cursor-ew-resize touch-none focus:outline-none focus:ring-2 focus:ring-gold bg-[#0C1712]"
       >
-        {/* Layer 1: After / Revealed Image (Base Layer) */}
+        {/* Layer 1: Revealed Image (Base Layer) */}
         <div className="absolute inset-0 w-full h-full">
           <img
             src={afterImage}
             alt={afterLabel}
-            className="w-full h-full object-cover object-center filter brightness-[0.92]"
+            className="w-full h-full object-cover object-center filter brightness-[0.94]"
             draggable={false}
           />
-          {/* Subtle gradient banner for label */}
-          <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/85 via-black/40 to-transparent text-right pointer-events-none">
-            <span className="text-[10px] uppercase tracking-widest text-gold-shimmer font-semibold block">
-              Chapter II
-            </span>
-            <p className="font-display text-base sm:text-lg font-medium text-pearl drop-shadow-sm">
-              {afterLabel}
-            </p>
-          </div>
         </div>
 
-        {/* Layer 2: Before Image (Clipped Layer) */}
+        {/* Layer 2: Cover Image (Clipped Layer) */}
         <div
           className="absolute inset-0 w-full h-full overflow-hidden"
           style={{
@@ -106,41 +118,32 @@ export const TouchToRevealMemory: React.FC<TouchToRevealMemoryProps> = ({
           <img
             src={beforeImage}
             alt={beforeLabel}
-            className="w-full h-full object-cover object-center filter brightness-[0.92]"
+            className="w-full h-full object-cover object-center filter brightness-[0.94]"
             draggable={false}
           />
-          {/* Subtle gradient banner for label */}
-          <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-black/85 via-black/40 to-transparent text-left pointer-events-none">
-            <span className="text-[10px] uppercase tracking-widest text-gold-shimmer font-semibold block">
-              Chapter I
-            </span>
-            <p className="font-display text-base sm:text-lg font-medium text-pearl drop-shadow-sm">
-              {beforeLabel}
-            </p>
-          </div>
         </div>
 
-        {/* Gold Divider Seam Line */}
+        {/* Fine Gold Divider Seam */}
         <div
           className="absolute inset-y-0 w-[2px] bg-gradient-to-b from-transparent via-gold-shimmer to-transparent pointer-events-none z-10 shadow-gold-glow"
           style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
         />
 
-        {/* Gold Circular Drag Handle */}
+        {/* Circular Gold Drag Handle with Clear Affordance */}
         <div
-          className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0C1712]/90 backdrop-blur-md border-2 border-gold shadow-gold-glow flex items-center justify-center transition-transform ${
-            isDragging ? 'scale-110 shadow-lg' : 'hover:scale-105'
+          className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#091711]/95 backdrop-blur-md border-2 border-gold shadow-gold-glow flex items-center justify-center transition-transform ${
+            isDragging ? 'scale-110 shadow-xl' : 'hover:scale-105'
           }`}
           style={{ left: `${sliderPosition}%` }}
         >
-          <ChevronsLeftRight className="w-4 h-4 text-gold-shimmer animate-pulse" />
+          <ChevronsLeftRight className="w-4 h-4 text-gold-shimmer" />
         </div>
       </div>
 
-      {/* Elegant Instruction Cue */}
-      <div className="mt-3.5 flex items-center gap-2 text-slate/75 text-xs font-sans tracking-wide">
+      {/* Subtle, Understated Instruction Cue */}
+      <div className="mt-3 flex items-center gap-1.5 text-slate/75 text-xs font-sans tracking-wide">
         <Sparkles className="w-3.5 h-3.5 text-gold" />
-        <span>Slide horizontally to reveal our journey</span>
+        <span>Slide divider to reveal our journey</span>
       </div>
     </div>
   );

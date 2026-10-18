@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
-import { Sparkles } from 'lucide-react';
 import { weddingConfig } from '../config/weddingConfig';
 import { weddingAudio } from '../utils/audioPlayer';
 
@@ -21,11 +20,11 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
   const leftDoorRef = useRef<HTMLDivElement>(null);
   const rightDoorRef = useRef<HTMLDivElement>(null);
   const centerSeamRef = useRef<HTMLDivElement>(null);
-  const centerContentRef = useRef<HTMLDivElement>(null);
+  const apertureContentRef = useRef<HTMLDivElement>(null);
   const [isOpening, setIsOpening] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
 
-  // Check for reduced motion preference
+  // Reduced motion preference
   const prefersReducedMotion = useRef(false);
   useEffect(() => {
     prefersReducedMotion.current = window.matchMedia(
@@ -37,7 +36,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
     if (isOpening) return;
     setIsOpening(true);
 
-    // Synchronize music: begin audio volume fade-in as doors open
+    // Audio volume fade-in synchronised with reveal
     if (weddingConfig.audio.enabled) {
       weddingAudio.playWithFadeIn(2400, 0.65).catch(() => {});
     }
@@ -45,7 +44,6 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
     onOpenStart?.();
 
     if (prefersReducedMotion.current) {
-      // Gentle opacity fade for reduced motion users
       gsap.to(containerRef.current, {
         opacity: 0,
         duration: 0.8,
@@ -59,7 +57,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       return;
     }
 
-    // GSAP 3D Parting Door Timeline (~1.3s)
+    // GSAP 3D Door Parting Timeline (~1.35s)
     const tl = gsap.timeline({
       onComplete: () => {
         setIsRemoved(true);
@@ -68,39 +66,42 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       },
     });
 
-    // 1. Central gold seam line flares with an antique gold highlight
-    tl.to(
+    // 1. Center seam line appears and flares as the physical parting mechanism
+    tl.fromTo(
       centerSeamRef.current,
+      { opacity: 0, scaleY: 0.2, scaleX: 1 },
       {
-        scaleX: 3.5,
-        boxShadow: '0 0 30px rgba(240, 212, 158, 0.95), 0 0 10px #D4A359',
+        opacity: 1,
+        scaleY: 1,
+        scaleX: 2.5,
+        boxShadow: '0 0 24px rgba(240, 212, 158, 0.95), 0 0 10px #D4A359',
         duration: 0.25,
         ease: 'power2.out',
       },
       0
     );
 
-    // 2. Minimal center monogram and text fade & soften
+    // 2. Aperture typography gently dissolves
     tl.to(
-      centerContentRef.current,
+      apertureContentRef.current,
       {
         opacity: 0,
-        scale: 0.92,
+        scale: 0.95,
         duration: 0.35,
         ease: 'power2.in',
       },
-      0.08
+      0.05
     );
 
-    // 3. Left and Right emerald doors swing outward around outer hinges in 3D
+    // 3. Left and Right emerald panels swing open along outer hinges in 3D
     tl.to(
       leftDoorRef.current,
       {
-        rotateY: -94,
+        rotateY: -92,
         xPercent: -8,
         z: -120,
         opacity: 0,
-        duration: 1.25,
+        duration: 1.3,
         ease: 'power3.inOut',
         force3D: true,
       },
@@ -110,18 +111,18 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
     tl.to(
       rightDoorRef.current,
       {
-        rotateY: 94,
+        rotateY: 92,
         xPercent: 8,
         z: -120,
         opacity: 0,
-        duration: 1.25,
+        duration: 1.3,
         ease: 'power3.inOut',
         force3D: true,
       },
       0.1
     );
 
-    // 4. Subtle seam fade out
+    // 4. Center seam smoothly fades out with the door swing
     tl.to(
       centerSeamRef.current,
       {
@@ -129,7 +130,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
         duration: 0.4,
         ease: 'power2.in',
       },
-      0.3
+      0.35
     );
   };
 
@@ -147,15 +148,15 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
           handleEnter();
         }
       }}
-      aria-label="Tap to open the wedding invitation of Vineeth and Alida"
+      aria-label="Tap anywhere to open Vineeth & Alida's wedding invitation"
       style={{
-        perspective: '1300px',
-        WebkitPerspective: '1300px',
+        perspective: '1400px',
+        WebkitPerspective: '1400px',
       }}
       className="fixed inset-0 z-50 overflow-hidden cursor-pointer select-none bg-transparent h-[100dvh] w-full"
     >
       {/* =======================================================================
-          LEFT EMERALD DOOR PANEL (Hinged on the left edge)
+          LEFT EMERALD APERTURE PANEL (Hinged on the left edge)
           ======================================================================= */}
       <div
         ref={leftDoorRef}
@@ -164,17 +165,17 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
           WebkitTransformOrigin: 'left center',
           transformStyle: 'preserve-3d',
         }}
-        className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#07130E] via-[#0B1E16] to-[#10291F] border-r border-gold/40 shadow-2xl overflow-hidden will-change-transform"
+        className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#05100B] via-[#091C14] to-[#0E281D] border-r border-gold/30 shadow-2xl overflow-hidden will-change-transform"
       >
         {/* Subtle ambient lighting */}
-        <div className="absolute top-1/4 right-0 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gold/10 blur-3xl pointer-events-none" />
-        {/* Ornate corner filigree */}
-        <div className="absolute top-6 left-6 w-7 h-7 sm:w-8 sm:h-8 border-t border-l border-gold/40 pointer-events-none" />
-        <div className="absolute bottom-6 left-6 w-7 h-7 sm:w-8 sm:h-8 border-b border-l border-gold/40 pointer-events-none" />
+        <div className="absolute top-1/3 right-0 w-72 h-72 rounded-full bg-gold/10 blur-3xl pointer-events-none" />
+        {/* Restrained corner filigree */}
+        <div className="absolute top-6 left-6 w-6 h-6 border-t border-l border-gold/30 pointer-events-none" />
+        <div className="absolute bottom-6 left-6 w-6 h-6 border-b border-l border-gold/30 pointer-events-none" />
       </div>
 
       {/* =======================================================================
-          RIGHT EMERALD DOOR PANEL (Hinged on the right edge)
+          RIGHT EMERALD APERTURE PANEL (Hinged on the right edge)
           ======================================================================= */}
       <div
         ref={rightDoorRef}
@@ -183,60 +184,92 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
           WebkitTransformOrigin: 'right center',
           transformStyle: 'preserve-3d',
         }}
-        className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[#07130E] via-[#0B1E16] to-[#10291F] border-l border-gold/40 shadow-2xl overflow-hidden will-change-transform"
+        className="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[#05100B] via-[#091C14] to-[#0E281D] border-l border-gold/30 shadow-2xl overflow-hidden will-change-transform"
       >
         {/* Subtle ambient lighting */}
-        <div className="absolute bottom-1/4 left-0 w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-peacock/10 blur-3xl pointer-events-none" />
-        {/* Ornate corner filigree */}
-        <div className="absolute top-6 right-6 w-7 h-7 sm:w-8 sm:h-8 border-t border-r border-gold/40 pointer-events-none" />
-        <div className="absolute bottom-6 right-6 w-7 h-7 sm:w-8 sm:h-8 border-b border-r border-gold/40 pointer-events-none" />
+        <div className="absolute bottom-1/3 left-0 w-72 h-72 rounded-full bg-peacock/10 blur-3xl pointer-events-none" />
+        {/* Restrained corner filigree */}
+        <div className="absolute top-6 right-6 w-6 h-6 border-t border-r border-gold/30 pointer-events-none" />
+        <div className="absolute bottom-6 right-6 w-6 h-6 border-b border-r border-gold/30 pointer-events-none" />
       </div>
 
       {/* =======================================================================
-          CENTRAL GOLD SEAM LINE (The visual parting seam)
+          CENTRAL GOLD SEAM (Part of the opening mechanism, invisible until tap)
+          Never intersects or runs behind the text!
           ======================================================================= */}
       <div
         ref={centerSeamRef}
-        className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1.5px] bg-gradient-to-b from-transparent via-gold-shimmer to-transparent pointer-events-none z-10 shadow-gold-glow will-change-transform"
+        className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1.5px] bg-gradient-to-b from-transparent via-gold-shimmer to-transparent pointer-events-none z-30 opacity-0 will-change-transform"
       />
 
       {/* =======================================================================
-          MINIMAL MOBILE-FIRST LAUNCH CONTENT
-          Only monogram, warm greeting, and subtle "Tap to open" cue.
-          No repeated dates, venue details or clutter.
+          THE EMERALD APERTURE: MINIMAL, BESPOKE LAUNCH CONTENT
+          - Custom SVG V&A ligature on ONE single line (immune to text wrapping)
+          - "A celebration awaits"
+          - Subtle "Tap to open" cue
+          - Zero repeated dates, venues, or duplicate text
           ======================================================================= */}
       <div
-        ref={centerContentRef}
+        ref={apertureContentRef}
         className="absolute inset-0 flex flex-col items-center justify-between py-12 sm:py-16 px-6 text-center z-20 pointer-events-none"
       >
-        {/* Top spacer / subtle decorative flourish */}
-        <div className="flex items-center gap-2 text-gold/60 pt-4">
-          <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-gold/50" />
-          <Sparkles className="w-3.5 h-3.5 text-gold/70" />
-          <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-gold/50" />
+        {/* Top subtle emblem */}
+        <div className="pt-2 flex items-center justify-center gap-3 text-gold/40">
+          <span className="w-6 h-[1px] bg-gradient-to-r from-transparent to-gold/40" />
+          <span className="text-[10px] uppercase tracking-[0.3em] font-sans text-gold/60 font-light">
+            Reception Invitation
+          </span>
+          <span className="w-6 h-[1px] bg-gradient-to-l from-transparent to-gold/40" />
         </div>
 
-        {/* Center: V&A Monogram & Short Greeting */}
-        <div className="flex flex-col items-center my-auto">
-          {/* Monogram Crest */}
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-gold/70 bg-[#0A1813]/90 backdrop-blur-md shadow-gold-glow flex items-center justify-center mb-5 sm:mb-6 ring-4 ring-gold/15">
-            <span className="font-display font-medium text-2xl sm:text-3xl text-gold-shimmer tracking-widest pl-1">
-              {weddingConfig.couple.monogram}
-            </span>
+        {/* Center: Bespoke V&A SVG Ligature & Minimal Greeting */}
+        <div className="flex flex-col items-center my-auto px-4 max-w-xs">
+          {/* Custom V&A SVG Ligature - Aligned on one line, zero wrapping */}
+          <div className="mb-4">
+            <svg
+              viewBox="0 0 120 40"
+              className="w-28 sm:w-32 h-auto mx-auto overflow-visible drop-shadow-md"
+              aria-label="V and A Monogram"
+            >
+              <text
+                x="60"
+                y="28"
+                textAnchor="middle"
+                className="font-display font-medium fill-gold-shimmer select-none"
+                style={{ fontSize: '26px', letterSpacing: '0.18em' }}
+              >
+                V<tspan className="font-script text-[22px] fill-gold" dx="2" dy="-2">&amp;</tspan><tspan dx="2">A</tspan>
+              </text>
+              {/* Delicate ornamental curve below */}
+              <path
+                d="M 28 36 Q 60 40 92 36"
+                stroke="url(#apertureGoldLine)"
+                strokeWidth="1"
+                fill="none"
+                strokeLinecap="round"
+              />
+              <defs>
+                <linearGradient id="apertureGoldLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#C89D54" stopOpacity="0" />
+                  <stop offset="50%" stopColor="#F0D49E" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#C89D54" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
 
-          {/* Short Warm Greeting */}
-          <h2 className="font-display italic text-2xl sm:text-3xl font-light text-pearl tracking-wide mb-2 drop-shadow-sm">
+          {/* Minimal Poetic Greeting */}
+          <h2 className="font-display italic text-2xl sm:text-3xl font-light text-pearl tracking-wide drop-shadow-sm mb-1.5">
             A celebration awaits
           </h2>
 
-          <p className="text-xs sm:text-sm text-pearl-100/70 font-sans tracking-widest uppercase">
-            {weddingConfig.couple.combinedNames}
+          <p className="text-[11px] sm:text-xs text-pearl-100/60 font-sans tracking-[0.2em] uppercase font-light">
+            Vineeth &amp; Alida
           </p>
 
-          {/* Personalized guest welcome if provided */}
+          {/* Guest Personalization if provided via URL */}
           {guestName && (
-            <div className="mt-4 px-4 py-1.5 rounded-full bg-pearl/10 border border-gold/40 text-pearl-100 text-xs font-medium tracking-wide shadow-sm backdrop-blur-sm">
+            <div className="mt-4 px-3.5 py-1 rounded-full bg-pearl/10 border border-gold/30 text-pearl-100 text-[11px] font-medium tracking-wide shadow-sm backdrop-blur-sm">
               Prepared for {guestName}
             </div>
           )}
@@ -244,14 +277,11 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
 
         {/* Bottom: Subtle "Tap to open" cue */}
         <div className="pb-4 flex flex-col items-center gap-1.5">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-black/40 border border-gold/50 text-gold-shimmer text-xs tracking-[0.25em] uppercase font-medium shadow-md backdrop-blur-md animate-pulse">
-            <span className="text-[10px] text-gold/60">✦</span>
-            <span className="text-[11px] font-sans">Tap to open</span>
-            <span className="text-[10px] text-gold/60">✦</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 border border-gold/40 text-gold-shimmer text-[11px] tracking-[0.25em] uppercase font-medium shadow-md backdrop-blur-md animate-pulse">
+            <span className="text-[9px] text-gold/60">✦</span>
+            <span className="font-sans">Tap to open</span>
+            <span className="text-[9px] text-gold/60">✦</span>
           </div>
-          <span className="text-[10px] text-pearl-100/40 tracking-wider">
-            Touch anywhere to begin
-          </span>
         </div>
       </div>
     </div>
