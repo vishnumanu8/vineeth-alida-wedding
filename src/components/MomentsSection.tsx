@@ -27,9 +27,9 @@ export const MomentsSection: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-6 sm:mb-10"
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-6 sm:mb-9"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-champagne-light border border-gold/30 text-botanical text-xs uppercase tracking-widest font-semibold mb-2">
             <Camera className="w-3.5 h-3.5 text-gold" />
@@ -47,15 +47,25 @@ export const MomentsSection: React.FC = () => {
         {/* Carousel Container */}
         <div className="relative w-full max-w-sm sm:max-w-md mx-auto">
           {/* Card Frame */}
-          <div className="relative rounded-3xl p-3 bg-pearl border border-gold/30 shadow-wedding-lg overflow-hidden">
+          <div className="relative rounded-3xl p-2.5 sm:p-3 bg-pearl border border-gold/35 shadow-wedding-lg overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentMoment.id}
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.4 }}
-                className="relative rounded-2xl overflow-hidden"
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(_e, { offset }) => {
+                  if (offset.x < -40) {
+                    handleNext();
+                  } else if (offset.x > 40) {
+                    handlePrev();
+                  }
+                }}
+                className="relative rounded-2xl overflow-hidden cursor-grab active:cursor-grabbing select-none"
               >
                 <WeddingImage
                   src={currentMoment.url}
@@ -67,7 +77,7 @@ export const MomentsSection: React.FC = () => {
                 />
 
                 {/* Caption Banner */}
-                <div className="absolute bottom-0 inset-x-0 p-4 bg-gradient-to-t from-botanical-deep/85 via-botanical-deep/50 to-transparent text-pearl text-left">
+                <div className="absolute bottom-0 inset-x-0 p-3.5 sm:p-4 bg-gradient-to-t from-botanical-deep/85 via-botanical-deep/50 to-transparent text-pearl text-left pointer-events-none">
                   <div className="flex items-center gap-1.5 text-gold text-xs mb-0.5">
                     <Sparkles className="w-3 h-3 text-gold" />
                     <span className="font-medium tracking-wide">Vineeth &amp; Alida</span>
@@ -90,7 +100,7 @@ export const MomentsSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="absolute left-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-pearl/80 hover:bg-pearl text-botanical border border-gold/30 shadow-md flex items-center justify-center transition-all cursor-pointer z-10"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-pearl/85 hover:bg-pearl text-botanical border border-gold/30 shadow-md flex items-center justify-center transition-all cursor-pointer z-10"
                   aria-label="Previous photograph"
                 >
                   <ChevronLeft className="w-5 h-5" />
@@ -98,7 +108,7 @@ export const MomentsSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="absolute right-5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-pearl/80 hover:bg-pearl text-botanical border border-gold/30 shadow-md flex items-center justify-center transition-all cursor-pointer z-10"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-pearl/85 hover:bg-pearl text-botanical border border-gold/30 shadow-md flex items-center justify-center transition-all cursor-pointer z-10"
                   aria-label="Next photograph"
                 >
                   <ChevronRight className="w-5 h-5" />
@@ -107,22 +117,27 @@ export const MomentsSection: React.FC = () => {
             )}
           </div>
 
-          {/* Dots Indicator */}
+          {/* Dots Indicator & Swipe Hint */}
           {moments.length > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-4">
-              {moments.map((moment, idx) => (
-                <button
-                  key={moment.id}
-                  type="button"
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full transition-all cursor-pointer ${
-                    currentIndex === idx
-                      ? 'w-6 bg-botanical'
-                      : 'w-2 bg-champagne-border hover:bg-gold/60'
-                  }`}
-                  aria-label={`Go to photo ${idx + 1}`}
-                />
-              ))}
+            <div className="flex flex-col items-center gap-1.5 mt-3.5">
+              <div className="flex items-center justify-center gap-2">
+                {moments.map((moment, idx) => (
+                  <button
+                    key={moment.id}
+                    type="button"
+                    onClick={() => setCurrentIndex(idx)}
+                    className={`h-2 rounded-full transition-all cursor-pointer ${
+                      currentIndex === idx
+                        ? 'w-6 bg-botanical'
+                        : 'w-2 bg-champagne-border hover:bg-gold/60'
+                    }`}
+                    aria-label={`Go to photo ${idx + 1}`}
+                  />
+                ))}
+              </div>
+              <span className="text-[10px] text-slate/60 tracking-wider">
+                Swipe or tap arrows to view
+              </span>
             </div>
           )}
         </div>

@@ -98,7 +98,7 @@ class WeddingAudioManager {
     if (this.isPlayingState) {
       this.pause();
     } else {
-      this.play();
+      this.play().catch(() => {});
     }
   }
 

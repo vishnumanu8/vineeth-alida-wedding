@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
           <button
             type="button"
             onClick={handleShareWhatsApp}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-pearl hover:bg-champagne-light border border-gold/40 text-xs sm:text-sm font-medium text-botanical shadow-sm transition-all hover:shadow cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-pearl hover:bg-champagne-light border border-gold/40 text-xs sm:text-sm font-medium text-botanical shadow-sm transition-all hover:shadow cursor-pointer min-h-[44px]"
           >
             <Share2 className="w-3.5 h-3.5 text-gold" />
             <span>Share Invitation via WhatsApp</span>

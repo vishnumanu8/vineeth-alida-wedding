@@ -23,47 +23,59 @@ export const OpeningCard: React.FC<OpeningCardProps> = ({ onOpen, guestName }) =
       });
     }
 
-    // Smooth transition time
+    // Smooth transition time for cinematic unfolding
     setTimeout(() => {
       onOpen(playAudioWithOpen);
-    }, 1100);
+    }, 900);
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-[#1C332A] via-[#244438] to-[#172B23] p-4 sm:p-6 overflow-hidden select-none safe-top safe-bottom">
-      {/* Subtle background ambient golden dust / stars */}
-      <div className="absolute inset-0 pointer-events-none opacity-25">
-        <div className="absolute top-10 left-10 w-64 h-64 rounded-full bg-gold/20 blur-3xl animate-pulse" />
-        <div className="absolute bottom-10 right-10 w-72 h-72 rounded-full bg-peacock/20 blur-3xl animate-pulse" />
+    <motion.div
+      key="opening-overlay"
+      initial={{ opacity: 1 }}
+      exit={{
+        opacity: 0,
+        scale: 1.04,
+        filter: 'blur(6px)',
+        transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+      }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-[#182B24] via-[#223E33] to-[#15241E] p-4 sm:p-6 overflow-hidden select-none safe-top safe-bottom"
+    >
+      {/* Subtle ambient golden dust / glow */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-gold/30 blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full bg-peacock/25 blur-3xl" />
       </div>
 
-      {/* Main Invitation Card Container — Responsive and strictly fitted to mobile viewport (max-h 100dvh) */}
+      {/* Main Invitation Card Container — Strictly fitted to mobile viewport */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.94, y: 16 }}
+        initial={{ opacity: 0, scale: 0.95, y: 14 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="relative w-full max-w-sm sm:max-w-md mx-auto my-auto flex flex-col items-center justify-between py-6 px-5 sm:px-8 rounded-3xl bg-pearl border border-gold/40 shadow-2xl shadow-black/40 overflow-hidden text-center max-h-[92dvh]"
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full max-w-[360px] sm:max-w-md mx-auto my-auto flex flex-col items-center justify-between py-6 sm:py-7 px-5 sm:px-8 rounded-3xl bg-pearl border border-gold/45 shadow-2xl shadow-black/50 overflow-hidden text-center max-h-[92dvh]"
       >
         {/* Subtle Luxury Corner Ornaments */}
-        <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-gold/60 rounded-tl-lg pointer-events-none" />
-        <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-gold/60 rounded-tr-lg pointer-events-none" />
-        <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-gold/60 rounded-bl-lg pointer-events-none" />
-        <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-gold/60 rounded-br-lg pointer-events-none" />
+        <div className="absolute top-3 left-3 w-5 h-5 border-t-2 border-l-2 border-gold/60 rounded-tl-sm pointer-events-none" />
+        <div className="absolute top-3 right-3 w-5 h-5 border-t-2 border-r-2 border-gold/60 rounded-tr-sm pointer-events-none" />
+        <div className="absolute bottom-3 left-3 w-5 h-5 border-b-2 border-l-2 border-gold/60 rounded-bl-sm pointer-events-none" />
+        <div className="absolute bottom-3 right-3 w-5 h-5 border-b-2 border-r-2 border-gold/60 rounded-br-sm pointer-events-none" />
 
         {/* Inner thin decorative gold border line */}
-        <div className="absolute inset-2 sm:inset-3 border border-gold/20 rounded-2xl pointer-events-none" />
+        <div className="absolute inset-2 sm:inset-3 border border-gold/25 rounded-2xl pointer-events-none" />
 
-        {/* Top Header / Monogram Crest */}
-        <div className="relative z-10 pt-2 flex flex-col items-center">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="h-[1px] w-8 bg-gradient-to-r from-transparent to-gold/60" />
-            <div className="w-8 h-8 rounded-full border border-gold/50 bg-champagne-light flex items-center justify-center text-gold shadow-sm">
-              <Sparkles className="w-4 h-4 text-gold animate-pulse" />
+        {/* Top Header / Royal Monogram Crest */}
+        <div className="relative z-10 pt-1 flex flex-col items-center">
+          <div className="flex items-center gap-2.5 mb-1.5">
+            <span className="h-[1px] w-7 sm:w-10 bg-gradient-to-r from-transparent to-gold/70" />
+            <div className="w-7 h-7 rounded-full border border-gold/60 bg-champagne-light flex items-center justify-center text-botanical shadow-sm">
+              <span className="font-display font-semibold text-xs tracking-wider text-botanical">
+                V&amp;A
+              </span>
             </div>
-            <span className="h-[1px] w-8 bg-gradient-to-l from-transparent to-gold/60" />
+            <span className="h-[1px] w-7 sm:w-10 bg-gradient-to-l from-transparent to-gold/70" />
           </div>
 
-          <p className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-slate font-medium">
+          <p className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-slate font-medium">
             Wedding Reception Invitation
           </p>
 
@@ -80,20 +92,21 @@ export const OpeningCard: React.FC<OpeningCardProps> = ({ onOpen, guestName }) =
           )}
         </div>
 
-        {/* Centerpiece: Couple Names & Interactive Wax Seal */}
-        <div className="relative z-10 my-4 sm:my-6 flex flex-col items-center w-full">
-          <p className="font-script text-2xl sm:text-3xl text-gold mb-0.5">
-            Vineeth
-          </p>
-          <span className="font-display italic text-base text-slate font-light my-[-4px]">
-            &amp;
-          </span>
-          <p className="font-script text-2xl sm:text-3xl text-gold mb-3 sm:mb-4">
-            Alida
-          </p>
+        {/* Centerpiece: Couple Names & Tactile 3D Wax Seal */}
+        <div className="relative z-10 my-3 sm:my-5 flex flex-col items-center w-full">
+          {/* Couple Names */}
+          <div className="mb-2">
+            <h2 className="font-display text-3xl sm:text-4xl text-botanical font-normal tracking-tight">
+              Vineeth{' '}
+              <span className="font-script text-2xl sm:text-3xl text-gold font-normal px-1">
+                &amp;
+              </span>{' '}
+              Alida
+            </h2>
+          </div>
 
-          <p className="font-display text-sm sm:text-base text-charcoal/80 max-w-[260px] leading-relaxed italic mb-4 sm:mb-5">
-            &ldquo;Join us to celebrate love, laughter, and our happily ever after.&rdquo;
+          <p className="font-display text-xs sm:text-sm text-charcoal/80 max-w-[270px] leading-relaxed italic mb-4 sm:mb-5">
+            &ldquo;Together with our families, we joyfully invite you to celebrate our reception evening.&rdquo;
           </p>
 
           {/* Tactile 3D Wax Seal — Tap to Open */}
@@ -101,22 +114,28 @@ export const OpeningCard: React.FC<OpeningCardProps> = ({ onOpen, guestName }) =
             type="button"
             onClick={handleOpen}
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.96 }}
-            className="group relative cursor-pointer focus:outline-none focus:ring-4 focus:ring-gold/30 rounded-full"
+            whileTap={{ scale: 0.95 }}
+            className="group relative cursor-pointer focus:outline-none focus:ring-4 focus:ring-gold/30 rounded-full p-1"
             aria-label="Break wax seal and open wedding invitation"
           >
-            {/* Pulsing Aura */}
-            <div className="absolute -inset-2 rounded-full bg-gold/20 blur-sm animate-pulse pointer-events-none" />
+            {/* Subtle Pulsing Aura */}
+            <div className="absolute inset-0 rounded-full bg-gold/25 blur-md animate-pulse pointer-events-none" />
 
-            {/* Wax Seal Body */}
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#C69852] via-[#B88A45] to-[#8C6329] border-2 border-[#E7BA77] shadow-wax-seal flex flex-col items-center justify-center text-pearl transition-transform duration-300">
+            {/* Wax Seal Body — Optically centered & symmetrical */}
+            <div className="relative w-20 h-20 sm:w-22 sm:h-22 rounded-full bg-gradient-to-br from-[#CA9C56] via-[#B88A45] to-[#865E26] border-2 border-[#ECC17E] shadow-wax-seal flex items-center justify-center text-pearl transition-transform duration-300">
               {/* Inner carved circle */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-gold-light/40 flex flex-col items-center justify-center p-1">
-                <span className="font-display text-xs tracking-widest text-pearl-100/90 font-medium uppercase scale-90">
-                  EST. 2026
+              <div className="w-[68px] h-[68px] sm:w-[74px] sm:h-[74px] rounded-full border border-gold-shimmer/40 flex flex-col items-center justify-center p-1 text-center">
+                {/* Fleur / Diamond accent */}
+                <span className="text-[9px] text-pearl-100/80 leading-none select-none">
+                  ✦
                 </span>
-                <span className="font-script text-2xl sm:text-3xl text-pearl font-bold drop-shadow-md">
-                  V &amp; A
+                {/* Monogram — Cormorant Serif optical center */}
+                <span className="font-display text-xl sm:text-2xl font-semibold text-pearl tracking-wider drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] my-[-1px]">
+                  V&amp;A
+                </span>
+                {/* Year */}
+                <span className="text-[9px] font-sans tracking-[0.2em] text-pearl-100/90 font-medium uppercase leading-none">
+                  2026
                 </span>
               </div>
             </div>
@@ -128,8 +147,8 @@ export const OpeningCard: React.FC<OpeningCardProps> = ({ onOpen, guestName }) =
           </motion.button>
         </div>
 
-        {/* Bottom Actions: Clear "Open Invitation" Button & Music Toggle */}
-        <div className="relative z-10 w-full pt-2 flex flex-col items-center gap-3">
+        {/* Bottom Actions: "Open Invitation" Button & Music Toggle */}
+        <div className="relative z-10 w-full pt-1 flex flex-col items-center gap-2.5">
           {/* Main Action Button */}
           <motion.button
             type="button"
@@ -137,7 +156,7 @@ export const OpeningCard: React.FC<OpeningCardProps> = ({ onOpen, guestName }) =
             disabled={isOpening}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full max-w-[280px] py-3.5 px-6 rounded-full bg-botanical hover:bg-botanical-light text-pearl font-medium text-sm sm:text-base tracking-wider uppercase transition-all duration-300 shadow-lg shadow-botanical/25 flex items-center justify-center gap-2 border border-gold/40 group cursor-pointer"
+            className="w-full max-w-[270px] py-3 px-6 rounded-full bg-botanical hover:bg-botanical-light text-pearl font-medium text-sm sm:text-base tracking-wider uppercase transition-all duration-300 shadow-lg shadow-botanical/25 flex items-center justify-center gap-2 border border-gold/40 group cursor-pointer"
           >
             <AnimatePresence mode="wait">
               {isOpening ? (
@@ -173,7 +192,7 @@ export const OpeningCard: React.FC<OpeningCardProps> = ({ onOpen, guestName }) =
             <button
               type="button"
               onClick={() => setPlayAudioWithOpen(!playAudioWithOpen)}
-              className="flex items-center gap-2 text-xs text-slate hover:text-charcoal transition-colors px-3 py-1.5 rounded-full hover:bg-champagne/40"
+              className="flex items-center gap-1.5 text-xs text-slate hover:text-charcoal transition-colors px-3 py-1 rounded-full hover:bg-champagne/40 cursor-pointer"
               aria-label={playAudioWithOpen ? "Disable music on opening" : "Enable music on opening"}
             >
               {playAudioWithOpen ? (
@@ -196,6 +215,6 @@ export const OpeningCard: React.FC<OpeningCardProps> = ({ onOpen, guestName }) =
           </p>
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };

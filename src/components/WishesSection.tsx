@@ -43,7 +43,7 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
 
     setTimeout(() => {
       setSent(false);
-    }, 4000);
+    }, 4500);
   };
 
   return (
@@ -53,8 +53,8 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-6 sm:mb-8"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-champagne-light border border-gold/30 text-botanical text-xs uppercase tracking-widest font-semibold mb-2">
@@ -74,9 +74,9 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="rounded-3xl bg-pearl border border-gold/30 p-6 sm:p-8 shadow-wedding-lg relative overflow-hidden"
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="rounded-3xl bg-pearl border border-gold/30 p-5 sm:p-8 shadow-wedding-lg relative overflow-hidden"
         >
           {/* Preset Wish Chips */}
           <div className="mb-5">
@@ -95,7 +95,7 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
                       : 'bg-champagne-light hover:bg-champagne border-gold/30 text-charcoal'
                   }`}
                 >
-                  &ldquo;{preset.slice(0, 42)}...&rdquo;
+                  &ldquo;{preset.slice(0, 40)}...&rdquo;
                 </button>
               ))}
             </div>
@@ -116,7 +116,7 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
                 placeholder="e.g. Suresh &amp; Family, John, Anita"
                 value={senderName}
                 onChange={(e) => setSenderName(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-champagne-light/50 border border-champagne-border focus:border-botanical focus:bg-pearl focus:outline-none text-sm text-charcoal transition-colors placeholder:text-slate/60"
+                className="w-full px-4 py-2.5 rounded-xl bg-champagne-light/50 border border-champagne-border focus:border-botanical focus:bg-pearl focus:outline-none text-base sm:text-sm text-charcoal transition-colors placeholder:text-slate/60"
               />
             </div>
 
@@ -133,14 +133,14 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
                 placeholder="Write your wishes for Vineeth &amp; Alida..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-champagne-light/50 border border-champagne-border focus:border-botanical focus:bg-pearl focus:outline-none text-sm text-charcoal transition-colors placeholder:text-slate/60 resize-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-champagne-light/50 border border-champagne-border focus:border-botanical focus:bg-pearl focus:outline-none text-base sm:text-sm text-charcoal transition-colors placeholder:text-slate/60 resize-none"
               />
             </div>
 
             {/* Action Button */}
             <button
               type="submit"
-              className="w-full py-3.5 px-6 rounded-full bg-botanical hover:bg-botanical-light text-pearl font-medium text-sm sm:text-base tracking-wide transition-all shadow-md shadow-botanical/20 flex items-center justify-center gap-2 border border-gold/30 cursor-pointer group"
+              className="w-full py-3.5 px-6 rounded-full bg-botanical hover:bg-botanical-light text-pearl font-medium text-sm sm:text-base tracking-wide transition-all shadow-md shadow-botanical/20 flex items-center justify-center gap-2 border border-gold/30 cursor-pointer group min-h-[46px]"
             >
               <MessageCircleHeart className="w-4 h-4 text-rose fill-rose" />
               <span>Send Wishes via WhatsApp</span>
@@ -150,7 +150,7 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
             {/* Success feedback pill */}
             {sent && (
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="p-3 rounded-xl bg-botanical/10 border border-botanical/30 text-botanical text-xs text-center flex items-center justify-center gap-2 font-medium"
               >

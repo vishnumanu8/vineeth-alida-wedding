@@ -90,7 +90,7 @@ export const WeddingImage: React.FC<WeddingImageProps> = ({
             </div>
 
             {/* Monogram */}
-            <span className="font-script text-3xl md:text-4xl text-gold mb-1">
+            <span className="font-display font-semibold text-2xl md:text-3xl tracking-widest text-gold mb-1">
               V &amp; A
             </span>
 
