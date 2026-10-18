@@ -47,7 +47,7 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
   };
 
   return (
-    <section id="wishes" className="py-12 sm:py-20 px-4 sm:px-6">
+    <section id="wishes" className="py-12 sm:py-20 pl-12 pr-4 sm:pl-16 sm:pr-6 md:px-8">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <motion.div

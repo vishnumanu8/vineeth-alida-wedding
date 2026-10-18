@@ -10,8 +10,11 @@ export const CoupleSection: React.FC = () => {
   return (
     <section
       id="invitation-story"
-      className="relative py-14 sm:py-24 px-4 sm:px-6 bg-pearl text-charcoal overflow-hidden"
+      className="relative py-14 sm:py-24 pl-12 pr-4 sm:pl-16 sm:pr-6 md:px-8 bg-pearl text-charcoal overflow-hidden"
     >
+      {/* Subtle top transition gradient from hero dark emerald */}
+      <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
+
       {/* Subtle radiant background aura */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-champagne/45 rounded-full blur-3xl pointer-events-none -z-10" />
 

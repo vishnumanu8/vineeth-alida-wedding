@@ -114,7 +114,7 @@ export const ReceptionSection: React.FC = () => {
   return (
     <section
       id="reception"
-      className="relative py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-transparent via-champagne/30 to-transparent"
+      className="relative py-12 sm:py-20 pl-12 pr-4 sm:pl-16 sm:pr-6 md:px-8 bg-gradient-to-b from-transparent via-champagne/30 to-transparent"
     >
       <div className="max-w-4xl mx-auto">
         {/* Section Headline */}

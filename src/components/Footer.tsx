@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-gradient-to-b from-champagne-light to-champagne/60 border-t border-champagne-border py-12 sm:py-16 px-4 sm:px-6 text-center">
+    <footer className="relative bg-gradient-to-b from-champagne-light to-champagne/60 border-t border-champagne-border py-12 sm:py-16 pl-12 pr-4 sm:pl-16 sm:pr-6 md:px-8 text-center">
       <div className="max-w-3xl mx-auto flex flex-col items-center">
         {/* Monogram Crest */}
         <div className="w-12 h-12 rounded-full border-2 border-gold/40 bg-pearl flex items-center justify-center text-botanical font-display font-semibold text-lg shadow-sm mb-3">

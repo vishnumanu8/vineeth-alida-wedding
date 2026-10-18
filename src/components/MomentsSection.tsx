@@ -21,7 +21,7 @@ export const MomentsSection: React.FC = () => {
   const currentMoment = moments[currentIndex];
 
   return (
-    <section id="moments" className="py-12 sm:py-20 px-4 sm:px-6 overflow-hidden">
+    <section id="moments" className="py-12 sm:py-20 pl-12 pr-4 sm:pl-16 sm:pr-6 md:px-8 overflow-hidden">
       <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
         {/* Header */}
         <motion.div

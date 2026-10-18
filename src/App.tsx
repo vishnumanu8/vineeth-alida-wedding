@@ -4,6 +4,7 @@ import { weddingAudio } from './utils/audioPlayer';
 import { getGuestNameFromUrl } from './utils/url';
 
 import { OpeningDoors } from './components/OpeningDoors';
+import { TheLivingGoldenThread } from './components/TheLivingGoldenThread';
 import { HeroSection } from './components/HeroSection';
 import { CoupleSection } from './components/CoupleSection';
 import { ReceptionSection } from './components/ReceptionSection';
@@ -42,9 +43,12 @@ export const App: React.FC = () => {
         />
       )}
 
+      {/* Feature A: The Living Golden Thread (Progressive scroll path & milestone navigation) */}
+      <TheLivingGoldenThread />
+
       {/* 2. Main Full-Screen & Scroll-Driven Wedding Invitation */}
       <main className="flex-1 w-full overflow-x-hidden">
-        {/* Full-Screen Immersive Couple Hero Screen */}
+        {/* Full-Screen Immersive Couple Hero Screen (Pre-rendered behind doors for instant reveal) */}
         <HeroSection guestName={guestName} />
 
         {/* Section 1: The Couple Profiles & Family Blessings */}
