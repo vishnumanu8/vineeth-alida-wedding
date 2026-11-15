@@ -242,7 +242,7 @@ export const weddingConfig: WeddingConfig = {
     siteDescription:
       "Together with their families, Vineeth and Alida warmly invite you to celebrate their wedding reception on Thursday, 7 January 2027.",
     siteUrl: "https://vineeth-alida.vercel.app/",
-    ogImage: "/images/og-invitation.jpg",
+    ogImage: "/og-image-letter.png",
     themeColor: "#11211A",
   },
 };

@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
   const handleShareWhatsApp = async () => {
     setSharing(true);
     const canonicalSiteUrl =
-      metadata?.siteUrl || 'https://vishnumanu8.github.io/vineeth-alida-wedding/';
+      metadata?.siteUrl || 'https://vineeth-alida.vercel.app/';
 
     // Detect if running on localhost / private network
     const isLocalhost =
@@ -27,14 +27,14 @@ export const Footer: React.FC = () => {
     const shareText = `*Wedding Reception Invitation — ${couple.combinedNames}* 💐\n\nYou are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} at ${reception.venueName}, ${reception.city}.\n\nView digital invitation & directions:\n${shareUrl}`;
 
     // Load actual invitation image file for native media sharing
-    const imageUrl = metadata?.ogImage || '/images/og-invitation.jpg';
+    const imageUrl = metadata?.ogImage || '/og-image-letter.png';
     let imageFile: File | null = null;
     try {
       const res = await fetch(imageUrl);
       if (res.ok) {
         const blob = await res.blob();
-        imageFile = new File([blob], 'Vineeth-Alida-Wedding-Invitation.jpg', {
-          type: blob.type || 'image/jpeg',
+        imageFile = new File([blob], 'Vineeth-Alida-Wedding-Invitation.png', {
+          type: blob.type || 'image/png',
         });
       }
     } catch {
@@ -130,8 +130,8 @@ export const Footer: React.FC = () => {
           </button>
 
           <a
-            href="/images/og-invitation.jpg"
-            download="Vineeth-Alida-Wedding-Invitation.jpg"
+            href="/og-image-letter.png"
+            download="Vineeth-Alida-Wedding-Invitation.png"
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-champagne-light/60 hover:bg-champagne border border-gold/25 text-xs font-medium text-slate hover:text-botanical transition-all cursor-pointer min-h-[44px]"
             title="Download invitation card monogram"
           >
