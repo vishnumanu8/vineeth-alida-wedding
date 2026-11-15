@@ -18,20 +18,21 @@ The **"Living Invitation Letter"** edition (`WeddingInvitationNoImage` branch) i
 
 All couple/human photographs, image comparison sliders, and thumbnail references were systematically audited and removed:
 
-| Removed Item | Former Location | Replacement |
-|---|---|---|
-| **Hero Couple Photo** | `public/images/hero-couple.jpg` | **Animated Gold Monogram (`V & A`)** with botanical flourishes, kinetic typography, and ambient gold dust particles |
-| **Groom & Bride Portraits** | `public/images/groom-vineeth.jpg`, `public/images/bride-alida.jpg` | **Heraldic Botanical Crests** with laurel wreaths, initials 'V' and 'A', and formal heritage profiles |
-| **Before/After Memory Slider** | `MomentsSection.tsx`, `TouchToRevealMemory.tsx` | **The Living Invitation Letter (`InvitationLetter.tsx`)** with digital parchment, wax seal crest, and live countdown timer |
-| **Image Preload Tag** | `<link rel="preload" as="image" href="/images/hero-couple.jpg">` in `index.html` | Removed / Replaced with `<link rel="preload" as="image" href="/favicon.svg">` |
-| **Social / WhatsApp Sharing Card** | `og:image` pointing to `og-wedding.jpg` | **`public/images/og-invitation.jpg`** — A custom 1200×630px emerald and gold typographic monogram card |
-| **Footer Download Asset** | Download link to `og-wedding.jpg` | Updated to download `og-invitation.jpg` as the keepsake invitation card |
+| Removed Item                       | Former Location                                                                  | Replacement                                                                                                                |
+| ---------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **Hero Couple Photo**              | `public/images/hero-couple.jpg`                                                  | **Animated Gold Monogram (`V & A`)** with botanical flourishes, kinetic typography, and ambient gold dust particles        |
+| **Groom & Bride Portraits**        | `public/images/groom-vineeth.jpg`, `public/images/bride-alida.jpg`               | **Heraldic Botanical Crests** with laurel wreaths, initials 'V' and 'A', and formal heritage profiles                      |
+| **Before/After Memory Slider**     | `MomentsSection.tsx`, `TouchToRevealMemory.tsx`                                  | **The Living Invitation Letter (`InvitationLetter.tsx`)** with digital parchment, wax seal crest, and live countdown timer |
+| **Image Preload Tag**              | `<link rel="preload" as="image" href="/images/hero-couple.jpg">` in `index.html` | Removed / Replaced with `<link rel="preload" as="image" href="/favicon.svg">`                                              |
+| **Social / WhatsApp Sharing Card** | `og:image` pointing to `og-wedding.jpg`                                          | **`public/images/og-invitation.jpg`** — A custom 1200×630px emerald and gold typographic monogram card                     |
+| **Footer Download Asset**          | Download link to `og-wedding.jpg`                                                | Updated to download `og-invitation.jpg` as the keepsake invitation card                                                    |
 
 ---
 
 ## 👑 Phase 3: Preserved Identity & Core Functional Features
 
 The visual design language and interactive capabilities from the original project remain 100% functional:
+
 - **Colour Palette**: Deep botanical emerald (`#07130E`, `#0E281D`), warm pearl (`#FFFDF7`, `#FDFBF7`), and champagne gold (`#D4A359`, `#C89D54`, `#F0D49E`).
 - **Launch Screen**: The cinematic 3D double-door parting reveal (`OpeningDoors.tsx`) with atmospheric mist and light bokeh motes.
 - **Audio Experience**: Background romantic acoustic music with volume fade-in and fixed bottom-right mute/unmute control (`AudioControl.tsx`).
@@ -53,7 +54,7 @@ Designed specifically for guests receiving the link via WhatsApp on mobile phone
    - Tactile digital parchment with scalloped/ornate edges and self-drawing gold corner filigree.
    - Deep red wax seal crest with embossed "V & A 2027" monogram.
    - Scroll-triggered prose reveals presenting the families' formal invitation words.
-   - **Live Countdown Clock (`CountdownTimer.tsx`)**: Real-time ticking countdown to 7 January 2027 at 6:00 PM IST (Days, Hours, Minutes, Seconds).
+   - **Live Countdown Clock (`CountdownTimer.tsx`)**: Real-time ticking countdown to 7 January 2027 at 5:30 PM IST (Days, Hours, Minutes, Seconds).
 3. **Continuous Golden Thread (`GoldenThreadDivider.tsx`)**:
    - Scroll-linked vertical gold thread with delicate SVG botanical leaves that sway and draw into view as sections are approached.
 
@@ -62,6 +63,7 @@ Designed specifically for guests receiving the link via WhatsApp on mobile phone
 ## 🐾 Phase 5: "Meet the Four-Legged VIPs" (`PetVipSection.tsx`)
 
 A delightful section positioned near the bottom of the invitation (above Wishes and Footer):
+
 - **Asset**: `public/images/Vineeth_Alida_Additional_image.jpeg` (896 × 1195 px).
 - **Integrity**: Displayed authentically without cropping, distorting, or AI-altering the dogs' faces.
 - **Stepping Paw Trail**: On scroll, an animated sequence of golden SVG paw prints steps across the path into the section.
@@ -98,9 +100,9 @@ A comprehensive refinement pass was implemented on `WeddingInvitationNoImage` to
 3. **Formal Letter Redesign & De-duplication (`InvitationLetter.tsx` & `CoupleSection.tsx`):**
    - Removed standalone Groom & Bride profile cards (`BASED IN DUBAI`, `NATIVE TO KERALA`, personal quotes, duplicate parents pills).
    - Formally paired the couple with their respective parents adhering to formal luxury etiquette:
-     - **Vineeth M** — *S/o Smt. Sobhana S. & Shri Madhavan Nair*
+     - **Vineeth M** — _S/o Smt. Sobhana S. & Shri Madhavan Nair_
      - `&`
-     - **Alida** — *D/o Smt. Manjusha G. & Shri Vinod Kumar*
+     - **Adv Alida M Vinod** — _D/o Smt. Manjusha G. & Shri Vinod Kumar_
    - Formal invitation prose welcoming guests to the auspicious wedding reception.
    - Removed duplicated date & venue block from the letter base; integrated the live **Countdown Timer** at the card's base.
    - Seamless flow directly into **"Our New Journey Begins"** (Dubai ✈ Kerala Flight Route) and the **Grand Evening Reception** venue card.
@@ -126,8 +128,8 @@ A targeted polish pass was executed on the `WeddingInvitationNoImage` branch:
    - Kept **The Invitation Letter** 100% formal and official for family and elders.
    - Removed the duplicate phrase `"Coming home to celebrate our beginning"` from the base of the Dubai ✈ Kerala white flight card in `CoupleSection.tsx`.
    - Added an elegant dual-pill **"Two Worlds, One Heart"** signature block featuring the couple's personal taglines with gold monogram initials (`V` & `A`):
-     - **Vineeth** — *"Balancing life's ledger with joy, heart & humor"*
-     - **Alida** — *"Advocating for endless love, laughter & forever"*
+     - **Vineeth** — _"Balancing life's ledger with joy, heart & humor"_
+     - **Alida** — _"Advocating for endless love, laughter & forever"_
 
 3. **Continuous Live SVG Paw Animation & Pets Section:**
    - **100% SVG Paws (No Native Emojis)**: Replaced all Unicode `🐾` text emojis (which render dark grey on iOS) with custom Champagne Gold SVG paw icons (`GoldPawSvg`) inside the `SPECIAL PAW-TY VIPs` badge, the walking trail, tap particles, and the `Send Love & Paws` button.
@@ -163,3 +165,33 @@ A targeted polish pass was executed on the `WeddingInvitationNoImage` branch:
   - `dist/assets/vendor-BXZjp2tV.js`: 133.93 kB
   - `dist/assets/index-Jr7He-ZQ.js`: 214.26 kB
 - **Vite Dev Server**: Running actively at `http://localhost:3000/`.
+
+---
+
+## 🌌 Phase 14: Global Color Theme Swap — "Midnight Sapphire & Champagne Gold"
+
+Executed a complete color theme transformation across the entire digital invitation, transitioning from the previous Emerald/Forest Green palette to an evening **"Midnight Sapphire & Champagne Gold"** aesthetic without altering layout structure, text content, or animation physics:
+
+1. **Global CSS & Tailwind Design Tokens (`tailwind.config.js` & `globals.css`):**
+   - Injected the new `sapphire` palette:
+     - `sapphire.light`: `#233876` (vibrant sapphire highlight)
+     - `sapphire.DEFAULT`: `#111D4A` (royal midnight navy)
+     - `sapphire.dark`: `#0B1325` (ultra-deep midnight background)
+     - `sapphire.deep`: `#060A14` (abyssal shadow)
+     - `sapphire.surface`: `#16255C` (elevated card tint)
+   - Remapped semantic aliases (`botanical` and `peacock`) to the Midnight Sapphire scale so buttons, typography, and accent borders seamlessly inherit the new theme.
+   - Updated `html, body`, `App.tsx`, and `index.html` background to `#0B1325` with `selection:text-sapphire-dark`.
+   - Updated `boxShadow.wedding` and `boxShadow.wedding-lg` to soft navy tones.
+
+2. **Component Backgrounds, Badges & Overlays:**
+   - **Opening Doors Reveal (`OpeningDoors.tsx`)**: Replaced door gradients with `from-[#060A17] via-[#0B1325] to-[#121E42]`, ambient lighting to `bg-sapphire/20`, and preserved shimmering gold center seam.
+   - **Hero Section (`HeroSection.tsx`)**: Updated radial gradient to sapphire `rgba(17, 29, 74, 0.75)` / `rgba(11, 19, 37, 0.9)` / `rgba(6, 10, 20, 0.95)` flowing gracefully into `#0B1325`.
+   - **Section Badges (`InvitationLetter.tsx`, `ReceptionSection.tsx`, `PetVipSection.tsx`, `WishesSection.tsx`)**: Updated translucent pills from `#0B1E16` to Midnight Sapphire `#111D4A` with champagne gold border and typography.
+   - **Pet Photography Container (`PetVipSection.tsx`)**: Updated background to deep navy `#0E1738` and confetti palette to `#1C2A4F`.
+   - **Floating Audio Control (`AudioControl.tsx`)**: Updated active badge background to `#0B1325`/90.
+   - **Favicon (`public/favicon.svg`)**: Updated badge background circle to `#0B1325`.
+
+3. **Open Graph & WhatsApp Link Preview Assets:**
+   - Updated `scripts/generate-og-image.mjs` and `public/og-image-letter.svg` with the Midnight Sapphire velvet gradient `radial-gradient(circle at 50% 45%, #162B66 0%, #0F1D47 48%, #070D21 100%)`.
+   - Regenerated `public/og-image-letter.png` (298 KB, under 300 KB requirement) and `public/og-image-letter.jpg` / `public/images/og-invitation.jpg` (66 KB) with Google Chrome headless screenshot and compression.
+

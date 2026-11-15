@@ -2,14 +2,14 @@ import confetti from 'canvas-confetti';
 
 /**
  * Fires an elegant, refined wedding-themed confetti explosion
- * with Antique Gold, Botanical Green, Champagne, and Rose Petal tones.
+ * with Antique Gold, Midnight Sapphire, Champagne, and Rose Petal tones.
  */
 export function fireWeddingCelebration() {
   const count = 120;
   const defaults = {
     origin: { y: 0.7 },
     zIndex: 9999,
-    colors: ['#B88A45', '#D4A359', '#315B4B', '#C77F83', '#F4E8D8', '#FFF9F1'],
+    colors: ['#B88A45', '#D4A359', '#1C2A4F', '#C77F83', '#F4E8D8', '#FFF9F1'],
   };
 
   function fire(particleRatio: number, opts: confetti.Options) {

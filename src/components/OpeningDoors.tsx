@@ -374,7 +374,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       </div>
 
       {/* =======================================================================
-          LEFT EMERALD APERTURE PANEL (Hinged on the left edge)
+          LEFT SAPPHIRE APERTURE PANEL (Hinged on the left edge)
           Slightly oversized by 1px and 10px top/bottom to prevent subpixel leaks
           ======================================================================= */}
       <div
@@ -384,7 +384,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
           WebkitTransformOrigin: 'left center',
           transformStyle: 'preserve-3d',
         }}
-        className="absolute -top-[10px] -bottom-[10px] left-0 w-[calc(50%+1px)] bg-gradient-to-r from-[#05100B] via-[#091C14] to-[#0E281D] border-r border-gold/30 shadow-2xl overflow-hidden will-change-transform"
+        className="absolute -top-[10px] -bottom-[10px] left-0 w-[calc(50%+1px)] bg-gradient-to-r from-[#060A17] via-[#0B1325] to-[#121E42] border-r border-gold/30 shadow-2xl overflow-hidden will-change-transform"
       >
         {/* Subtle ambient lighting */}
         <div className="absolute top-1/3 right-0 w-72 h-72 rounded-full bg-gold/10 blur-3xl pointer-events-none" />
@@ -394,7 +394,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       </div>
 
       {/* =======================================================================
-          RIGHT EMERALD APERTURE PANEL (Hinged on the right edge)
+          RIGHT SAPPHIRE APERTURE PANEL (Hinged on the right edge)
           Slightly oversized by 1px and 10px top/bottom to prevent subpixel leaks
           ======================================================================= */}
       <div
@@ -404,10 +404,10 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
           WebkitTransformOrigin: 'right center',
           transformStyle: 'preserve-3d',
         }}
-        className="absolute -top-[10px] -bottom-[10px] right-0 w-[calc(50%+1px)] bg-gradient-to-l from-[#05100B] via-[#091C14] to-[#0E281D] border-l border-gold/30 shadow-2xl overflow-hidden will-change-transform"
+        className="absolute -top-[10px] -bottom-[10px] right-0 w-[calc(50%+1px)] bg-gradient-to-l from-[#060A17] via-[#0B1325] to-[#121E42] border-l border-gold/30 shadow-2xl overflow-hidden will-change-transform"
       >
         {/* Subtle ambient lighting */}
-        <div className="absolute bottom-1/3 left-0 w-72 h-72 rounded-full bg-peacock/10 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/3 left-0 w-72 h-72 rounded-full bg-sapphire/20 blur-3xl pointer-events-none" />
         {/* Restrained corner filigree */}
         <div className="absolute top-8 right-6 w-6 h-6 border-t border-r border-gold/30 pointer-events-none" />
         <div className="absolute bottom-8 right-6 w-6 h-6 border-b border-r border-gold/30 pointer-events-none" />
@@ -423,7 +423,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
       />
 
       {/* =======================================================================
-          THE EMERALD APERTURE: MINIMAL, BESPOKE LAUNCH CONTENT
+          THE MIDNIGHT SAPPHIRE APERTURE: MINIMAL, BESPOKE LAUNCH CONTENT
           - Custom SVG V&A ligature on ONE single line (immune to text wrapping)
           - "A celebration awaits"
           - Subtle "Tap to open" cue

@@ -98,7 +98,7 @@ export const CoupleSection: React.FC = () => {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col items-center mb-6 sm:mb-8 max-w-xl mx-auto"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B1E16] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#111D4A] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
             <Compass className="w-3.5 h-3.5 text-gold" />
             <span>The Journey Home</span>
           </div>
@@ -209,7 +209,7 @@ export const CoupleSection: React.FC = () => {
                     x="35"
                     y="72"
                     textAnchor="middle"
-                    className="font-sans font-bold text-[11px] fill-[#11211A] tracking-wider uppercase"
+                    className="font-sans font-bold text-[11px] fill-[#0B1325] tracking-wider uppercase"
                   >
                     {couple.originJourney.from}
                   </text>
@@ -222,7 +222,7 @@ export const CoupleSection: React.FC = () => {
                     cy="52"
                     r="8"
                     fill="none"
-                    stroke="#315B4B"
+                    stroke="#111D4A"
                     strokeWidth="1"
                     opacity="0.35"
                   />
@@ -230,7 +230,7 @@ export const CoupleSection: React.FC = () => {
                     cx="285"
                     cy="52"
                     r="3.5"
-                    fill="#315B4B"
+                    fill="#111D4A"
                     stroke="#F0D49E"
                     strokeWidth="1.2"
                   />
@@ -238,7 +238,7 @@ export const CoupleSection: React.FC = () => {
                     x="285"
                     y="36"
                     textAnchor="middle"
-                    className="font-display italic text-[10px] fill-[#315B4B] font-medium"
+                    className="font-display italic text-[10px] fill-[#111D4A] font-medium"
                   >
                     Destination
                   </text>
@@ -246,7 +246,7 @@ export const CoupleSection: React.FC = () => {
                     x="285"
                     y="72"
                     textAnchor="middle"
-                    className="font-sans font-bold text-[11px] fill-[#11211A] tracking-wider uppercase"
+                    className="font-sans font-bold text-[11px] fill-[#0B1325] tracking-wider uppercase"
                   >
                     {couple.originJourney.to}
                   </text>
@@ -274,7 +274,7 @@ export const CoupleSection: React.FC = () => {
                   <rect x="-2.2" y="-4.8" width="4.5" height="1.8" rx="0.9" fill="#B88A45" stroke="#FFFDF7" strokeWidth="0.5" />
                   <rect x="-2.2" y="3.0" width="4.5" height="1.8" rx="0.9" fill="#B88A45" stroke="#FFFDF7" strokeWidth="0.5" />
 
-                  <path d="M 10 -0.8 Q 12 0 10 0.8 Z" fill="#07130E" />
+                  <path d="M 10 -0.8 Q 12 0 10 0.8 Z" fill="#0B1325" />
                 </g>
               </svg>
 
@@ -300,11 +300,11 @@ export const CoupleSection: React.FC = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-baseline gap-1.5 flex-wrap">
-                        <span className="font-display font-semibold text-[12px] sm:text-[13px] text-[#07130E] tracking-tight">
+                        <span className="font-display font-semibold text-[12px] sm:text-[13px] text-[#0B1325] tracking-tight">
                           {couple.groom.name}
                         </span>
                         <span className="text-gold/70 text-[10px]">✦</span>
-                        <span className="font-serif italic text-[11px] sm:text-xs text-[#204034] leading-snug">
+                        <span className="font-serif italic text-[11px] sm:text-xs text-[#16255C] leading-snug">
                           &ldquo;{couple.groom.oneLiner}&rdquo;
                         </span>
                       </div>
@@ -318,11 +318,11 @@ export const CoupleSection: React.FC = () => {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-baseline gap-1.5 flex-wrap">
-                        <span className="font-display font-semibold text-[12px] sm:text-[13px] text-[#07130E] tracking-tight">
+                        <span className="font-display font-semibold text-[12px] sm:text-[13px] text-[#0B1325] tracking-tight">
                           {couple.bride.name}
                         </span>
                         <span className="text-gold/70 text-[10px]">✦</span>
-                        <span className="font-serif italic text-[11px] sm:text-xs text-[#204034] leading-snug">
+                        <span className="font-serif italic text-[11px] sm:text-xs text-[#16255C] leading-snug">
                           &ldquo;{couple.bride.oneLiner}&rdquo;
                         </span>
                       </div>

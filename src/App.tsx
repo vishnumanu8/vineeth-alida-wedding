@@ -37,11 +37,11 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#07130E] text-charcoal flex flex-col font-sans selection:bg-gold/20 selection:text-botanical-dark relative">
+    <div className="min-h-screen bg-[#0B1325] text-charcoal flex flex-col font-sans selection:bg-gold/20 selection:text-sapphire-dark relative">
       {/* 60fps Magical Multi-Layer Firefly, Bokeh & Stardust Engine */}
       <MagicalFireflyEngine />
 
-      {/* 1. Cinematic Emerald Aperture Double-Door Parting Reveal */}
+      {/* 1. Cinematic Midnight Sapphire Aperture Double-Door Parting Reveal */}
       {!hasOpenedDoors && (
         <OpeningDoors
           onOpen={handleOpenDoors}

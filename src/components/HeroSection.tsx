@@ -125,15 +125,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
       aria-label="Vineeth & Alida Wedding Reception Hero"
     >
       {/* =======================================================================
-          LIVING INVITATION CANVAS: TEXTURED EMERALD & GOLD PARTICLES (NO PHOTOS)
+          LIVING INVITATION CANVAS: MIDNIGHT SAPPHIRE & GOLD PARTICLES (NO PHOTOS)
           ======================================================================= */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Subtle radial emerald illumination */}
+        {/* Subtle radial midnight sapphire illumination */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 80% 65% at 50% 45%, rgba(14, 40, 29, 0.75) 0%, rgba(7, 19, 14, 0.9) 70%, rgba(5, 14, 10, 0.95) 100%)',
+              'radial-gradient(ellipse 80% 65% at 50% 45%, rgba(17, 29, 74, 0.75) 0%, rgba(11, 19, 37, 0.9) 70%, rgba(6, 10, 20, 0.95) 100%)',
           }}
         />
 
@@ -155,7 +155,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
         <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-gold/30 pointer-events-none" />
 
         {/* Bottom gradient merging into next section */}
-        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#07130E] to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#0B1325] to-transparent pointer-events-none" />
       </div>
 
       {/* =======================================================================
@@ -214,13 +214,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
           </h1>
         </div>
 
-        {/* Line 3: Confirmed Date */}
+        {/* Line 3: Confirmed Date & Time */}
         <div className="overflow-hidden mb-2">
           <p
             ref={dateLineRef}
             className="font-display italic text-sm sm:text-xl text-pearl/95 tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
           >
-            {reception.formattedDate}
+            {reception.formattedDate} • {reception.formattedTime}
           </p>
         </div>
 

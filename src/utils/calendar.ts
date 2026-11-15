@@ -6,7 +6,7 @@ interface CalendarEventParams {
   title: string;
   description: string;
   location: string;
-  startDateIso: string; // e.g. "2026-11-29T18:00:00+05:30"
+  startDateIso: string; // e.g. "2027-01-07T17:30:00+05:30"
   durationHours?: number;
 }
 

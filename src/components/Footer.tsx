@@ -20,11 +20,12 @@ export const Footer: React.FC = () => {
         window.location.hostname.startsWith('10.') ||
         window.location.hostname.endsWith('.local'));
 
-    // Always share the public canonical URL so WhatsApp crawlers can scrape og-invitation.jpg
-    const shareUrl = isLocalhost ? canonicalSiteUrl : window.location.href.split('?')[0];
+    // Always share the public canonical URL with cache-busting parameter so WhatsApp fetches fresh sapphire preview
+    const shareBase = isLocalhost ? canonicalSiteUrl : window.location.href.split('?')[0];
+    const shareUrl = shareBase.includes('?') ? shareBase : `${shareBase.replace(/\/$/, '')}/?v=sapphire`;
 
     const shareTitle = `Wedding Reception Invitation — ${couple.combinedNames}`;
-    const shareText = `*Wedding Reception Invitation — ${couple.combinedNames}* 💐\n\nYou are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} at ${reception.venueName}, ${reception.city}.\n\nView digital invitation & directions:\n${shareUrl}`;
+    const shareText = `*Wedding Reception Invitation — ${couple.combinedNames}* 💐\n\nYou are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} (${reception.formattedTime}) at ${reception.venueName}, ${reception.city}.\n\nView digital invitation & directions:\n${shareUrl}`;
 
     // 1. Primary: Native Web Share API with URL Link (iOS Safari, Android Chrome)
     // Sharing as a URL link instructs WhatsApp to generate an interactive Rich Card Preview.
@@ -33,7 +34,7 @@ export const Footer: React.FC = () => {
       try {
         await navigator.share({
           title: shareTitle,
-          text: `*Wedding Reception Invitation — ${couple.combinedNames}* 💐\n\nYou are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} at ${reception.venueName}, ${reception.city}.\n\nView digital invitation & directions:`,
+          text: `*Wedding Reception Invitation — ${couple.combinedNames}* 💐\n\nYou are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} (${reception.formattedTime}) at ${reception.venueName}, ${reception.city}.\n\nView digital invitation & directions:`,
           url: shareUrl,
         });
         setSharing(false);
@@ -94,7 +95,7 @@ export const Footer: React.FC = () => {
           </button>
 
           <a
-            href="/og-image-letter.jpg"
+            href="/og-image-sapphire.jpg"
             download="Vineeth-Alida-Wedding-Invitation.jpg"
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-champagne-light/60 hover:bg-champagne border border-gold/25 text-xs font-medium text-slate hover:text-botanical transition-all cursor-pointer min-h-[44px]"
             title="Download invitation card monogram"

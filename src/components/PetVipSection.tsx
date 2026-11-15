@@ -218,7 +218,7 @@ export const PetVipSection: React.FC = () => {
           x: clientX / window.innerWidth,
           y: clientY / window.innerHeight,
         },
-        colors: ['#F0D49E', '#D4A359', '#315B4B', '#FFF9F1'],
+        colors: ['#F0D49E', '#D4A359', '#1C2A4F', '#FFF9F1'],
         ticks: 120,
         gravity: 1.1,
         scalar: 0.9,
@@ -252,7 +252,7 @@ export const PetVipSection: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="mb-6 sm:mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B1E16] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#111D4A] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
             <GoldPawSvg className="w-3.5 h-3.5 text-gold fill-gold" />
             <span>{pets.sectionBadge.replace('✨ ', '').replace('🐾', '').trim()}</span>
           </div>
@@ -300,7 +300,7 @@ export const PetVipSection: React.FC = () => {
             <div className="absolute bottom-2.5 right-2.5 w-4 h-4 border-b-2 border-r-2 border-gold pointer-events-none" />
 
             {/* Tightened Pet Photography Container with Animated Upper Space */}
-            <div className="relative w-full aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden border border-gold/30 bg-[#0B1A13] shadow-inner">
+            <div className="relative w-full aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden border border-gold/30 bg-[#0E1738] shadow-inner">
               <img
                 src={pets.image}
                 alt={pets.imageAlt}

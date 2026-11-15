@@ -1,10 +1,10 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Radial Emerald Velvet Gradient -->
-    <radialGradient id="emeraldBg" cx="50%" cy="45%" r="65%">
-      <stop offset="0%" stop-color="#103325" />
-      <stop offset="48%" stop-color="#092017" />
-      <stop offset="100%" stop-color="#05100B" />
+    <!-- Radial Midnight Sapphire Velvet Gradient -->
+    <radialGradient id="sapphireBg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#162B66" />
+      <stop offset="48%" stop-color="#0F1D47" />
+      <stop offset="100%" stop-color="#070D21" />
     </radialGradient>
 
     <!-- Metallic Champagne Gold Gradient -->
@@ -22,7 +22,7 @@
   </defs>
 
   <!-- 1. Background -->
-  <rect width="1200" height="630" fill="url(#emeraldBg)" />
+  <rect width="1200" height="630" fill="url(#sapphireBg)" />
 
   <!-- 2. Minimalist Gold Border -->
   <rect x="26" y="26" width="1148" height="578" rx="16" stroke="#D4A359" stroke-width="1" stroke-opacity="0.4" fill="none" />
@@ -73,14 +73,14 @@
     <line x1="20" y1="0" x2="110" y2="0" stroke="url(#goldMetallic)" stroke-width="1" stroke-opacity="0.65" />
   </g>
 
-  <!-- 8. Reception Date -->
+  <!-- 8. Reception Date & Time -->
   <text x="600" y="445" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif" font-size="28" font-weight="600" font-style="italic" fill="#E5C158" letter-spacing="1">
-    Thursday, 7 January 2027
+    Thursday, 7 January 2027 • 5:30 PM
   </text>
 
   <!-- 9. Venue & Location -->
   <text x="600" y="495" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="600" fill="#F0D49E" fill-opacity="0.88" letter-spacing="3">
-    MANGROVE AQUAVENTURES • PARAVOOR, KERALA
+    KARIYILAKALLU LAKE VIEW • PARAVOOR, KERALA
   </text>
 
   <!-- 10. Warm Invitation Subtitle -->

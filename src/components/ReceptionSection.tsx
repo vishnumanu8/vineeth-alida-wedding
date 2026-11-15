@@ -88,7 +88,7 @@ export const ReceptionSection: React.FC = () => {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="text-center mb-8 sm:mb-12"
       >
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B1E16] text-gold-shimmer text-xs font-semibold uppercase tracking-widest border border-gold/40 mb-3 shadow-sm">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#111D4A] text-gold-shimmer text-xs font-semibold uppercase tracking-widest border border-gold/40 mb-3 shadow-sm">
           <Sparkles className="w-3.5 h-3.5 text-gold" />
           <span>{reception.badge}</span>
         </div>
@@ -121,7 +121,7 @@ export const ReceptionSection: React.FC = () => {
 
         {/* ===================================================================
             PART 1: CALENDAR-INSPIRED DATE & TIME COMPOSITION
-            Places "07" prominently beside "JANUARY 2027" and "6:00 PM onwards"
+            Places "07" prominently beside "JANUARY 2027" and "5:30 PM onwards"
             =================================================================== */}
         <div className="flex flex-col items-center max-w-full">
           <div className="inline-flex items-center gap-3 sm:gap-6 p-3 sm:p-6 rounded-2xl bg-champagne-light/60 border border-gold/30 shadow-sm max-w-full">

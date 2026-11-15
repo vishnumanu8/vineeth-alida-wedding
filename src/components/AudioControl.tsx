@@ -39,7 +39,7 @@ export const AudioControl: React.FC<AudioControlProps> = ({ visible = true }) =>
         onClick={toggleAudio}
         className={`flex items-center gap-2 px-3 py-2 rounded-full border backdrop-blur-md transition-all duration-300 shadow-lg cursor-pointer active:scale-95 ${
           isPlaying
-            ? 'bg-[#091711]/90 text-pearl border-gold/60 shadow-gold-glow'
+            ? 'bg-[#0B1325]/90 text-pearl border-gold/60 shadow-gold-glow'
             : 'bg-black/45 text-pearl/70 border-white/20 hover:border-gold/40'
         }`}
         title={isPlaying ? 'Pause celebration music' : 'Play celebration music'}

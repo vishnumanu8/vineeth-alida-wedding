@@ -123,7 +123,7 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-6 sm:mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B1E16] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#111D4A] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
             <Heart className="w-3.5 h-3.5 text-rose fill-rose" />
             <span>Blessings &amp; Greetings</span>
           </div>

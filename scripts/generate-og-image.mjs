@@ -25,7 +25,7 @@ const htmlContent = `<!DOCTYPE html>
       width: 1200px;
       height: 630px;
       overflow: hidden;
-      background: #07130E;
+      background: #0B1325;
       font-family: 'Cormorant Garamond', Georgia, serif;
       -webkit-font-smoothing: antialiased;
     }
@@ -33,7 +33,7 @@ const htmlContent = `<!DOCTYPE html>
       position: relative;
       width: 1200px;
       height: 630px;
-      background: radial-gradient(circle at 50% 45%, #103325 0%, #092017 48%, #05100B 100%);
+      background: radial-gradient(circle at 50% 45%, #162B66 0%, #0F1D47 48%, #070D21 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -224,14 +224,14 @@ const htmlContent = `<!DOCTYPE html>
       <div class="divider-line"></div>
     </div>
 
-    <!-- Date -->
+    <!-- Date & Time -->
     <div class="date">
-      Thursday, 7 January 2027
+      Thursday, 7 January 2027 • 5:30 PM
     </div>
 
     <!-- Venue & Location -->
     <div class="venue">
-      Mangrove Aquaventures • Paravoor, Kerala
+      Kariyilakallu Lake View • Paravoor, Kerala
     </div>
 
     <!-- Family note -->
@@ -244,8 +244,11 @@ const htmlContent = `<!DOCTYPE html>
 
 const tempHtmlPath = '/tmp/og-simple-template.html';
 const outputPngPath = resolve(rootDir, 'public/og-image-letter.png');
+const sapphirePngPath = resolve(rootDir, 'public/og-image-sapphire.png');
 const outputJpgPath = resolve(rootDir, 'public/og-image-letter.jpg');
+const sapphireJpgPath = resolve(rootDir, 'public/og-image-sapphire.jpg');
 const legacyJpgPath = resolve(rootDir, 'public/images/og-invitation.jpg');
+const legacyWeddingJpgPath = resolve(rootDir, 'public/images/og-wedding.jpg');
 
 writeFileSync(tempHtmlPath, htmlContent, 'utf-8');
 
@@ -279,13 +282,16 @@ for ctype, cdata in chunks:
 out.extend(struct.pack('>I', len(compressed)) + b'IDAT' + compressed + struct.pack('>I', zlib.crc32(b'IDAT' + compressed) & 0xffffffff))
 out.extend(struct.pack('>I', 0) + b'IEND' + struct.pack('>I', zlib.crc32(b'IEND') & 0xffffffff))
 with open('${outputPngPath}', 'wb') as f: f.write(out)
+with open('${sapphirePngPath}', 'wb') as f: f.write(out)
 "`);
 
-// Generate JPEGs for fastest WhatsApp link unfurling
+// Generate JPEGs for fastest WhatsApp link unfurling across all asset names
 try {
   execSync(`sips -s format jpeg "${outputPngPath}" --out "${outputJpgPath}"`, { stdio: 'inherit' });
+  execSync(`sips -s format jpeg "${outputPngPath}" --out "${sapphireJpgPath}"`, { stdio: 'inherit' });
   execSync(`sips -s format jpeg "${outputPngPath}" --out "${legacyJpgPath}"`, { stdio: 'inherit' });
-  console.log('Updated JPEGs:', outputJpgPath, legacyJpgPath);
+  execSync(`sips -s format jpeg "${outputPngPath}" --out "${legacyWeddingJpgPath}"`, { stdio: 'inherit' });
+  console.log('Updated JPEGs:', outputJpgPath, sapphireJpgPath, legacyJpgPath, legacyWeddingJpgPath);
 } catch (e) {
   console.warn(e.message);
 }

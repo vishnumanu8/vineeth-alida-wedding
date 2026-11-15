@@ -134,7 +134,7 @@ export const weddingConfig: WeddingConfig = {
     },
     bride: {
       name: "Alida",
-      fullName: "Alida",
+      fullName: "Adv. Alida M Vinod",
       title: "The Bride",
       familyNote: "D/o Smt. Manjusha G . & Shri Vinod Kumar",
       oneLiner: "Advocating for endless love, laughter & forever",
@@ -164,24 +164,24 @@ export const weddingConfig: WeddingConfig = {
     badge: "The Wedding Reception",
     title: "Grand Evening Reception",
     subtitle: "A celebratory evening of music, dining, and blessings",
-    // Confirmed Reception Date & Time: Thursday, 7 January 2027 at 6:00 PM
-    isoDateTime: "2027-01-07T18:00:00+05:30",
+    // Confirmed Reception Date & Time: Thursday, 7 January 2027 at 5:30 PM
+    isoDateTime: "2027-01-07T17:30:00+05:30",
     formattedDate: "Thursday, 7 January 2027",
     formattedDay: "Thursday Evening",
-    formattedTime: "6:00 PM Onwards",
+    formattedTime: "5:30 PM Onwards",
     timeZone: "Asia/Kolkata",
-    venueName: "Mangrove Aquaventures",
-    venueHall: "Backwater Lawns & Banquet",
-    fullAddress: "Vadakkemukku, Nedungolam, Paravoor, Kerala 691334",
+    venueName: "Kariyilakallu Lake View",
+    venueHall: "Lakeside Pavilion & Backwaters",
+    fullAddress: "Nedungolam, Paravoor, Kollam, Kerala 691334",
     city: "Paravoor, Kerala",
-    // Verified Google Share directions URL
-    googleMapsUrl: "https://share.google/lS2sSzxGjm4a2iZhD",
+    // Verified Google Maps Place & Directions URL
+    googleMapsUrl: "https://maps.google.com/?cid=2116222744221680343",
     calendarDetails: {
       title: "Wedding Reception of Vineeth & Alida",
       description:
         "Join Vineeth and Alida for an evening of celebration, dining, and blessings at their wedding reception.",
       location:
-        "Mangrove Aquaventures, Vadakkemukku, Nedungolam, Paravoor, Kerala 691334",
+        "Kariyilakallu Lake View, Nedungolam, Paravoor, Kerala 691334",
     },
   },
 
@@ -242,7 +242,7 @@ export const weddingConfig: WeddingConfig = {
     siteDescription:
       "Together with their families, Vineeth and Alida warmly invite you to celebrate their wedding reception on Thursday, 7 January 2027.",
     siteUrl: "https://vineeth-alida.vercel.app/",
-    ogImage: "/og-image-letter.jpg",
-    themeColor: "#11211A",
+    ogImage: "/og-image-sapphire.jpg",
+    themeColor: "#0B1325",
   },
 };
