@@ -4,13 +4,128 @@ import { Heart } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { weddingConfig } from '../config/weddingConfig';
 
-interface FloatingParticle {
+/**
+ * High-definition Champagne Gold SVG Paw Icon
+ * Replaces native grey Unicode 🐾 emoji across all mobile devices
+ */
+export const GoldPawSvg: React.FC<{
+  className?: string;
+  fill?: string;
+  size?: number | string;
+}> = ({ className = 'w-4 h-4', fill = '#F0D49E', size }) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    className={className}
+    fill={fill}
+    aria-hidden="true"
+  >
+    {/* Main central pad */}
+    <ellipse cx="12" cy="15.8" rx="4.8" ry="3.8" />
+    {/* 4 Toe beans */}
+    <circle cx="6.2" cy="10.2" r="2.1" />
+    <circle cx="10" cy="6.6" r="2.3" />
+    <circle cx="14" cy="6.6" r="2.3" />
+    <circle cx="17.8" cy="10.2" r="2.1" />
+  </svg>
+);
+
+/**
+ * 4-Point Golden Sparkle SVG
+ */
+const GoldSparkleSvg: React.FC<{
+  className?: string;
+  fill?: string;
+  size?: number | string;
+}> = ({ className = 'w-3.5 h-3.5', fill = '#F0D49E', size }) => (
+  <svg
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    className={className}
+    fill={fill}
+    aria-hidden="true"
+  >
+    <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+  </svg>
+);
+
+interface TapParticle {
   id: number;
   x: number;
   y: number;
   size: number;
-  emoji: string;
+  type: 'paw' | 'heart' | 'sparkle';
 }
+
+/**
+ * Continuous Infinite Walking Paw Trail Component
+ * 8 alternating footsteps with permanent outer coordinates and animated inner SVG
+ */
+const WalkingPawTrail: React.FC = () => {
+  const pawSteps = [
+    { x: 18,  y: 30, rot: -16, delay: 0 },
+    { x: 56,  y: 18, rot: 14,  delay: 0.22 },
+    { x: 94,  y: 28, rot: -14, delay: 0.44 },
+    { x: 132, y: 16, rot: 16,  delay: 0.66 },
+    { x: 170, y: 26, rot: -15, delay: 0.88 },
+    { x: 208, y: 16, rot: 15,  delay: 1.10 },
+    { x: 246, y: 26, rot: -14, delay: 1.32 },
+    { x: 284, y: 18, rot: 16,  delay: 1.54 },
+  ];
+
+  return (
+    <div className="w-full flex justify-center mb-3">
+      <svg
+        viewBox="0 0 310 46"
+        className="w-64 sm:w-80 h-auto overflow-visible mx-auto"
+        aria-label="Golden paw footsteps walking continuously"
+      >
+        <defs>
+          <linearGradient id="walkingPawGoldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#C89D54" />
+            <stop offset="50%" stopColor="#F5E2B8" />
+            <stop offset="100%" stopColor="#D4A359" />
+          </linearGradient>
+          <filter id="pawGlowFilter" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="1.5" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
+        </defs>
+
+        {pawSteps.map((paw, i) => (
+          <g
+            key={i}
+            transform={`translate(${paw.x}, ${paw.y}) rotate(${paw.rot})`}
+          >
+            <motion.g
+              animate={{
+                opacity: [0.15, 1, 0.15],
+                scale: [0.85, 1.18, 0.85],
+              }}
+              transition={{
+                duration: 1.76,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: paw.delay,
+              }}
+              filter="url(#pawGlowFilter)"
+            >
+              <g transform="scale(0.85)">
+                <ellipse cx="0" cy="0" rx="6.5" ry="5.2" fill="url(#walkingPawGoldGrad)" />
+                <circle cx="-5.5" cy="-7.5" r="2.2" fill="url(#walkingPawGoldGrad)" />
+                <circle cx="-1.8" cy="-10" r="2.5" fill="url(#walkingPawGoldGrad)" />
+                <circle cx="2.6" cy="-10" r="2.5" fill="url(#walkingPawGoldGrad)" />
+                <circle cx="6.2" cy="-7.5" r="2.2" fill="url(#walkingPawGoldGrad)" />
+              </g>
+            </motion.g>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+};
 
 export const PetVipSection: React.FC = () => {
   const { pets } = weddingConfig;
@@ -19,33 +134,39 @@ export const PetVipSection: React.FC = () => {
   const isInView = useInView(sectionRef, { margin: '-10% 0px -10% 0px' });
 
   const [loveCount, setLoveCount] = useState(0);
-  const [particles, setParticles] = useState<FloatingParticle[]>([]);
+  const [tapParticles, setTapParticles] = useState<TapParticle[]>([]);
   const [isTapped, setIsTapped] = useState(false);
 
-  // Automatic continuous particle emitter while section is in viewport
+  // 6 Continuous ambient floaters in upper space of pet portrait
+  const ambientFloaters = [
+    { id: 1, type: 'paw', left: '16%', startTop: 38, duration: 4.6, delay: 0 },
+    { id: 2, type: 'heart', left: '38%', startTop: 45, duration: 5.2, delay: 1.1 },
+    { id: 3, type: 'sparkle', left: '68%', startTop: 40, duration: 4.8, delay: 2.2 },
+    { id: 4, type: 'paw', left: '84%', startTop: 44, duration: 5.0, delay: 0.6 },
+    { id: 5, type: 'heart', left: '26%', startTop: 36, duration: 4.4, delay: 3.0 },
+    { id: 6, type: 'sparkle', left: '54%', startTop: 46, duration: 5.4, delay: 1.8 },
+  ];
+
+  // Automatic periodic particle emitter while section is in viewport
   useEffect(() => {
     if (!isInView) return;
 
-    const emojis = ['🐾', '💛', '✨', '🐾', '💖'];
+    const particleTypes: ('paw' | 'heart' | 'sparkle')[] = ['paw', 'heart', 'sparkle', 'paw'];
     const interval = setInterval(() => {
-      const newParticle: FloatingParticle = {
+      const newParticle: TapParticle = {
         id: Date.now() + Math.random(),
-        x: 30 + Math.random() * 260,
-        y: 280 + Math.random() * 40,
-        size: 14 + Math.random() * 10,
-        emoji: emojis[Math.floor(Math.random() * emojis.length)],
+        x: 35 + Math.random() * 240,
+        y: 220 + Math.random() * 50,
+        size: 16 + Math.random() * 8,
+        type: particleTypes[Math.floor(Math.random() * particleTypes.length)],
       };
 
-      setParticles((prev) => {
-        const next = [...prev.slice(-12), newParticle];
-        return next;
-      });
+      setTapParticles((prev) => [...prev.slice(-8), newParticle]);
 
-      // Cleanup
       setTimeout(() => {
-        setParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
+        setTapParticles((prev) => prev.filter((p) => p.id !== newParticle.id));
       }, 2000);
-    }, 1500);
+    }, 1800);
 
     return () => clearInterval(interval);
   }, [isInView]);
@@ -58,23 +179,23 @@ export const PetVipSection: React.FC = () => {
 
     const rect = cardRef.current?.getBoundingClientRect();
     const spawnX = rect ? e.clientX - rect.left : 150;
-    const spawnY = rect ? e.clientY - rect.top : 200;
+    const spawnY = rect ? e.clientY - rect.top : 220;
 
-    const emojis = ['🐾', '💛', '✨', '🐾', '💖', '🐾'];
-    const burst: FloatingParticle[] = Array.from({ length: 5 }, (_, i) => ({
+    const types: ('paw' | 'heart' | 'sparkle')[] = ['paw', 'heart', 'sparkle', 'paw', 'heart'];
+    const burst: TapParticle[] = Array.from({ length: 5 }, (_, i) => ({
       id: Date.now() + i,
       x: spawnX + (Math.random() - 0.5) * 80,
       y: spawnY + (Math.random() - 0.5) * 40,
-      size: 18 + Math.random() * 14,
-      emoji: emojis[Math.floor(Math.random() * emojis.length)],
+      size: 18 + Math.random() * 10,
+      type: types[i % types.length],
     }));
 
-    setParticles((prev) => [...prev, ...burst]);
+    setTapParticles((prev) => [...prev, ...burst]);
     setTimeout(() => {
-      setParticles((prev) => prev.filter((item) => !burst.some((b) => b.id === item.id)));
+      setTapParticles((prev) => prev.filter((item) => !burst.some((b) => b.id === item.id)));
     }, 2000);
 
-    // Golden confetti burst
+    // Golden celebratory confetti burst
     try {
       confetti({
         particleCount: 26,
@@ -95,16 +216,6 @@ export const PetVipSection: React.FC = () => {
 
   if (!pets || !pets.enabled) return null;
 
-  // 6 Stepping Paws with infinite walking sequence
-  const walkingPaws = [
-    { x: 30, y: 24, rot: -18, delay: 0 },
-    { x: 70, y: 12, rot: 16, delay: 0.35 },
-    { x: 110, y: 24, rot: -16, delay: 0.7 },
-    { x: 150, y: 12, rot: 18, delay: 1.05 },
-    { x: 190, y: 24, rot: -18, delay: 1.4 },
-    { x: 230, y: 12, rot: 16, delay: 1.75 },
-  ];
-
   return (
     <section
       ref={sectionRef}
@@ -113,43 +224,12 @@ export const PetVipSection: React.FC = () => {
     >
       <div className="max-w-2xl mx-auto flex flex-col items-center text-center">
         {/* ===================================================================
-            INFINITE WALKING GOLDEN PAW TRAIL (Continuous Rhythmic Loop)
+            1. INFINITE WORKING GOLDEN PAW TRAIL (Continuous Rhythmic Loop)
             =================================================================== */}
-        <div className="w-full flex justify-center mb-3">
-          <svg
-            viewBox="0 0 260 45"
-            className="w-56 sm:w-72 h-auto overflow-visible"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient id="walkingPawGold" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#C89D54" />
-                <stop offset="50%" stopColor="#F0D49E" />
-                <stop offset="100%" stopColor="#C89D54" />
-              </linearGradient>
-            </defs>
-
-            {walkingPaws.map((paw, i) => (
-              <g
-                key={i}
-                transform={`translate(${paw.x}, ${paw.y}) rotate(${paw.rot}) scale(0.72)`}
-                style={{
-                  animation: `pawStep 2.1s infinite ease-in-out`,
-                  animationDelay: `${paw.delay}s`,
-                }}
-              >
-                <ellipse cx="0" cy="0" rx="9" ry="7.5" fill="url(#walkingPawGold)" />
-                <circle cx="-7.5" cy="-9.5" r="3.2" fill="url(#walkingPawGold)" />
-                <circle cx="-2.5" cy="-12.5" r="3.5" fill="url(#walkingPawGold)" />
-                <circle cx="3.5" cy="-12.5" r="3.5" fill="url(#walkingPawGold)" />
-                <circle cx="8" cy="-9" r="3.2" fill="url(#walkingPawGold)" />
-              </g>
-            ))}
-          </svg>
-        </div>
+        <WalkingPawTrail />
 
         {/* ===================================================================
-            HIGH-CONTRAST SECTION HEADER
+            2. HIGH-CONTRAST SECTION HEADER WITH GOLD SVG PAW
             =================================================================== */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -158,9 +238,9 @@ export const PetVipSection: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="mb-6 sm:mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B1E16] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
-            <span>🐾</span>
-            <span>{pets.sectionBadge}</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B1E16] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
+            <GoldPawSvg className="w-3.5 h-3.5 text-gold fill-gold" />
+            <span>{pets.sectionBadge.replace('✨ ', '').replace('🐾', '').trim()}</span>
           </div>
 
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[#FAF6F0] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
@@ -172,7 +252,7 @@ export const PetVipSection: React.FC = () => {
         </motion.div>
 
         {/* ===================================================================
-            CONTINUOUS LIVING PET FRAME: 3D FLOATING, BORDER BEAM & EMANATING PARTICLES
+            3. CONTINUOUS LIVING PET FRAME: 3D FLOATING, BORDER BEAM & UPPER OVERLAY
             =================================================================== */}
         <motion.div
           animate={{ y: [0, -7, 0] }}
@@ -199,33 +279,61 @@ export const PetVipSection: React.FC = () => {
             tabIndex={0}
             aria-label="Tap to send love and paws to the family pets"
           >
-            {/* Corner Filigrees with Tiny Walking Golden Paws */}
+            {/* Corner Filigrees with Golden Paws */}
             <div className="absolute top-2.5 left-2.5 w-4 h-4 border-t-2 border-l-2 border-gold pointer-events-none" />
             <div className="absolute top-2.5 right-2.5 w-4 h-4 border-t-2 border-r-2 border-gold pointer-events-none" />
             <div className="absolute bottom-2.5 left-2.5 w-4 h-4 border-b-2 border-l-2 border-gold pointer-events-none" />
             <div className="absolute bottom-2.5 right-2.5 w-4 h-4 border-b-2 border-r-2 border-gold pointer-events-none" />
 
-            {/* Genuine Uncropped Dog Photography Container */}
+            {/* Tightened Pet Photography Container with Animated Upper Space */}
             <div className="relative w-full aspect-[3/4] sm:aspect-[4/5] rounded-2xl overflow-hidden border border-gold/30 bg-[#0B1A13] shadow-inner">
               <img
                 src={pets.image}
                 alt={pets.imageAlt}
-                className="w-full h-full object-cover object-center filter brightness-[1.02] contrast-[1.03]"
+                className="w-full h-full object-cover object-bottom filter brightness-[1.02] contrast-[1.03]"
                 loading="lazy"
               />
+
+              {/* Upper Space Continuous Floating Overlay (Hearts, Sparkles, Mini Paws) */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+                {ambientFloaters.map((f) => (
+                  <motion.div
+                    key={f.id}
+                    initial={{ y: 0, opacity: 0, scale: 0.8 }}
+                    animate={{
+                      y: [-8, -75],
+                      opacity: [0, 0.9, 0],
+                      scale: [0.8, 1.15, 0.85],
+                      x: [0, f.id % 2 === 0 ? 8 : -8, 0],
+                    }}
+                    transition={{
+                      duration: f.duration,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: f.delay,
+                    }}
+                    className="absolute drop-shadow-[0_2px_6px_rgba(212,163,89,0.85)]"
+                    style={{ left: f.left, top: `${f.startTop}%` }}
+                  >
+                    {f.type === 'paw' && <GoldPawSvg size={15} fill="#F5E2B8" />}
+                    {f.type === 'heart' && <Heart className="w-3.5 h-3.5 text-rose-300 fill-rose-300/85" />}
+                    {f.type === 'sparkle' && <GoldSparkleSvg className="w-3.5 h-3.5" fill="#FFFDF7" />}
+                  </motion.div>
+                ))}
+              </div>
 
               {/* Bottom subtle gradient */}
               <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-black/65 via-black/25 to-transparent pointer-events-none" />
 
-              {/* Automatic & Tap Floating Hearts & Paws Overlay */}
+              {/* Tap Burst Hearts & Paws Overlay */}
               <AnimatePresence>
-                {particles.map((item) => (
-                  <motion.span
+                {tapParticles.map((item) => (
+                  <motion.div
                     key={item.id}
                     initial={{ opacity: 1, scale: 0.6, y: 0 }}
                     animate={{
                       opacity: 0,
-                      scale: 1.45,
+                      scale: 1.4,
                       y: -110,
                       x: (Math.random() - 0.5) * 50,
                     }}
@@ -235,11 +343,12 @@ export const PetVipSection: React.FC = () => {
                     style={{
                       left: `${item.x}px`,
                       top: `${item.y}px`,
-                      fontSize: `${item.size}px`,
                     }}
                   >
-                    {item.emoji}
-                  </motion.span>
+                    {item.type === 'paw' && <GoldPawSvg size={item.size} fill="#F0D49E" />}
+                    {item.type === 'heart' && <Heart className="w-4 h-4 text-rose-400 fill-rose-400" />}
+                    {item.type === 'sparkle' && <GoldSparkleSvg className="w-4 h-4" fill="#FFFDF7" />}
+                  </motion.div>
                 ))}
               </AnimatePresence>
             </div>
@@ -259,14 +368,14 @@ export const PetVipSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Interactive Tap Button */}
+            {/* Interactive Tap Button with Crisp Gold Paw SVG */}
             <div className="mt-4 w-full flex items-center justify-center">
               <button
                 type="button"
                 onClick={handleSendLove}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-botanical hover:bg-botanical-light text-pearl text-xs sm:text-sm font-medium border border-gold/40 shadow-sm transition-all hover:shadow cursor-pointer min-h-[42px]"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-botanical hover:bg-botanical-light text-pearl text-xs sm:text-sm font-medium border border-gold/40 shadow-sm transition-all hover:shadow cursor-pointer min-h-[42px] active:scale-95"
               >
-                <span>🐾</span>
+                <GoldPawSvg className="w-4 h-4 text-gold fill-[#F0D49E]" />
                 <span>Send Love &amp; Paws</span>
                 {loveCount > 0 && (
                   <span className="ml-1 px-2 py-0.5 rounded-full bg-gold/20 text-gold-shimmer text-[11px] font-semibold">
@@ -284,19 +393,8 @@ export const PetVipSection: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Embedded 60fps Keyframe Animations for Paws & Border Beam */}
+      {/* Embedded 60fps Keyframe Animations for Border Beam */}
       <style>{`
-        @keyframes pawStep {
-          0%, 100% {
-            opacity: 0.25;
-            transform: scale(0.65) translateY(4px);
-          }
-          30%, 65% {
-            opacity: 1;
-            transform: scale(0.9) translateY(0);
-            filter: drop-shadow(0 0 6px #F0D49E);
-          }
-        }
         @keyframes borderBeamSpin {
           from {
             transform: rotate(0deg);

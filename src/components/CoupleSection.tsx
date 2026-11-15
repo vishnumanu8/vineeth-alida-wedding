@@ -278,10 +278,57 @@ export const CoupleSection: React.FC = () => {
                 </g>
               </svg>
 
-              <div className="mt-4 pt-3 border-t border-champagne-border/80 w-full flex items-center justify-center gap-2">
-                <span className="text-slate/80 text-xs font-sans tracking-wide">
-                  ✦ {couple.originJourney.note} ✦
-                </span>
+              {/* =============================================================
+                  "TWO WORLDS, ONE HEART" SIGNATURE QUOTES BLOCK
+                  ============================================================= */}
+              <div className="mt-5 pt-4 border-t border-gold/30 w-full flex flex-col items-center">
+                {/* Micro Header */}
+                <div className="inline-flex items-center gap-2 mb-3">
+                  <span className="h-[1px] w-6 bg-gradient-to-r from-transparent to-gold/70" />
+                  <span className="font-display text-[10px] sm:text-[11px] uppercase tracking-[0.22em] text-[#8C6D37] font-semibold">
+                    Two Worlds, One Heart
+                  </span>
+                  <span className="h-[1px] w-6 bg-gradient-to-l from-transparent to-gold/70" />
+                </div>
+
+                {/* Dual Quote Cards */}
+                <div className="w-full flex flex-col gap-2.5">
+                  {/* Vineeth Quote */}
+                  <div className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 rounded-2xl bg-[#FAF6EE] border border-gold/30 shadow-xs text-left">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#D4A359] to-[#8C6D37] text-[#FFFDF7] flex items-center justify-center font-display font-bold text-[11px] shrink-0 shadow-xs">
+                      V
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-1.5 flex-wrap">
+                        <span className="font-display font-semibold text-[12px] sm:text-[13px] text-[#07130E] tracking-tight">
+                          {couple.groom.name}
+                        </span>
+                        <span className="text-gold/70 text-[10px]">✦</span>
+                        <span className="font-serif italic text-[11px] sm:text-xs text-[#204034] leading-snug">
+                          &ldquo;{couple.groom.oneLiner}&rdquo;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Alida Quote */}
+                  <div className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 rounded-2xl bg-[#FAF6EE] border border-gold/30 shadow-xs text-left">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#D4A359] to-[#8C6D37] text-[#FFFDF7] flex items-center justify-center font-display font-bold text-[11px] shrink-0 shadow-xs">
+                      A
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-1.5 flex-wrap">
+                        <span className="font-display font-semibold text-[12px] sm:text-[13px] text-[#07130E] tracking-tight">
+                          {couple.bride.name}
+                        </span>
+                        <span className="text-gold/70 text-[10px]">✦</span>
+                        <span className="font-serif italic text-[11px] sm:text-xs text-[#204034] leading-snug">
+                          &ldquo;{couple.bride.oneLiner}&rdquo;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>

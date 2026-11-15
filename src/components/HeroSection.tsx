@@ -121,7 +121,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
         minHeight: '100dvh',
         maxHeight: '100dvh',
       }}
-      className="relative w-full h-[100dvh] min-h-[100dvh] max-h-[100dvh] flex flex-col justify-between items-center text-center px-4 sm:px-8 select-none overflow-hidden bg-[#07130E] cursor-pointer pt-[max(0.75rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
+      className="relative w-full h-[100dvh] min-h-[100dvh] max-h-[100dvh] flex flex-col justify-between items-center text-center px-4 sm:px-8 select-none overflow-hidden bg-transparent cursor-pointer pt-[max(0.75rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
       aria-label="Vineeth & Alida Wedding Reception Hero"
     >
       {/* =======================================================================
@@ -133,7 +133,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(ellipse 80% 65% at 50% 45%, rgba(14, 40, 29, 0.95) 0%, rgba(7, 19, 14, 0.98) 70%, #050E0A 100%)',
+              'radial-gradient(ellipse 80% 65% at 50% 45%, rgba(14, 40, 29, 0.75) 0%, rgba(7, 19, 14, 0.9) 70%, rgba(5, 14, 10, 0.95) 100%)',
           }}
         />
 

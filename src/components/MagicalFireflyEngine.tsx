@@ -77,7 +77,7 @@ export const MagicalFireflyEngine: React.FC = () => {
       { core: '#FFDF9E', glow: 'rgba(255, 223, 158, 0.65)' },
     ];
 
-    // Layer 1: 40 Glowing Golden Fireflies (faster & organic orbital/sine paths)
+    // Layer 1: 40 Glowing Golden Fireflies (tuned to graceful, medium-slow magical speed)
     const fireflyCount = prefersReducedMotion ? 12 : 40;
     const fireflies: Firefly[] = Array.from({ length: fireflyCount }, () => {
       const palette = goldPalette[Math.floor(Math.random() * goldPalette.length)];
@@ -87,13 +87,13 @@ export const MagicalFireflyEngine: React.FC = () => {
         radius: 1.6 + Math.random() * 2.2,
         color: palette.core,
         glowColor: palette.glow,
-        vx: (Math.random() - 0.5) * 1.6,
-        vy: -0.4 - Math.random() * 1.2,
+        vx: (Math.random() - 0.5) * 1.15,
+        vy: -0.28 - Math.random() * 0.85,
         baseAlpha: 0.35 + Math.random() * 0.55,
-        pulseSpeed: 1.8 + Math.random() * 2.8,
+        pulseSpeed: 1.5 + Math.random() * 2.2,
         pulsePhase: Math.random() * Math.PI * 2,
         angle: Math.random() * Math.PI * 2,
-        angularSpeed: (Math.random() - 0.5) * 0.05,
+        angularSpeed: (Math.random() - 0.5) * 0.035,
         orbitRadius: 15 + Math.random() * 30,
       };
     });
@@ -103,8 +103,8 @@ export const MagicalFireflyEngine: React.FC = () => {
       x: Math.random() * width,
       y: Math.random() * height,
       radius: 40 + Math.random() * 65,
-      vy: -0.15 - Math.random() * 0.3,
-      vx: (Math.random() - 0.5) * 0.2,
+      vy: -0.11 - Math.random() * 0.22,
+      vx: (Math.random() - 0.5) * 0.16,
       alpha: 0.03 + Math.random() * 0.07,
       targetAlpha: 0.04 + Math.random() * 0.07,
       color: Math.random() > 0.5 ? '240, 212, 158' : '212, 163, 89',
@@ -116,10 +116,10 @@ export const MagicalFireflyEngine: React.FC = () => {
       x: Math.random() * width,
       y: Math.random() * height,
       size: 0.9 + Math.random() * 1.4,
-      vy: -0.3 - Math.random() * 0.6,
-      vx: (Math.random() - 0.5) * 0.5,
+      vy: -0.22 - Math.random() * 0.45,
+      vx: (Math.random() - 0.5) * 0.35,
       alpha: 0.2 + Math.random() * 0.6,
-      twinkleSpeed: 2.5 + Math.random() * 3.5,
+      twinkleSpeed: 2.2 + Math.random() * 2.8,
       twinklePhase: Math.random() * Math.PI * 2,
       color: '#FFFDF7',
     }));
@@ -187,7 +187,7 @@ export const MagicalFireflyEngine: React.FC = () => {
       for (const f of fireflies) {
         f.angle += f.angularSpeed * 60 * dt;
         f.y += f.vy * 60 * dt;
-        f.x += (f.vx + Math.sin(f.angle) * 0.8) * 60 * dt;
+        f.x += (f.vx + Math.sin(f.angle) * 0.55) * 60 * dt;
 
         if (f.y < -20) {
           f.y = height + 20;
@@ -255,7 +255,7 @@ export const MagicalFireflyEngine: React.FC = () => {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-10 w-full h-full"
+      className="pointer-events-none fixed inset-0 z-30 w-full h-full"
       style={{ opacity: 0.95 }}
     />
   );

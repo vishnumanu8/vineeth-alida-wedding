@@ -114,13 +114,35 @@ A comprehensive refinement pass was implemented on `WeddingInvitationNoImage` to
 
 ---
 
-## 🧪 Phase 9: Verification & Build Status
+## ✨ Phase 10: Targeted Polish (Hero Fireflies, Dreamy Speed, Story Quotes & Live SVG Paws)
 
-- **Production Build**: `npm run build` (`tsc -b && vite build`) passes in ~1.26s with **0 errors**.
+A targeted polish pass was executed on the `WeddingInvitationNoImage` branch:
+
+1. **Hero Screen Fireflies & Speed Tuning:**
+   - **Hero Fireflies Enabled**: Fixed the stacking context and background opacity so `<MagicalFireflyEngine />` (`fixed inset-0 z-30 pointer-events-none`) floats visibly across the **Hero screen** immediately upon door-opening reveal, as well as seamlessly across all subsequent sections.
+   - **Dreamy Medium-Slow Speed**: Reduced particle velocity and angular step by ~28% (`vx: 1.15`, `vy: -0.28 to -1.13`, wobble: `0.55`). The fireflies drift at a smooth, luxurious, medium-slow magical pace that is noticeable immediately without being frantic or sluggish.
+
+2. **"Two Worlds, One Heart" Story Quotes in Journey Card:**
+   - Kept **The Invitation Letter** 100% formal and official for family and elders.
+   - Removed the duplicate phrase `"Coming home to celebrate our beginning"` from the base of the Dubai ✈ Kerala white flight card in `CoupleSection.tsx`.
+   - Added an elegant dual-pill **"Two Worlds, One Heart"** signature block featuring the couple's personal taglines with gold monogram initials (`V` & `A`):
+     - **Vineeth** — *"Balancing life's ledger with joy, heart & humor"*
+     - **Alida** — *"Advocating for endless love, laughter & forever"*
+
+3. **Continuous Live SVG Paw Animation & Pets Section:**
+   - **100% SVG Paws (No Native Emojis)**: Replaced all Unicode `🐾` text emojis (which render dark grey on iOS) with custom Champagne Gold SVG paw icons (`GoldPawSvg`) inside the `SPECIAL PAW-TY VIPs` badge, the walking trail, tap particles, and the `Send Love & Paws` button.
+   - **Continuous `<WalkingPawTrail />`**: Created an 8-step alternating golden paw trail where outer `<g>` coordinates are preserved and inner `<motion.g>` elements step in an always-active infinite loop (`repeat: Infinity`, staggered by `0.22s` per paw) with a soft gold glow filter.
+   - **Framing & Upper Space Floating Overlay**: Tightened pet portrait framing to `object-bottom` and introduced a continuous ambient floating overlay in the upper space of the frame where gold hearts, sparkles, and mini paws float upward in an infinite loop.
+
+---
+
+## 🧪 Phase 11: Verification & Build Status
+
+- **Production Build**: `npm run build` (`tsc -b && vite build`) passes in ~1.21s with **0 errors**.
 - **Bundle Chunks**:
   - `dist/index.html`: 3.79 kB
-  - `dist/assets/index-D7UuJ61d.css`: 38.30 kB
-  - `dist/assets/motion-BwLpCJQ6.js`: 122.17 kB
-  - `dist/assets/vendor-BsOvDYUW.js`: 133.93 kB
-  - `dist/assets/index-CEc4b7wN.js`: 217.26 kB
-- **Vite Dev Server**: Running locally at `http://localhost:3000/`.
+  - `dist/assets/index-DvpewGPt.css`: 37.90 kB
+  - `dist/assets/motion-CWfDWe8t.js`: 122.91 kB
+  - `dist/assets/vendor-BXZjp2tV.js`: 133.93 kB
+  - `dist/assets/index-BZTfhi9t.js`: 214.06 kB
+- **Vite Dev Server**: Running actively at `http://localhost:3000/`.
