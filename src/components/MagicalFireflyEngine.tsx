@@ -77,20 +77,20 @@ export const MagicalFireflyEngine: React.FC = () => {
       { core: '#FFDF9E', glow: 'rgba(255, 223, 158, 0.65)' },
     ];
 
-    // Layer 1: 26 Glowing Golden Fireflies (sparse, elegant & breathable ambient density)
-    const fireflyCount = prefersReducedMotion ? 8 : 26;
+    // Layer 1: 15 Glowing Golden Fireflies (delicate, ultra-sparse & breathable ambient density)
+    const fireflyCount = prefersReducedMotion ? 5 : 15;
     const fireflies: Firefly[] = Array.from({ length: fireflyCount }, () => {
       const palette = goldPalette[Math.floor(Math.random() * goldPalette.length)];
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: 1.6 + Math.random() * 2.2,
+        radius: 1.4 + Math.random() * 1.8,
         color: palette.core,
         glowColor: palette.glow,
         vx: (Math.random() - 0.5) * 1.15,
         vy: -0.28 - Math.random() * 0.85,
-        baseAlpha: 0.35 + Math.random() * 0.55,
-        pulseSpeed: 1.5 + Math.random() * 2.2,
+        baseAlpha: 0.28 + Math.random() * 0.42,
+        pulseSpeed: 1.4 + Math.random() * 2.0,
         pulsePhase: Math.random() * Math.PI * 2,
         angle: Math.random() * Math.PI * 2,
         angularSpeed: (Math.random() - 0.5) * 0.035,
@@ -98,28 +98,28 @@ export const MagicalFireflyEngine: React.FC = () => {
       };
     });
 
-    // Layer 2: 6 Soft Bokeh Light Orbs (delicate depth accents)
-    const bokehOrbs: BokehOrb[] = Array.from({ length: 6 }, () => ({
+    // Layer 2: 3 Soft Bokeh Light Orbs (whisper-quiet ambient warmth)
+    const bokehOrbs: BokehOrb[] = Array.from({ length: 3 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       radius: 40 + Math.random() * 65,
       vy: -0.11 - Math.random() * 0.22,
       vx: (Math.random() - 0.5) * 0.16,
-      alpha: 0.03 + Math.random() * 0.07,
-      targetAlpha: 0.04 + Math.random() * 0.07,
+      alpha: 0.025 + Math.random() * 0.05,
+      targetAlpha: 0.035 + Math.random() * 0.05,
       color: Math.random() > 0.5 ? '240, 212, 158' : '212, 163, 89',
     }));
 
-    // Layer 3: 20 Floating Golden Botanical Dust / Stardust
-    const stardustCount = prefersReducedMotion ? 6 : 20;
+    // Layer 3: 10 Floating Golden Botanical Dust / Stardust
+    const stardustCount = prefersReducedMotion ? 3 : 10;
     const stardusts: Stardust[] = Array.from({ length: stardustCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: 0.9 + Math.random() * 1.4,
+      size: 0.8 + Math.random() * 1.2,
       vy: -0.22 - Math.random() * 0.45,
       vx: (Math.random() - 0.5) * 0.35,
-      alpha: 0.2 + Math.random() * 0.6,
-      twinkleSpeed: 2.2 + Math.random() * 2.8,
+      alpha: 0.18 + Math.random() * 0.45,
+      twinkleSpeed: 2.0 + Math.random() * 2.5,
       twinklePhase: Math.random() * Math.PI * 2,
       color: '#FFFDF7',
     }));
@@ -201,7 +201,7 @@ export const MagicalFireflyEngine: React.FC = () => {
         const currentRadius = f.radius * (0.9 + 0.2 * pulse);
 
         // Outer glow
-        const glowRadius = currentRadius * 3.8;
+        const glowRadius = currentRadius * 3.0;
         const glowGrad = ctx.createRadialGradient(
           f.x,
           f.y,

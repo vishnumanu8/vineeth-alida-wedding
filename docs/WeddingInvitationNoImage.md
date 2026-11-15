@@ -139,9 +139,9 @@ A targeted polish pass was executed on the `WeddingInvitationNoImage` branch:
 ## 🍃 Phase 12: Ambient Density Reduction & Counter Bug Fix
 
 1. **Sparse & Breathable Firefly Density:**
-   - Reduced background firefly count from 40 to **26** (a ~35% reduction, directly within the requested 25-28 range).
-   - Reduced soft bokeh orbs from 9 to **6**, and stardust particles from 30 to **20**.
-   - Result: A light, elegant, and breathable ambient effect that frames the invitation without visual clutter or distraction.
+   - Reduced background firefly count to **15** (ultra-delicate ambient sparks), soft bokeh orbs to **3**, and micro-stardust to **10**.
+   - Softened outer glow radius for each particle (`3.0x` from `3.8x`) and tuned base opacity.
+   - Result: A whisper-quiet, elegant, and breathable ambient effect that leaves the screen completely open and uncluttered.
 
 2. **"Send Love & Paws" Double-Increment Bug Fix:**
    - **Root Cause Identified**: The child `<button>` had `onClick={handleSendLove}` and its parent card container also had `onClick={handleSendLove}` without `e.stopPropagation()`. Clicking the button fired the handler once on the button and once again when the event bubbled to the card, causing every click to increment by +2.
