@@ -136,6 +136,7 @@ export const PetVipSection: React.FC = () => {
   const [loveCount, setLoveCount] = useState(0);
   const [tapParticles, setTapParticles] = useState<TapParticle[]>([]);
   const [isTapped, setIsTapped] = useState(false);
+  const lastTapRef = useRef<number>(0);
 
   // 6 Continuous ambient floaters in upper space of pet portrait
   const ambientFloaters = [
@@ -172,14 +173,25 @@ export const PetVipSection: React.FC = () => {
   }, [isInView]);
 
   // Tap micro-interaction: burst of love & confetti
-  const handleSendLove = (e: React.MouseEvent) => {
+  // Uses strict event stopPropagation and debounce guard to guarantee exactly +1 per physical tap
+  const handleSendLove = (e?: React.MouseEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
+
+    const now = Date.now();
+    if (now - lastTapRef.current < 250) {
+      return;
+    }
+    lastTapRef.current = now;
+
     setLoveCount((prev) => prev + 1);
     setIsTapped(true);
     setTimeout(() => setIsTapped(false), 350);
 
     const rect = cardRef.current?.getBoundingClientRect();
-    const spawnX = rect ? e.clientX - rect.left : 150;
-    const spawnY = rect ? e.clientY - rect.top : 220;
+    const spawnX = e && rect ? e.clientX - rect.left : 150;
+    const spawnY = e && rect ? e.clientY - rect.top : 220;
 
     const types: ('paw' | 'heart' | 'sparkle')[] = ['paw', 'heart', 'sparkle', 'paw', 'heart'];
     const burst: TapParticle[] = Array.from({ length: 5 }, (_, i) => ({
@@ -197,12 +209,14 @@ export const PetVipSection: React.FC = () => {
 
     // Golden celebratory confetti burst
     try {
+      const clientX = e ? e.clientX : window.innerWidth / 2;
+      const clientY = e ? e.clientY : window.innerHeight / 2;
       confetti({
         particleCount: 26,
         spread: 65,
         origin: {
-          x: e.clientX / window.innerWidth,
-          y: e.clientY / window.innerHeight,
+          x: clientX / window.innerWidth,
+          y: clientY / window.innerHeight,
         },
         colors: ['#F0D49E', '#D4A359', '#315B4B', '#FFF9F1'],
         ticks: 120,
@@ -372,7 +386,10 @@ export const PetVipSection: React.FC = () => {
             <div className="mt-4 w-full flex items-center justify-center">
               <button
                 type="button"
-                onClick={handleSendLove}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleSendLove(e);
+                }}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-botanical hover:bg-botanical-light text-pearl text-xs sm:text-sm font-medium border border-gold/40 shadow-sm transition-all hover:shadow cursor-pointer min-h-[42px] active:scale-95"
               >
                 <GoldPawSvg className="w-4 h-4 text-gold fill-[#F0D49E]" />

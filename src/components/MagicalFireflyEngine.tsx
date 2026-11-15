@@ -77,8 +77,8 @@ export const MagicalFireflyEngine: React.FC = () => {
       { core: '#FFDF9E', glow: 'rgba(255, 223, 158, 0.65)' },
     ];
 
-    // Layer 1: 40 Glowing Golden Fireflies (tuned to graceful, medium-slow magical speed)
-    const fireflyCount = prefersReducedMotion ? 12 : 40;
+    // Layer 1: 26 Glowing Golden Fireflies (sparse, elegant & breathable ambient density)
+    const fireflyCount = prefersReducedMotion ? 8 : 26;
     const fireflies: Firefly[] = Array.from({ length: fireflyCount }, () => {
       const palette = goldPalette[Math.floor(Math.random() * goldPalette.length)];
       return {
@@ -98,8 +98,8 @@ export const MagicalFireflyEngine: React.FC = () => {
       };
     });
 
-    // Layer 2: 9 Soft Bokeh Light Orbs
-    const bokehOrbs: BokehOrb[] = Array.from({ length: 9 }, () => ({
+    // Layer 2: 6 Soft Bokeh Light Orbs (delicate depth accents)
+    const bokehOrbs: BokehOrb[] = Array.from({ length: 6 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       radius: 40 + Math.random() * 65,
@@ -110,8 +110,8 @@ export const MagicalFireflyEngine: React.FC = () => {
       color: Math.random() > 0.5 ? '240, 212, 158' : '212, 163, 89',
     }));
 
-    // Layer 3: 30 Floating Golden Botanical Dust / Stardust
-    const stardustCount = prefersReducedMotion ? 10 : 30;
+    // Layer 3: 20 Floating Golden Botanical Dust / Stardust
+    const stardustCount = prefersReducedMotion ? 6 : 20;
     const stardusts: Stardust[] = Array.from({ length: stardustCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,

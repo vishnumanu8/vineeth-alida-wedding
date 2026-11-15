@@ -5,6 +5,7 @@ A complete, production-ready, standalone digital wedding reception invitation we
 Designed with **95% modern wedding elegance and 5% playful personality**, this application delivers an unforgettable first impression, an immersive full-screen opening, and effortless usability for all guests—from friends on smartphones to parents and senior family members.
 
 > **🌿 Editions & Git Branches:**
+>
 > - **`main`**: Original cinematic photo edition with high-contrast couple portraits and dynamic memory slider.
 > - **`WeddingInvitationNoImage`**: **"The Living Invitation Letter" edition** — Completely removes personal couple/group photos and replaces them with an animated gold monogram, tactile digital parchment invitation letter, live countdown clock, heraldic botanical crests, and a delightful bottom showcase of the bride's two pet dogs (`Vineeth_Alida_Additional_image.jpeg`). See [`docs/WeddingInvitationNoImage.md`](docs/WeddingInvitationNoImage.md).
 
@@ -93,7 +94,9 @@ WeddingInvitationApp_2/
 ## 🚀 Beginner Setup Guide (Local Development)
 
 ### Step 1. Prerequisites
+
 Make sure you have Node.js installed (v18 or higher recommended, Node v20 is ideal):
+
 - Download from: [https://nodejs.org/](https://nodejs.org/)
 - Verify in your terminal:
   ```bash
@@ -102,22 +105,29 @@ Make sure you have Node.js installed (v18 or higher recommended, Node v20 is ide
   ```
 
 ### Step 2. Install Dependencies
+
 In the project directory, run:
+
 ```bash
 npm install
 ```
 
 ### Step 3. Start the Development Server
+
 ```bash
 npm run dev
 ```
+
 Open your browser and navigate to:
+
 ```text
 http://localhost:3000
 ```
 
 ### Step 4. Test on a Physical Smartphone (Same Wi-Fi)
+
 Vite will show a `Network:` URL in the terminal (for example: `http://192.168.1.5:3000`).
+
 1. Connect your smartphone to the same Wi-Fi network as your computer.
 2. Open Safari (iPhone) or Chrome (Android) and type the `Network:` address.
 3. Test the double-door parting reveal, audio playback, native momentum scrolling, and WhatsApp wishes directly on mobile!
@@ -129,7 +139,9 @@ Vite will show a `Network:` URL in the terminal (for example: `http://192.168.1.
 You **do not** need to edit complex React code to update the wedding details! All editable content is centralized in **`src/config/weddingConfig.ts`**.
 
 ### 1. Update Wedding Dates, Venue & WhatsApp Number
+
 Open `src/config/weddingConfig.ts` and update:
+
 ```typescript
 reception: {
   isoDateTime: "2027-01-07T18:00:00+05:30", // Confirmed ISO date & time
@@ -149,7 +161,9 @@ wishes: {
 ```
 
 ### 2. Replace Photographs
+
 Place your actual photos into the `public/images/` directory using these filenames:
+
 - **`hero-couple.jpg`**: Vertical full-screen couple portrait (`1080 × 1920 px`, 9:16).
 - **`groom-vineeth.jpg`**: Groom portrait (`800 × 1000 px`, 4:5).
 - **`bride-alida.jpg`**: Bride portrait (`800 × 1000 px`, 4:5).
@@ -161,14 +175,17 @@ Place your actual photos into the `public/images/` directory using these filenam
 ## 💌 Guest Personalization (`?guest=...`)
 
 You can create personalized WhatsApp invitation links for individual guests or families:
+
 ```text
 https://your-domain.vercel.app/?guest=Suresh%20%26%20Family
 https://your-domain.vercel.app/?guest=Rahul%20%26%20Priya
 https://your-domain.vercel.app/?guest=Uncle%20Thomas
 ```
+
 When the guest opens their link:
-1. The double doors feature a personalized badge: *"Prepared for Suresh & Family"*.
-2. The full-screen hero displays: *"Cordially Welcoming Suresh & Family"*.
+
+1. The double doors feature a personalized badge: _"Prepared for Suresh & Family"_.
+2. The full-screen hero displays: _"Cordially Welcoming Suresh & Family"_.
 3. The WhatsApp wishes form automatically fills in their name!
 
 ---
@@ -178,6 +195,7 @@ When the guest opens their link:
 Deploy your wedding invitation in less than 3 minutes on Vercel:
 
 ### Step 1. Push Code to GitHub
+
 1. Create a free account on [GitHub](https://github.com/) if you don't already have one.
 2. Create a new repository (e.g., `vineeth-alida-wedding`).
 3. Push your local project:
@@ -187,6 +205,7 @@ Deploy your wedding invitation in less than 3 minutes on Vercel:
    ```
 
 ### Step 2. Deploy on Vercel (Free)
+
 1. Sign up or log in at [Vercel](https://vercel.com/) (using your GitHub account).
 2. Click **"Add New Project"** -> **"Project"**.
 3. Select your GitHub repository (`vineeth-alida-wedding`) and click **"Import"**.
@@ -197,7 +216,7 @@ Deploy your wedding invitation in less than 3 minutes on Vercel:
 5. Click **"Deploy"**.
 6. Within ~30 seconds, your site is live at:
    ```text
-   https://vineeth-alida-wedding.vercel.app
+   https://vineeth-alida-letter.vercel.app
    ```
 
 ---

@@ -136,13 +136,30 @@ A targeted polish pass was executed on the `WeddingInvitationNoImage` branch:
 
 ---
 
-## 🧪 Phase 11: Verification & Build Status
+## 🍃 Phase 12: Ambient Density Reduction & Counter Bug Fix
 
-- **Production Build**: `npm run build` (`tsc -b && vite build`) passes in ~1.21s with **0 errors**.
+1. **Sparse & Breathable Firefly Density:**
+   - Reduced background firefly count from 40 to **26** (a ~35% reduction, directly within the requested 25-28 range).
+   - Reduced soft bokeh orbs from 9 to **6**, and stardust particles from 30 to **20**.
+   - Result: A light, elegant, and breathable ambient effect that frames the invitation without visual clutter or distraction.
+
+2. **"Send Love & Paws" Double-Increment Bug Fix:**
+   - **Root Cause Identified**: The child `<button>` had `onClick={handleSendLove}` and its parent card container also had `onClick={handleSendLove}` without `e.stopPropagation()`. Clicking the button fired the handler once on the button and once again when the event bubbled to the card, causing every click to increment by +2.
+   - **Resolution**:
+     - Added explicit `e.stopPropagation()` on both the button's `onClick` and within `handleSendLove`.
+     - Introduced a timestamp debounce ref (`lastTapRef`) with a 250ms threshold to prevent rapid duplicate synthetic events on touchscreens.
+     - Ensured functional state updates (`setLoveCount((prev) => prev + 1)`).
+   - **Result**: Exactly one physical tap equals strictly `+1` sequentially (1, 2, 3, 4...).
+
+---
+
+## 🧪 Phase 13: Verification & Build Status
+
+- **Production Build**: `npm run build` (`tsc -b && vite build`) passes in ~1.26s with **0 errors**.
 - **Bundle Chunks**:
   - `dist/index.html`: 3.79 kB
   - `dist/assets/index-DvpewGPt.css`: 37.90 kB
   - `dist/assets/motion-CWfDWe8t.js`: 122.91 kB
   - `dist/assets/vendor-BXZjp2tV.js`: 133.93 kB
-  - `dist/assets/index-BZTfhi9t.js`: 214.06 kB
+  - `dist/assets/index-Jr7He-ZQ.js`: 214.26 kB
 - **Vite Dev Server**: Running actively at `http://localhost:3000/`.
