@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Calendar, MessageCircleHeart, ScrollText } from 'lucide-react';
 import { weddingConfig } from './config/weddingConfig';
 import { weddingAudio } from './utils/audioPlayer';
 import { getGuestNameFromUrl } from './utils/url';
@@ -14,6 +13,7 @@ import { PetVipSection } from './components/PetVipSection';
 import { WishesSection } from './components/WishesSection';
 import { Footer } from './components/Footer';
 import { AudioControl } from './components/AudioControl';
+import { MagicalFireflyEngine } from './components/MagicalFireflyEngine';
 
 export const App: React.FC = () => {
   const [hasOpenedDoors, setHasOpenedDoors] = useState(false);
@@ -37,7 +37,10 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#07130E] text-charcoal flex flex-col font-sans selection:bg-gold/20 selection:text-botanical-dark">
+    <div className="min-h-screen bg-[#07130E] text-charcoal flex flex-col font-sans selection:bg-gold/20 selection:text-botanical-dark relative">
+      {/* 60fps Magical Multi-Layer Firefly, Bokeh & Stardust Engine */}
+      <MagicalFireflyEngine />
+
       {/* 1. Cinematic Emerald Aperture Double-Door Parting Reveal */}
       {!hasOpenedDoors && (
         <OpeningDoors
@@ -47,56 +50,36 @@ export const App: React.FC = () => {
       )}
 
       {/* 2. Main Wedding Invitation in Natural Document Flow */}
-      <main className="flex-1 w-full overflow-x-hidden">
+      <main className="flex-1 w-full overflow-x-hidden relative z-20">
         {/* Full-Screen Animated Monogram & Kinetic Typography Hero */}
         <HeroSection guestName={guestName} />
 
-        {/* In-Page Golden Thread Motif 1: The Invitation Letter */}
-        <GoldenThreadDivider
-          label="The Letter"
-          targetId="invitation-letter"
-          icon={<ScrollText className="w-3 h-3 text-gold" />}
-        />
+        {/* Clean Ornamental Golden Thread Divider */}
+        <GoldenThreadDivider />
 
-        {/* Section 1: The Living Invitation Letter with Parchment & Countdown */}
+        {/* Section 1: The Living Invitation Letter with Formal Etiquette & Live Countdown */}
         <InvitationLetter />
 
-        {/* In-Page Golden Thread Motif 2: Our Journey */}
-        <GoldenThreadDivider
-          label="Our Journey"
-          targetId="invitation-story"
-          icon={<Heart className="w-3 h-3 text-gold fill-gold/40" />}
-        />
+        {/* Clean Ornamental Golden Thread Divider */}
+        <GoldenThreadDivider />
 
-        {/* Section 2: Couple Heraldic Crests & Dubai-to-Kerala Flight Animation */}
+        {/* Section 2: Dubai to Kerala Animated Flight Route ("Our New Journey Begins") */}
         <CoupleSection />
 
-        {/* In-Page Golden Thread Motif 3: The Reception */}
-        <GoldenThreadDivider
-          label="The Reception"
-          targetId="reception"
-          icon={<Calendar className="w-3 h-3 text-gold" />}
-        />
+        {/* Clean Ornamental Golden Thread Divider */}
+        <GoldenThreadDivider />
 
         {/* Section 3: Unified Editorial Reception Composition */}
         <ReceptionSection />
 
-        {/* In-Page Golden Thread Motif 4: Special Guests (Pet VIPs) */}
-        <GoldenThreadDivider
-          label="VIP Guests"
-          targetId="four-legged-vips"
-          icon={<span className="text-[10px]">🐾</span>}
-        />
+        {/* Clean Ornamental Golden Thread Divider */}
+        <GoldenThreadDivider />
 
-        {/* Section 4: Meet the Four-Legged VIPs (Pet Dogs Showcase) */}
+        {/* Section 4: Continuously Alive Pet Dogs Showcase ("Our Four-Legged VIPs") */}
         <PetVipSection />
 
-        {/* In-Page Golden Thread Motif 5: Blessings & Wishes */}
-        <GoldenThreadDivider
-          label="Blessings"
-          targetId="wishes"
-          icon={<MessageCircleHeart className="w-3 h-3 text-rose fill-rose/40" />}
-        />
+        {/* Clean Ornamental Golden Thread Divider */}
+        <GoldenThreadDivider />
 
         {/* Section 5: Wishes & Blessings via WhatsApp */}
         <WishesSection initialGuestName={guestName} />

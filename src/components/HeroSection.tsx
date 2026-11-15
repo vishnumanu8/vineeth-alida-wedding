@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronDown, Sparkles } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { weddingConfig } from '../config/weddingConfig';
 import { AnimatedMonogram } from './AnimatedMonogram';
-import { AmbientDustParticles } from './AmbientDustParticles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -138,9 +137,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
           }}
         />
 
-        {/* Ambient floating golden dust motes */}
-        <AmbientDustParticles count={20} />
-
         {/* Delicate golden sweep beam on tap */}
         <div
           ref={shimmerRef}
@@ -163,7 +159,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
       </div>
 
       {/* =======================================================================
-          TOP BAR: MONOGRAM CREST & GUEST GREETING PILL
+          TOP BAR: MONOGRAM CREST & OPTIONAL GUEST GREETING PILL (CLEAN & MINIMAL)
           ======================================================================= */}
       <div className="relative z-10 w-full max-w-5xl mx-auto flex items-center justify-between pointer-events-auto shrink-0">
         <div className="w-8 h-8 rounded-full border border-gold/40 bg-black/40 backdrop-blur-md flex items-center justify-center text-pearl font-display font-medium text-xs shadow-md">
@@ -175,10 +171,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
             Cordially Welcoming {guestName}
           </div>
         ) : (
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-black/30 border border-gold/25 text-gold/80 text-[10px] tracking-widest uppercase">
-            <Sparkles className="w-2.5 h-2.5 text-gold" />
-            <span>Digital Invitation</span>
-          </div>
+          <div />
         )}
 
         <div className="w-8" />

@@ -187,7 +187,7 @@ export const weddingConfig: WeddingConfig = {
 
   pets: {
     enabled: true,
-    sectionBadge: "Two Very Special Guests",
+    sectionBadge: "✨ SPECIAL PAW-TY VIPs",
     title: "Our Four-Legged VIPs",
     subtitle: "Stepping into celebration with boundless love & joyful paws",
     description:

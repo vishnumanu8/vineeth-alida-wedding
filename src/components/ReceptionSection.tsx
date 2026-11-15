@@ -88,16 +88,16 @@ export const ReceptionSection: React.FC = () => {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="text-center mb-8 sm:mb-12"
       >
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-botanical/10 text-botanical text-xs font-semibold uppercase tracking-widest border border-botanical/20 mb-3">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B1E16] text-gold-shimmer text-xs font-semibold uppercase tracking-widest border border-gold/40 mb-3 shadow-sm">
           <Sparkles className="w-3.5 h-3.5 text-gold" />
           <span>{reception.badge}</span>
         </div>
 
-        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-botanical tracking-tight">
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[#FAF6F0] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
           {reception.title}
         </h2>
 
-        <p className="font-sans text-xs sm:text-sm text-slate max-w-lg mx-auto mt-1.5 leading-relaxed">
+        <p className="font-sans text-xs sm:text-sm text-[#E5C158] max-w-lg mx-auto mt-1.5 leading-relaxed tracking-wide">
           {reception.subtitle}
         </p>
       </motion.div>

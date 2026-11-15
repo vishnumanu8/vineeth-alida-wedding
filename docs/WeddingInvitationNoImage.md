@@ -79,13 +79,48 @@ A delightful section positioned near the bottom of the invitation (above Wishes 
 
 ---
 
-## 🧪 Phase 7: Verification Results
+## 💎 Phase 8: UX Polish, Formal Etiquette Fix & Continuous Live Animations
 
-- **Production Build**: `npm run build` (`tsc -b && vite build`) passes in ~1.28s with **0 errors**.
+A comprehensive refinement pass was implemented on `WeddingInvitationNoImage` to elevate contrast, eliminate content redundancy, fix formal etiquette, and bring rich continuous life to the invitation:
+
+1. **Hero Cleanup & Invisible Heading Contrast Fix:**
+   - Removed the `✨ DIGITAL INVITATION` badge from the Hero section to allow the animated monogram and typography to stand proud.
+   - Removed duplicate dark transition pills (`THE LETTER`, `THE RECEPTION`, etc.) from `GoldenThreadDivider.tsx`, leaving a clean, continuous golden thread with swaying botanical leaf accents.
+   - Fixed section headings across all dark emerald sections (`InvitationLetter`, `CoupleSection`, `ReceptionSection`, `PetVipSection`, `WishesSection`) from low-contrast dark green to high-contrast **Warm Ivory/Cream (`#FAF6F0`)** titles and **Champagne Gold (`#E5C158`)** subtitles on translucent `#0B1E16` pills with gold borders.
+
+2. **60fps Multi-Layer Firefly & Stardust Engine (`MagicalFireflyEngine.tsx`):**
+   - High-performance full-screen HTML5 Canvas particle engine running at 60fps:
+     - **Layer 1 — Glowing Golden Fireflies (40 particles)**: Organic sine/orbital drifting paths with individual pulse frequencies and luminous glow filters.
+     - **Layer 2 — Soft Bokeh Light Orbs (9 orbs)**: Large softly blurred radial gradient spheres drifting upward.
+     - **Layer 3 — Floating Stardust (30 particles)**: Micro-sparkles drifting across both dark emerald and cream sections.
+   - Automatically pauses on hidden browser tabs (`visibilitychange`) to conserve battery and CPU.
+
+3. **Formal Letter Redesign & De-duplication (`InvitationLetter.tsx` & `CoupleSection.tsx`):**
+   - Removed standalone Groom & Bride profile cards (`BASED IN DUBAI`, `NATIVE TO KERALA`, personal quotes, duplicate parents pills).
+   - Formally paired the couple with their respective parents adhering to formal luxury etiquette:
+     - **Vineeth M** — *S/o Smt. Sobhana S. & Shri Madhavan Nair*
+     - `&`
+     - **Alida** — *D/o Smt. Manjusha G. & Shri Vinod Kumar*
+   - Formal invitation prose welcoming guests to the auspicious wedding reception.
+   - Removed duplicated date & venue block from the letter base; integrated the live **Countdown Timer** at the card's base.
+   - Seamless flow directly into **"Our New Journey Begins"** (Dubai ✈ Kerala Flight Route) and the **Grand Evening Reception** venue card.
+
+4. **Continuous Living Pets Section (`PetVipSection.tsx`):**
+   - Updated badge to `✨ SPECIAL PAW-TY VIPs`.
+   - **Infinite Walking Paw Trail**: 6 golden paw prints stepping in an alternating, rhythmic loop above the card.
+   - **Continuous 3D Floating/Breathing**: Gentle vertical float (`y: [0, -7, 0]`) with rotating gold border beam.
+   - **Automatic Continuous Particle Emitter**: Emits floating hearts and paws every 1.5 seconds when in viewport.
+   - **Enhanced Tap Interaction**: Spring bounce physics, celebratory confetti burst, floating love particles, and persistent paw love counter.
+
+---
+
+## 🧪 Phase 9: Verification & Build Status
+
+- **Production Build**: `npm run build` (`tsc -b && vite build`) passes in ~1.26s with **0 errors**.
 - **Bundle Chunks**:
   - `dist/index.html`: 3.79 kB
-  - `dist/assets/index-CKxwvpPf.css`: 37.77 kB
+  - `dist/assets/index-D7UuJ61d.css`: 38.30 kB
   - `dist/assets/motion-BwLpCJQ6.js`: 122.17 kB
   - `dist/assets/vendor-BsOvDYUW.js`: 133.93 kB
-  - `dist/assets/index-D60-OIEC.js`: 215.58 kB
-- **Viewport Testing**: Verified responsive rendering across mobile screen widths (320px, 360px, 390px, 430px) and desktop displays.
+  - `dist/assets/index-CEc4b7wN.js`: 217.26 kB
+- **Vite Dev Server**: Running locally at `http://localhost:3000/`.

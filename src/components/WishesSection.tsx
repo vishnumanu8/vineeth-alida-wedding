@@ -123,15 +123,15 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-6 sm:mb-8"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-champagne-light border border-gold/30 text-botanical text-xs uppercase tracking-widest font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B1E16] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
             <Heart className="w-3.5 h-3.5 text-rose fill-rose" />
             <span>Blessings &amp; Greetings</span>
           </div>
 
-          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-botanical tracking-tight">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[#FAF6F0] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
             Send Your Warm Wishes
           </h2>
-          <p className="text-xs sm:text-sm text-slate mt-1 max-w-md mx-auto">
+          <p className="text-xs sm:text-sm text-[#E5C158] mt-1.5 max-w-md mx-auto tracking-wide font-sans">
             Your heartfelt words and prayers are the greatest gift to Vineeth &amp; Alida.
           </p>
         </motion.div>

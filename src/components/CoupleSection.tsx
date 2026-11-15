@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Sparkles } from 'lucide-react';
+import { Compass } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { weddingConfig } from '../config/weddingConfig';
@@ -8,7 +8,7 @@ import { weddingConfig } from '../config/weddingConfig';
 gsap.registerPlugin(ScrollTrigger);
 
 export const CoupleSection: React.FC = () => {
-  const { couple, family } = weddingConfig;
+  const { couple } = weddingConfig;
 
   const flightRouteRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
@@ -85,52 +85,51 @@ export const CoupleSection: React.FC = () => {
   return (
     <section
       id="invitation-story"
-      className="relative py-14 sm:py-24 px-4 sm:px-6 bg-pearl text-charcoal overflow-hidden"
+      className="relative py-10 sm:py-16 px-4 sm:px-6 overflow-hidden"
     >
-      {/* Subtle top transition gradient */}
-      <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
-
-      {/* Radiant background aura */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-champagne/45 rounded-full blur-3xl pointer-events-none -z-10" />
-
-      <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
+      <div className="max-w-3xl mx-auto flex flex-col items-center text-center">
         {/* ===================================================================
-            SECTION TITLE & INTRO
+            HIGH-CONTRAST SECTION HEADER
             =================================================================== */}
         <motion.div
-          initial={{ opacity: 0, y: 18 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center mb-8 sm:mb-12 max-w-xl mx-auto"
+          className="flex flex-col items-center mb-6 sm:mb-8 max-w-xl mx-auto"
         >
-          <div className="flex items-center gap-2.5 mb-2.5">
-            <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-r from-transparent to-gold" />
-            <span className="font-display italic text-xs sm:text-sm text-gold tracking-widest uppercase font-medium">
-              Two Worlds Meeting With Grace
-            </span>
-            <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-l from-transparent to-gold" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0B1E16] border border-gold/40 text-gold-shimmer text-xs uppercase tracking-widest font-semibold mb-2.5 shadow-sm">
+            <Compass className="w-3.5 h-3.5 text-gold" />
+            <span>The Journey Home</span>
           </div>
 
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-botanical tracking-tight leading-tight">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[#FAF6F0] tracking-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
             Our New Journey Begins
           </h2>
 
-          <p className="font-sans text-xs sm:text-sm md:text-base text-slate mt-2 leading-relaxed">
-            From the bustling desert skylines of Dubai to the serene backwaters of Kerala, two stories converge into one lifetime celebration.
+          <p className="font-sans text-xs sm:text-sm text-[#E5C158] mt-1.5 max-w-md mx-auto leading-relaxed tracking-wide">
+            From the skylines of Dubai to the serene backwaters of Kerala, coming home to celebrate our beginning.
           </p>
+        </motion.div>
 
-          {/* ===================================================================
-              ANIMATED DUBAI ✈ KERALA FLIGHT ROUTE (Scroll-Linked Scrub)
-              =================================================================== */}
-          {couple.originJourney && (
+        {/* ===================================================================
+            ANIMATED DUBAI ✈ KERALA FLIGHT CARD (Scroll-Linked Scrub)
+            =================================================================== */}
+        {couple.originJourney && (
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="w-full max-w-md sm:max-w-lg rounded-3xl bg-[#FFFDF9] border border-gold/45 shadow-wedding-lg p-5 sm:p-8 flex flex-col items-center select-none relative overflow-hidden"
+          >
             <div
               ref={flightRouteRef}
-              className="mt-6 w-full max-w-xs sm:max-w-sm flex flex-col items-center select-none"
+              className="w-full flex flex-col items-center"
               aria-label="Flight journey from Dubai to Kerala"
             >
               <svg
-                viewBox="0 0 320 80"
+                viewBox="0 0 320 84"
                 className="w-full h-auto overflow-visible drop-shadow-sm"
               >
                 <defs>
@@ -200,9 +199,9 @@ export const CoupleSection: React.FC = () => {
                   />
                   <text
                     x="35"
-                    y="38"
+                    y="36"
                     textAnchor="middle"
-                    className="font-display italic text-[10px] fill-[#B88A45]"
+                    className="font-display italic text-[10px] fill-[#B88A45] font-medium"
                   >
                     Departure
                   </text>
@@ -210,7 +209,7 @@ export const CoupleSection: React.FC = () => {
                     x="35"
                     y="72"
                     textAnchor="middle"
-                    className="font-sans font-semibold text-[11px] fill-[#11211A] tracking-wider uppercase"
+                    className="font-sans font-bold text-[11px] fill-[#11211A] tracking-wider uppercase"
                   >
                     {couple.originJourney.from}
                   </text>
@@ -237,9 +236,9 @@ export const CoupleSection: React.FC = () => {
                   />
                   <text
                     x="285"
-                    y="38"
+                    y="36"
                     textAnchor="middle"
-                    className="font-display italic text-[10px] fill-[#315B4B]"
+                    className="font-display italic text-[10px] fill-[#315B4B] font-medium"
                   >
                     Destination
                   </text>
@@ -247,7 +246,7 @@ export const CoupleSection: React.FC = () => {
                     x="285"
                     y="72"
                     textAnchor="middle"
-                    className="font-sans font-semibold text-[11px] fill-[#11211A] tracking-wider uppercase"
+                    className="font-sans font-bold text-[11px] fill-[#11211A] tracking-wider uppercase"
                   >
                     {couple.originJourney.to}
                   </text>
@@ -279,192 +278,14 @@ export const CoupleSection: React.FC = () => {
                 </g>
               </svg>
 
-              <p className="text-slate/75 text-[11px] sm:text-xs font-sans mt-1.5 tracking-wide font-light">
-                • {couple.originJourney.note} •
-              </p>
+              <div className="mt-4 pt-3 border-t border-champagne-border/80 w-full flex items-center justify-center gap-2">
+                <span className="text-slate/80 text-xs font-sans tracking-wide">
+                  ✦ {couple.originJourney.note} ✦
+                </span>
+              </div>
             </div>
-          )}
-        </motion.div>
-
-        {/* ===================================================================
-            HERALDIC BOTANICAL CRESTS: EDITORIAL GROOM & BRIDE PROFILES (NO PHOTOS)
-            =================================================================== */}
-        <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
-          {/* Groom Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="p-6 sm:p-8 rounded-3xl bg-pearl border border-gold/35 shadow-wedding flex flex-col items-center text-center relative overflow-hidden group hover:border-gold/60 transition-colors"
-          >
-            {/* Heraldic Botanical Laurel Emblem for Groom */}
-            <div className="relative w-24 h-24 mb-4 flex items-center justify-center">
-              <svg
-                viewBox="0 0 100 100"
-                className="w-full h-full overflow-visible drop-shadow-sm"
-              >
-                <defs>
-                  <linearGradient id="laurelGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#C89D54" />
-                    <stop offset="50%" stopColor="#F0D49E" />
-                    <stop offset="100%" stopColor="#B88A45" />
-                  </linearGradient>
-                </defs>
-
-                {/* Outer concentric rings */}
-                <circle cx="50" cy="50" r="46" fill="none" stroke="url(#laurelGold)" strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
-                <circle cx="50" cy="50" r="41" fill="#FFFDF7" stroke="#315B4B" strokeWidth="1.5" />
-
-                {/* Left botanical laurel wreath */}
-                <path d="M 24 50 C 22 36 32 24 44 18" fill="none" stroke="url(#laurelGold)" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M 28 36 Q 22 32 26 28" fill="none" stroke="url(#laurelGold)" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M 33 26 Q 29 20 35 18" fill="none" stroke="url(#laurelGold)" strokeWidth="1.2" strokeLinecap="round" />
-
-                {/* Right botanical laurel wreath */}
-                <path d="M 76 50 C 78 36 68 24 56 18" fill="none" stroke="url(#laurelGold)" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M 72 36 Q 78 32 74 28" fill="none" stroke="url(#laurelGold)" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M 67 26 Q 71 20 65 18" fill="none" stroke="url(#laurelGold)" strokeWidth="1.2" strokeLinecap="round" />
-
-                {/* Stylized Initial 'V' */}
-                <text
-                  x="50"
-                  y="59"
-                  textAnchor="middle"
-                  fontFamily="Cormorant Garamond, serif"
-                  fontSize="32"
-                  fontWeight="600"
-                  fill="#315B4B"
-                >
-                  V
-                </text>
-              </svg>
-            </div>
-
-            <span className="text-[10px] uppercase tracking-widest text-gold font-semibold mb-1">
-              {couple.groom.title}
-            </span>
-            <h3 className="font-display text-2xl sm:text-3xl font-semibold text-botanical">
-              {couple.groom.fullName}
-            </h3>
-            <p className="text-xs text-slate mt-1 mb-3">
-              {couple.groom.familyNote}
-            </p>
-
-            {/* Origin Pill */}
-            <span className="text-[10px] uppercase font-sans tracking-widest px-3 py-0.5 rounded-full bg-champagne-light/70 border border-gold/25 text-botanical mb-3 font-medium">
-              Based in {couple.groom.originCity}
-            </span>
-
-            {/* Subtle One-Liner */}
-            {couple.groom.oneLiner && (
-              <p className="text-xs italic text-charcoal/80 bg-champagne-light/80 px-3.5 py-2 rounded-xl border border-gold/20 max-w-xs mt-auto">
-                &ldquo;{couple.groom.oneLiner}&rdquo;
-              </p>
-            )}
           </motion.div>
-
-          {/* Bride Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="p-6 sm:p-8 rounded-3xl bg-pearl border border-gold/35 shadow-wedding flex flex-col items-center text-center relative overflow-hidden group hover:border-gold/60 transition-colors"
-          >
-            {/* Heraldic Botanical Laurel Emblem for Bride */}
-            <div className="relative w-24 h-24 mb-4 flex items-center justify-center">
-              <svg
-                viewBox="0 0 100 100"
-                className="w-full h-full overflow-visible drop-shadow-sm"
-              >
-                <defs>
-                  <linearGradient id="laurelGoldBride" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#C89D54" />
-                    <stop offset="50%" stopColor="#F0D49E" />
-                    <stop offset="100%" stopColor="#B88A45" />
-                  </linearGradient>
-                </defs>
-
-                {/* Outer concentric rings */}
-                <circle cx="50" cy="50" r="46" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
-                <circle cx="50" cy="50" r="41" fill="#FFFDF7" stroke="#315B4B" strokeWidth="1.5" />
-
-                {/* Left botanical laurel wreath */}
-                <path d="M 24 50 C 22 36 32 24 44 18" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M 28 36 Q 22 32 26 28" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M 33 26 Q 29 20 35 18" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.2" strokeLinecap="round" />
-
-                {/* Right botanical laurel wreath */}
-                <path d="M 76 50 C 78 36 68 24 56 18" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.5" strokeLinecap="round" />
-                <path d="M 72 36 Q 78 32 74 28" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.2" strokeLinecap="round" />
-                <path d="M 67 26 Q 71 20 65 18" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.2" strokeLinecap="round" />
-
-                {/* Stylized Initial 'A' */}
-                <text
-                  x="50"
-                  y="59"
-                  textAnchor="middle"
-                  fontFamily="Cormorant Garamond, serif"
-                  fontSize="32"
-                  fontWeight="600"
-                  fill="#315B4B"
-                >
-                  A
-                </text>
-              </svg>
-            </div>
-
-            <span className="text-[10px] uppercase tracking-widest text-gold font-semibold mb-1">
-              {couple.bride.title}
-            </span>
-            <h3 className="font-display text-2xl sm:text-3xl font-semibold text-botanical">
-              {couple.bride.fullName}
-            </h3>
-            <p className="text-xs text-slate mt-1 mb-3">
-              {couple.bride.familyNote}
-            </p>
-
-            {/* Origin Pill */}
-            <span className="text-[10px] uppercase font-sans tracking-widest px-3 py-0.5 rounded-full bg-champagne-light/70 border border-gold/25 text-botanical mb-3 font-medium">
-              Native to {couple.bride.originCity}
-            </span>
-
-            {/* Subtle One-Liner */}
-            {couple.bride.oneLiner && (
-              <p className="text-xs italic text-charcoal/80 bg-champagne-light/80 px-3.5 py-2 rounded-xl border border-gold/20 max-w-xs mt-auto">
-                &ldquo;{couple.bride.oneLiner}&rdquo;
-              </p>
-            )}
-          </motion.div>
-        </div>
-
-        {/* ===================================================================
-            FAMILY BLESSINGS NOTE
-            =================================================================== */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-10 sm:mt-14 flex flex-col items-center"
-        >
-          <div className="flex items-center gap-2 text-rose mb-2">
-            <Heart className="w-4 h-4 fill-rose text-rose" />
-            <Sparkles className="w-3.5 h-3.5 text-gold" />
-            <Heart className="w-4 h-4 fill-rose text-rose" />
-          </div>
-          <p className="font-display italic text-sm sm:text-base text-slate">
-            {family.warmClosing}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-2.5 text-xs font-medium text-botanical">
-            {family.hosts.map((host, idx) => (
-              <span key={idx} className="px-4 py-1.5 rounded-full bg-champagne/45 border border-gold/25">
-                {host}
-              </span>
-            ))}
-          </div>
-        </motion.div>
+        )}
       </div>
     </section>
   );

@@ -5,19 +5,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 interface GoldenThreadDividerProps {
-  label?: string;
-  targetId?: string;
-  icon?: React.ReactNode;
+  className?: string;
 }
 
 export const GoldenThreadDivider: React.FC<GoldenThreadDividerProps> = ({
-  label,
-  targetId,
-  icon,
+  className = '',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
-  const markerRef = useRef<HTMLButtonElement>(null);
   const leafLeftRef = useRef<SVGPathElement>(null);
   const leafRightRef = useRef<SVGPathElement>(null);
 
@@ -65,46 +60,20 @@ export const GoldenThreadDivider: React.FC<GoldenThreadDividerProps> = ({
           },
         });
       }
-
-      if (markerRef.current) {
-        gsap.fromTo(
-          markerRef.current,
-          { scale: 0.9, opacity: 0.7 },
-          {
-            scale: 1.05,
-            opacity: 1,
-            boxShadow: '0 0 16px rgba(212, 163, 89, 0.4)',
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: 'top 75%',
-              end: 'bottom 45%',
-              toggleActions: 'play reverse play reverse',
-            },
-          }
-        );
-      }
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
-  const handleClick = () => {
-    if (targetId) {
-      const el = document.getElementById(targetId);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
-
   return (
     <div
       ref={containerRef}
-      className="relative w-full flex flex-col items-center justify-center my-4 sm:my-6 pointer-events-auto select-none"
+      className={`relative w-full flex items-center justify-center my-3 sm:my-5 pointer-events-none select-none ${className}`}
+      aria-hidden="true"
     >
       {/* SVG In-Page Progressive Thread with Botanical Leaves */}
       <svg
-        className="w-6 h-14 sm:h-18 overflow-visible"
+        className="w-6 h-12 sm:h-16 overflow-visible"
         viewBox="0 0 20 70"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +86,7 @@ export const GoldenThreadDivider: React.FC<GoldenThreadDividerProps> = ({
           y2="70"
           stroke="#D4A359"
           strokeWidth="1"
-          strokeOpacity="0.25"
+          strokeOpacity="0.2"
           strokeDasharray="3 3"
         />
 
@@ -162,20 +131,6 @@ export const GoldenThreadDivider: React.FC<GoldenThreadDividerProps> = ({
           </linearGradient>
         </defs>
       </svg>
-
-      {/* Refined In-Page Chapter Marker */}
-      {label && (
-        <button
-          type="button"
-          onClick={handleClick}
-          ref={markerRef}
-          className="mt-1 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pearl border border-gold/40 text-botanical text-[11px] font-display uppercase tracking-widest shadow-sm hover:border-gold hover:text-gold-dark transition-all cursor-pointer"
-          aria-label={`Jump to ${label}`}
-        >
-          {icon}
-          <span>{label}</span>
-        </button>
-      )}
     </div>
   );
 };
