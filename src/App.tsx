@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Calendar, Sparkles, MessageCircleHeart } from 'lucide-react';
+import { Heart, Calendar, MessageCircleHeart, ScrollText } from 'lucide-react';
 import { weddingConfig } from './config/weddingConfig';
 import { weddingAudio } from './utils/audioPlayer';
 import { getGuestNameFromUrl } from './utils/url';
 
 import { OpeningDoors } from './components/OpeningDoors';
 import { HeroSection } from './components/HeroSection';
+import { InvitationLetter } from './components/InvitationLetter';
 import { GoldenThreadDivider } from './components/GoldenThreadDivider';
 import { CoupleSection } from './components/CoupleSection';
 import { ReceptionSection } from './components/ReceptionSection';
-import { MomentsSection } from './components/MomentsSection';
+import { PetVipSection } from './components/PetVipSection';
 import { WishesSection } from './components/WishesSection';
 import { Footer } from './components/Footer';
 import { AudioControl } from './components/AudioControl';
@@ -47,51 +48,61 @@ export const App: React.FC = () => {
 
       {/* 2. Main Wedding Invitation in Natural Document Flow */}
       <main className="flex-1 w-full overflow-x-hidden">
-        {/* Full-Screen Immersive Couple Hero Screen */}
+        {/* Full-Screen Animated Monogram & Kinetic Typography Hero */}
         <HeroSection guestName={guestName} />
 
-        {/* In-Page Golden Thread Motif 1: The Couple */}
+        {/* In-Page Golden Thread Motif 1: The Invitation Letter */}
         <GoldenThreadDivider
-          label="The Couple"
+          label="The Letter"
+          targetId="invitation-letter"
+          icon={<ScrollText className="w-3 h-3 text-gold" />}
+        />
+
+        {/* Section 1: The Living Invitation Letter with Parchment & Countdown */}
+        <InvitationLetter />
+
+        {/* In-Page Golden Thread Motif 2: Our Journey */}
+        <GoldenThreadDivider
+          label="Our Journey"
           targetId="invitation-story"
           icon={<Heart className="w-3 h-3 text-gold fill-gold/40" />}
         />
 
-        {/* Section 1: The Couple Profiles & Family Blessings */}
+        {/* Section 2: Couple Heraldic Crests & Dubai-to-Kerala Flight Animation */}
         <CoupleSection />
 
-        {/* In-Page Golden Thread Motif 2: The Reception */}
+        {/* In-Page Golden Thread Motif 3: The Reception */}
         <GoldenThreadDivider
           label="The Reception"
           targetId="reception"
           icon={<Calendar className="w-3 h-3 text-gold" />}
         />
 
-        {/* Section 2: Unified Editorial Reception Composition */}
+        {/* Section 3: Unified Editorial Reception Composition */}
         <ReceptionSection />
 
-        {/* In-Page Golden Thread Motif 3: Cherished Memories */}
+        {/* In-Page Golden Thread Motif 4: Special Guests (Pet VIPs) */}
         <GoldenThreadDivider
-          label="Memories"
-          targetId="moments"
-          icon={<Sparkles className="w-3 h-3 text-gold" />}
+          label="VIP Guests"
+          targetId="four-legged-vips"
+          icon={<span className="text-[10px]">🐾</span>}
         />
 
-        {/* Section 3: Touch-to-Reveal Memory Wipe */}
-        <MomentsSection />
+        {/* Section 4: Meet the Four-Legged VIPs (Pet Dogs Showcase) */}
+        <PetVipSection />
 
-        {/* In-Page Golden Thread Motif 4: Blessings & Wishes */}
+        {/* In-Page Golden Thread Motif 5: Blessings & Wishes */}
         <GoldenThreadDivider
           label="Blessings"
           targetId="wishes"
           icon={<MessageCircleHeart className="w-3 h-3 text-rose fill-rose/40" />}
         />
 
-        {/* Section 4: Wishes & Blessings via WhatsApp */}
+        {/* Section 5: Wishes & Blessings via WhatsApp */}
         <WishesSection initialGuestName={guestName} />
       </main>
 
-      {/* Elegant Footer */}
+      {/* Elegant Closing Keepsake Footer */}
       <Footer />
 
       {/* Unobtrusive Fixed Bottom-Right Audio Control */}

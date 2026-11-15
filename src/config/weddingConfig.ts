@@ -12,7 +12,8 @@ export interface CoupleProfile {
   title: string;
   familyNote: string;
   oneLiner?: string;
-  portrait: string;
+  portrait?: string;
+  initial: string;
   originCity: string;
   phone?: string; // Direct WhatsApp number with country code, no + or spaces, e.g. "919876543210"
 }
@@ -23,6 +24,16 @@ export interface WishRecipient {
   role: string;
   phone: string; // WhatsApp number with country code, no + or spaces, e.g. "919876543210"
   label?: string;
+}
+
+export interface PetVipConfig {
+  enabled: boolean;
+  sectionBadge: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+  imageAlt: string;
 }
 
 export interface WeddingConfig {
@@ -67,9 +78,11 @@ export interface WeddingConfig {
     };
   };
 
-  photos: {
-    heroPortrait: string;
-    moments: Array<{
+  pets: PetVipConfig;
+
+  photos?: {
+    heroPortrait?: string;
+    moments?: Array<{
       id: string;
       url: string;
       caption: string;
@@ -115,7 +128,7 @@ export const weddingConfig: WeddingConfig = {
       title: "The Groom",
       familyNote: "S/o Smt. Sobhana S. & Shri Madhavan Nair",
       oneLiner: "Balancing life's ledger with joy, heart & humor",
-      portrait: "/images/groom-vineeth.jpg",
+      initial: "V",
       originCity: "Dubai",
       phone: "917025987500", // Vineeth's Direct WhatsApp Number
     },
@@ -125,7 +138,7 @@ export const weddingConfig: WeddingConfig = {
       title: "The Bride",
       familyNote: "D/o Smt. Manjusha G . & Shri Vinod Kumar",
       oneLiner: "Advocating for endless love, laughter & forever",
-      portrait: "/images/bride-alida.jpg",
+      initial: "A",
       originCity: "Kerala",
       phone: "917510165607", // Alida's Direct WhatsApp Number
     },
@@ -172,28 +185,15 @@ export const weddingConfig: WeddingConfig = {
     },
   },
 
-  photos: {
-    heroPortrait: "/images/hero-couple.jpg",
-    moments: [
-      {
-        id: "moment-1",
-        url: "/images/moment-1.jpg",
-        caption: "The Journey Begins",
-        subtitle: "Two worlds meeting with grace",
-      },
-      {
-        id: "moment-2",
-        url: "/images/moment-2.jpg",
-        caption: "Evening Lights",
-        subtitle: "Laughter in every conversation",
-      },
-      {
-        id: "moment-3",
-        url: "/images/moment-3.jpg",
-        caption: "Together in Love",
-        subtitle: "Counting down to forever",
-      },
-    ],
+  pets: {
+    enabled: true,
+    sectionBadge: "Two Very Special Guests",
+    title: "Our Four-Legged VIPs",
+    subtitle: "Stepping into celebration with boundless love & joyful paws",
+    description:
+      "An inseparable part of our family story, patiently counting down the days with happy tail wags to celebrate Vineeth & Alida's new chapter together.",
+    image: "/images/Vineeth_Alida_Additional_image.jpeg",
+    imageAlt: "Vineeth & Alida's beloved family dogs",
   },
 
   wishes: {
@@ -242,7 +242,7 @@ export const weddingConfig: WeddingConfig = {
     siteDescription:
       "Together with their families, Vineeth and Alida warmly invite you to celebrate their wedding reception on Thursday, 7 January 2027.",
     siteUrl: "https://vineeth-alida.vercel.app/",
-    ogImage: "/images/og-wedding.jpg",
+    ogImage: "/images/og-invitation.jpg",
     themeColor: "#11211A",
   },
 };

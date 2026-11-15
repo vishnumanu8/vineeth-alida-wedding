@@ -4,7 +4,6 @@ import { Heart, Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { weddingConfig } from '../config/weddingConfig';
-import { WeddingImage } from './WeddingImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -88,15 +87,15 @@ export const CoupleSection: React.FC = () => {
       id="invitation-story"
       className="relative py-14 sm:py-24 px-4 sm:px-6 bg-pearl text-charcoal overflow-hidden"
     >
-      {/* Subtle top transition gradient from hero dark emerald */}
+      {/* Subtle top transition gradient */}
       <div className="absolute top-0 inset-x-0 h-16 bg-gradient-to-b from-black/5 to-transparent pointer-events-none" />
 
-      {/* Subtle radiant background aura */}
+      {/* Radiant background aura */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-champagne/45 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
         {/* ===================================================================
-            FAMILY INVITATION HEADLINE & MESSAGE
+            SECTION TITLE & INTRO
             =================================================================== */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
@@ -108,7 +107,7 @@ export const CoupleSection: React.FC = () => {
           <div className="flex items-center gap-2.5 mb-2.5">
             <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-r from-transparent to-gold" />
             <span className="font-display italic text-xs sm:text-sm text-gold tracking-widest uppercase font-medium">
-              {family.invitationHeadline}
+              Two Worlds Meeting With Grace
             </span>
             <span className="h-[1px] w-8 sm:w-12 bg-gradient-to-l from-transparent to-gold" />
           </div>
@@ -117,8 +116,8 @@ export const CoupleSection: React.FC = () => {
             Our New Journey Begins
           </h2>
 
-          <p className="font-sans text-xs sm:text-sm md:text-base text-slate mt-3 leading-relaxed">
-            {family.invitationMessage}
+          <p className="font-sans text-xs sm:text-sm md:text-base text-slate mt-2 leading-relaxed">
+            From the bustling desert skylines of Dubai to the serene backwaters of Kerala, two stories converge into one lifetime celebration.
           </p>
 
           {/* ===================================================================
@@ -169,7 +168,7 @@ export const CoupleSection: React.FC = () => {
                   fill="none"
                 />
 
-                {/* Animated Gold Flight Path (Progressively draws on scroll) */}
+                {/* Animated Gold Flight Path */}
                 <path
                   ref={pathRef}
                   d="M 35 52 Q 160 8 285 52"
@@ -259,13 +258,11 @@ export const CoupleSection: React.FC = () => {
                   ref={planeRef}
                   className="will-change-transform pointer-events-none"
                 >
-                  {/* Luminous engine trail / contrail */}
                   <circle cx="-14" cy="-3" r="1.2" fill="#F0D49E" opacity="0.75" />
                   <circle cx="-20" cy="-3" r="0.8" fill="#D4A359" opacity="0.45" />
                   <circle cx="-14" cy="3" r="1.2" fill="#F0D49E" opacity="0.75" />
                   <circle cx="-20" cy="3" r="0.8" fill="#D4A359" opacity="0.45" />
 
-                  {/* Authentic Passenger Airliner Silhouette */}
                   <path
                     d="M 15 0 C 14.2 -0.8 12.5 -1.8 8.5 -1.8 L 3 -1.8 L -2 -13 C -2.6 -13.8 -4 -13.8 -4.5 -12.8 L -3 -1.8 L -8.5 -1.8 L -11.5 -7 C -12 -7.7 -13.2 -7.6 -13.4 -6.8 L -12.5 -1.5 L -15.5 -1 C -16.2 -0.5 -16.2 0.5 -15.5 1 L -12.5 1.5 L -13.4 6.8 C -13.2 7.6 -12 7.7 -11.5 7 L -8.5 1.8 L -3 1.8 L -4.5 12.8 C -4 13.8 -2.6 13.8 -2 13 L 3 1.8 L 8.5 1.8 C 12.5 1.8 14.2 0.8 15 0 Z"
                     fill="url(#flightPlaneGrad)"
@@ -275,19 +272,13 @@ export const CoupleSection: React.FC = () => {
                     className="drop-shadow-[0_2px_8px_rgba(200,157,84,0.75)]"
                   />
 
-                  {/* Twin Jet Engines under main wings */}
                   <rect x="-2.2" y="-4.8" width="4.5" height="1.8" rx="0.9" fill="#B88A45" stroke="#FFFDF7" strokeWidth="0.5" />
                   <rect x="-2.2" y="3.0" width="4.5" height="1.8" rx="0.9" fill="#B88A45" stroke="#FFFDF7" strokeWidth="0.5" />
 
-                  {/* Cockpit Window Accent */}
-                  <path
-                    d="M 10 -0.8 Q 12 0 10 0.8 Z"
-                    fill="#07130E"
-                  />
+                  <path d="M 10 -0.8 Q 12 0 10 0.8 Z" fill="#07130E" />
                 </g>
               </svg>
 
-              {/* Note below flight trajectory */}
               <p className="text-slate/75 text-[11px] sm:text-xs font-sans mt-1.5 tracking-wide font-light">
                 • {couple.originJourney.note} •
               </p>
@@ -296,7 +287,7 @@ export const CoupleSection: React.FC = () => {
         </motion.div>
 
         {/* ===================================================================
-            COUPLE PROFILE CARDS WITH PORTRAITS & SUBTLE ONE-LINERS
+            HERALDIC BOTANICAL CRESTS: EDITORIAL GROOM & BRIDE PROFILES (NO PHOTOS)
             =================================================================== */}
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8">
           {/* Groom Card */}
@@ -305,17 +296,49 @@ export const CoupleSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="p-6 sm:p-8 rounded-3xl bg-pearl border border-champagne-border/90 shadow-wedding flex flex-col items-center text-center relative overflow-hidden group hover:border-gold/50 transition-colors"
+            className="p-6 sm:p-8 rounded-3xl bg-pearl border border-gold/35 shadow-wedding flex flex-col items-center text-center relative overflow-hidden group hover:border-gold/60 transition-colors"
           >
-            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gold/45 mb-4 shadow-sm">
-              <WeddingImage
-                src={couple.groom.portrait}
-                alt={couple.groom.fullName}
-                fallbackTitle={couple.groom.name}
-                fallbackSubtitle={couple.groom.title}
-                aspectRatio="1/1"
-                className="w-full h-full"
-              />
+            {/* Heraldic Botanical Laurel Emblem for Groom */}
+            <div className="relative w-24 h-24 mb-4 flex items-center justify-center">
+              <svg
+                viewBox="0 0 100 100"
+                className="w-full h-full overflow-visible drop-shadow-sm"
+              >
+                <defs>
+                  <linearGradient id="laurelGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#C89D54" />
+                    <stop offset="50%" stopColor="#F0D49E" />
+                    <stop offset="100%" stopColor="#B88A45" />
+                  </linearGradient>
+                </defs>
+
+                {/* Outer concentric rings */}
+                <circle cx="50" cy="50" r="46" fill="none" stroke="url(#laurelGold)" strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
+                <circle cx="50" cy="50" r="41" fill="#FFFDF7" stroke="#315B4B" strokeWidth="1.5" />
+
+                {/* Left botanical laurel wreath */}
+                <path d="M 24 50 C 22 36 32 24 44 18" fill="none" stroke="url(#laurelGold)" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M 28 36 Q 22 32 26 28" fill="none" stroke="url(#laurelGold)" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M 33 26 Q 29 20 35 18" fill="none" stroke="url(#laurelGold)" strokeWidth="1.2" strokeLinecap="round" />
+
+                {/* Right botanical laurel wreath */}
+                <path d="M 76 50 C 78 36 68 24 56 18" fill="none" stroke="url(#laurelGold)" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M 72 36 Q 78 32 74 28" fill="none" stroke="url(#laurelGold)" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M 67 26 Q 71 20 65 18" fill="none" stroke="url(#laurelGold)" strokeWidth="1.2" strokeLinecap="round" />
+
+                {/* Stylized Initial 'V' */}
+                <text
+                  x="50"
+                  y="59"
+                  textAnchor="middle"
+                  fontFamily="Cormorant Garamond, serif"
+                  fontSize="32"
+                  fontWeight="600"
+                  fill="#315B4B"
+                >
+                  V
+                </text>
+              </svg>
             </div>
 
             <span className="text-[10px] uppercase tracking-widest text-gold font-semibold mb-1">
@@ -327,6 +350,11 @@ export const CoupleSection: React.FC = () => {
             <p className="text-xs text-slate mt-1 mb-3">
               {couple.groom.familyNote}
             </p>
+
+            {/* Origin Pill */}
+            <span className="text-[10px] uppercase font-sans tracking-widest px-3 py-0.5 rounded-full bg-champagne-light/70 border border-gold/25 text-botanical mb-3 font-medium">
+              Based in {couple.groom.originCity}
+            </span>
 
             {/* Subtle One-Liner */}
             {couple.groom.oneLiner && (
@@ -342,17 +370,49 @@ export const CoupleSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="p-6 sm:p-8 rounded-3xl bg-pearl border border-champagne-border/90 shadow-wedding flex flex-col items-center text-center relative overflow-hidden group hover:border-gold/50 transition-colors"
+            className="p-6 sm:p-8 rounded-3xl bg-pearl border border-gold/35 shadow-wedding flex flex-col items-center text-center relative overflow-hidden group hover:border-gold/60 transition-colors"
           >
-            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-gold/45 mb-4 shadow-sm">
-              <WeddingImage
-                src={couple.bride.portrait}
-                alt={couple.bride.fullName}
-                fallbackTitle={couple.bride.name}
-                fallbackSubtitle={couple.bride.title}
-                aspectRatio="1/1"
-                className="w-full h-full"
-              />
+            {/* Heraldic Botanical Laurel Emblem for Bride */}
+            <div className="relative w-24 h-24 mb-4 flex items-center justify-center">
+              <svg
+                viewBox="0 0 100 100"
+                className="w-full h-full overflow-visible drop-shadow-sm"
+              >
+                <defs>
+                  <linearGradient id="laurelGoldBride" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#C89D54" />
+                    <stop offset="50%" stopColor="#F0D49E" />
+                    <stop offset="100%" stopColor="#B88A45" />
+                  </linearGradient>
+                </defs>
+
+                {/* Outer concentric rings */}
+                <circle cx="50" cy="50" r="46" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1" strokeDasharray="3 3" opacity="0.6" />
+                <circle cx="50" cy="50" r="41" fill="#FFFDF7" stroke="#315B4B" strokeWidth="1.5" />
+
+                {/* Left botanical laurel wreath */}
+                <path d="M 24 50 C 22 36 32 24 44 18" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M 28 36 Q 22 32 26 28" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M 33 26 Q 29 20 35 18" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.2" strokeLinecap="round" />
+
+                {/* Right botanical laurel wreath */}
+                <path d="M 76 50 C 78 36 68 24 56 18" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M 72 36 Q 78 32 74 28" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M 67 26 Q 71 20 65 18" fill="none" stroke="url(#laurelGoldBride)" strokeWidth="1.2" strokeLinecap="round" />
+
+                {/* Stylized Initial 'A' */}
+                <text
+                  x="50"
+                  y="59"
+                  textAnchor="middle"
+                  fontFamily="Cormorant Garamond, serif"
+                  fontSize="32"
+                  fontWeight="600"
+                  fill="#315B4B"
+                >
+                  A
+                </text>
+              </svg>
             </div>
 
             <span className="text-[10px] uppercase tracking-widest text-gold font-semibold mb-1">
@@ -364,6 +424,11 @@ export const CoupleSection: React.FC = () => {
             <p className="text-xs text-slate mt-1 mb-3">
               {couple.bride.familyNote}
             </p>
+
+            {/* Origin Pill */}
+            <span className="text-[10px] uppercase font-sans tracking-widest px-3 py-0.5 rounded-full bg-champagne-light/70 border border-gold/25 text-botanical mb-3 font-medium">
+              Native to {couple.bride.originCity}
+            </span>
 
             {/* Subtle One-Liner */}
             {couple.bride.oneLiner && (

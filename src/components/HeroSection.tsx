@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Sparkles } from 'lucide-react';
 import { weddingConfig } from '../config/weddingConfig';
+import { AnimatedMonogram } from './AnimatedMonogram';
+import { AmbientDustParticles } from './AmbientDustParticles';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,139 +16,98 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
   const { couple, reception } = weddingConfig;
 
   const heroRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLImageElement>(null);
   const shimmerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const labelLineRef = useRef<HTMLDivElement>(null);
   const namesLineRef = useRef<HTMLHeadingElement>(null);
   const dateLineRef = useRef<HTMLParagraphElement>(null);
+  const venueLineRef = useRef<HTMLParagraphElement>(null);
   const scrollCueRef = useRef<HTMLDivElement>(null);
 
-  // =========================================================================
-  // LINE-MASKED TYPOGRAPHY ENTRANCE & PARALLAX MOTION
-  // =========================================================================
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (!heroRef.current) return;
 
-      // Line-masked entrance sequence for hero typography
-      const tl = gsap.timeline({ delay: 0.2 });
+      const tl = gsap.timeline({ delay: 0.3 });
 
       if (labelLineRef.current) {
         tl.from(labelLineRef.current, {
           yPercent: 120,
           opacity: 0,
-          duration: 0.8,
+          duration: 0.9,
           ease: 'power3.out',
-        }, 0);
+        }, 0.2);
       }
 
       if (namesLineRef.current) {
         tl.from(namesLineRef.current, {
           yPercent: 120,
           opacity: 0,
-          duration: 1.0,
+          duration: 1.1,
           ease: 'power3.out',
-        }, 0.15);
+        }, 0.35);
       }
 
       if (dateLineRef.current) {
         tl.from(dateLineRef.current, {
           yPercent: 120,
           opacity: 0,
-          duration: 0.8,
+          duration: 0.85,
           ease: 'power3.out',
-        }, 0.35);
+        }, 0.55);
+      }
+
+      if (venueLineRef.current) {
+        tl.from(venueLineRef.current, {
+          opacity: 0,
+          y: 12,
+          duration: 0.8,
+          ease: 'power2.out',
+        }, 0.75);
       }
 
       if (scrollCueRef.current) {
         tl.from(scrollCueRef.current, {
           opacity: 0,
-          y: 10,
+          y: 12,
           duration: 0.8,
           ease: 'power2.out',
-        }, 0.55);
+        }, 0.95);
       }
 
-      // Parallax image movement into the next section
-      if (imageRef.current) {
-        gsap.to(imageRef.current, {
-          scale: 1.1,
-          yPercent: 10,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-          },
-        });
-      }
-
-      // Subtle fade & upward shift of hero content on scroll
+      // Smooth scroll-driven upward float & soft fade
       if (contentRef.current) {
         gsap.to(contentRef.current, {
           opacity: 0,
-          y: -30,
+          y: -40,
           ease: 'none',
           scrollTrigger: {
             trigger: heroRef.current,
             start: 'top top',
-            end: '55% top',
+            end: '60% top',
             scrub: true,
           },
         });
-      }
-
-      // Desktop smooth pointer parallax
-      const isFinePointer = window.matchMedia('(pointer: fine)').matches;
-      if (isFinePointer && imageRef.current) {
-        const xTo = gsap.quickTo(imageRef.current, 'x', { duration: 0.6, ease: 'power2.out' });
-        const yTo = gsap.quickTo(imageRef.current, 'y', { duration: 0.6, ease: 'power2.out' });
-
-        const handleMouseMove = (e: MouseEvent) => {
-          if (!heroRef.current) return;
-          const rect = heroRef.current.getBoundingClientRect();
-          const normX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-          const normY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-          xTo(normX * 14);
-          yTo(normY * 14);
-        };
-
-        const handleMouseLeave = () => {
-          xTo(0);
-          yTo(0);
-        };
-
-        const heroEl = heroRef.current;
-        heroEl.addEventListener('mousemove', handleMouseMove);
-        heroEl.addEventListener('mouseleave', handleMouseLeave);
-
-        return () => {
-          heroEl.removeEventListener('mousemove', handleMouseMove);
-          heroEl.removeEventListener('mouseleave', handleMouseLeave);
-        };
       }
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
 
-  // Mobile touch shimmer interaction
   const triggerShimmer = () => {
     if (!shimmerRef.current) return;
     gsap.killTweensOf(shimmerRef.current);
     gsap.fromTo(
       shimmerRef.current,
-      { xPercent: -130, opacity: 0.85 },
-      { xPercent: 130, opacity: 0, duration: 1.15, ease: 'power2.out' }
+      { xPercent: -130, opacity: 0.75 },
+      { xPercent: 130, opacity: 0, duration: 1.2, ease: 'power2.out' }
     );
   };
 
   const scrollToInvitation = (e: React.MouseEvent) => {
     e.stopPropagation();
-    const el = document.getElementById('invitation-story');
+    const el = document.getElementById('invitation-letter');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -165,80 +126,78 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
       aria-label="Vineeth & Alida Wedding Reception Hero"
     >
       {/* =======================================================================
-          IMMERSIVE FULL-VIEWPORT COUPLE PHOTOGRAPHY
-          Calibrated with a subtle botanical overlay and contrast scrim so any
-          replacement photo maintains crisp, elegant typography readability.
+          LIVING INVITATION CANVAS: TEXTURED EMERALD & GOLD PARTICLES (NO PHOTOS)
           ======================================================================= */}
       <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-        <img
-          ref={imageRef}
-          src={weddingConfig.photos.heroPortrait}
-          alt="Vineeth & Alida"
-          className="w-full h-full object-cover object-center filter brightness-[0.84] contrast-[1.04] opacity-85 will-change-transform"
-          loading="eager"
-          // @ts-expect-error - fetchpriority is standard in modern browsers
-          fetchpriority="high"
+        {/* Subtle radial emerald illumination */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 65% at 50% 45%, rgba(14, 40, 29, 0.95) 0%, rgba(7, 19, 14, 0.98) 70%, #050E0A 100%)',
+          }}
         />
 
-        {/* Delicate golden shimmer sweep beam on tap */}
+        {/* Ambient floating golden dust motes */}
+        <AmbientDustParticles count={20} />
+
+        {/* Delicate golden sweep beam on tap */}
         <div
           ref={shimmerRef}
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -translate-x-full z-10 opacity-0 will-change-transform"
           style={{
             background:
-              'linear-gradient(110deg, transparent 20%, rgba(240, 212, 158, 0.15) 45%, rgba(212, 163, 89, 0.45) 50%, rgba(240, 212, 158, 0.15) 55%, transparent 80%)',
+              'linear-gradient(110deg, transparent 20%, rgba(240, 212, 158, 0.12) 45%, rgba(212, 163, 89, 0.35) 50%, rgba(240, 212, 158, 0.12) 55%, transparent 80%)',
           }}
         />
 
-        {/* Full-frame subtle dark emerald tint overlay */}
-        <div className="absolute inset-0 bg-[#07130E]/35 pointer-events-none" />
+        {/* Outer ornate corner borders */}
+        <div className="absolute top-4 left-4 w-10 h-10 border-t border-l border-gold/30 pointer-events-none" />
+        <div className="absolute top-4 right-4 w-10 h-10 border-t border-r border-gold/30 pointer-events-none" />
+        <div className="absolute bottom-4 left-4 w-10 h-10 border-b border-l border-gold/30 pointer-events-none" />
+        <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-gold/30 pointer-events-none" />
 
-        {/* Central radial vignette specifically ensuring text readability */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse 75% 65% at 50% 50%, rgba(7, 19, 14, 0.6) 0%, rgba(7, 19, 14, 0.28) 50%, transparent 100%)',
-          }}
-        />
-
-        {/* Bottom gradient smoothly merging into the document flow */}
-        <div className="absolute bottom-0 inset-x-0 h-[60vh] bg-gradient-to-t from-[#07130E] via-[#07130E]/75 to-transparent pointer-events-none" />
-
-        {/* Subtle top edge shadow for status bar and monogram contrast */}
-        <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-[#07130E]/85 to-transparent pointer-events-none" />
+        {/* Bottom gradient merging into next section */}
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#07130E] to-transparent pointer-events-none" />
       </div>
 
       {/* =======================================================================
-          TOP BAR: REFINED MONOGRAM & OPTIONAL GUEST GREETING (ZERO UNNECESSARY FLOATING CONTROLS)
+          TOP BAR: MONOGRAM CREST & GUEST GREETING PILL
           ======================================================================= */}
       <div className="relative z-10 w-full max-w-5xl mx-auto flex items-center justify-between pointer-events-auto shrink-0">
-        {/* Monogram Crest */}
         <div className="w-8 h-8 rounded-full border border-gold/40 bg-black/40 backdrop-blur-md flex items-center justify-center text-pearl font-display font-medium text-xs shadow-md">
           {couple.monogram}
         </div>
 
-        {/* Guest Greeting Pill (if customized via URL) */}
         {guestName ? (
           <div className="px-3.5 py-1 rounded-full bg-black/50 backdrop-blur-md border border-gold/40 text-gold-shimmer text-[11px] font-medium tracking-wide shadow-md">
             Cordially Welcoming {guestName}
           </div>
-        ) : <div />}
+        ) : (
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-black/30 border border-gold/25 text-gold/80 text-[10px] tracking-widest uppercase">
+            <Sparkles className="w-2.5 h-2.5 text-gold" />
+            <span>Digital Invitation</span>
+          </div>
+        )}
 
         <div className="w-8" />
       </div>
 
       {/* =======================================================================
-          MAIN HERO ESSENTIALS: LINE-MASKED REVEAL
-          Show ONLY: Reception Label, Vineeth & Alida, Confirmed Date, Scroll Cue
+          MAIN HERO ESSENTIALS: ANIMATED MONOGRAM & KINETIC TYPOGRAPHY
           ======================================================================= */}
       <div
         ref={contentRef}
-        className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center my-auto py-1 px-2 pointer-events-none will-change-transform"
+        className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center my-auto py-2 px-3 pointer-events-none will-change-transform"
       >
+        {/* Animated Custom Gold Monogram SVG */}
+        <div className="mb-1 sm:mb-2 scale-90 sm:scale-100">
+          <AnimatedMonogram />
+        </div>
+
         {/* Line 1: Refined Wedding Reception Label */}
-        <div className="overflow-hidden mb-1.5 sm:mb-2.5">
+        <div className="overflow-hidden mb-1 sm:mb-2">
           <div ref={labelLineRef} className="flex items-center gap-3">
             <span className="h-[1px] w-6 sm:w-10 bg-gradient-to-r from-transparent to-gold" />
             <span className="font-display text-[10px] sm:text-xs uppercase tracking-[0.28em] text-gold-shimmer font-medium drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
@@ -249,10 +208,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
         </div>
 
         {/* Line 2: Prominent Couple Names */}
-        <div className="overflow-hidden mb-1.5 sm:mb-3">
+        <div className="overflow-hidden mb-1.5 sm:mb-2.5">
           <h1
             ref={namesLineRef}
-            className="font-display text-[clamp(2.1rem,7.5vw,4.5rem)] font-light text-pearl tracking-tight leading-tight drop-shadow-[0_3px_14px_rgba(0,0,0,0.92)]"
+            className="font-display text-[clamp(2.3rem,8vw,4.6rem)] font-light text-pearl tracking-tight leading-tight drop-shadow-[0_3px_14px_rgba(0,0,0,0.92)]"
           >
             {couple.groom.name}{' '}
             <span className="font-script text-2xl sm:text-5xl md:text-6xl text-gold font-normal px-1">
@@ -263,7 +222,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
         </div>
 
         {/* Line 3: Confirmed Date */}
-        <div className="overflow-hidden">
+        <div className="overflow-hidden mb-2">
           <p
             ref={dateLineRef}
             className="font-display italic text-sm sm:text-xl text-pearl/95 tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]"
@@ -271,10 +230,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
             {reception.formattedDate}
           </p>
         </div>
+
+        {/* Line 4: Venue Location Teaser */}
+        <p
+          ref={venueLineRef}
+          className="text-[11px] sm:text-xs text-pearl-100/75 uppercase tracking-[0.2em] font-sans font-light"
+        >
+          {reception.venueName} • {reception.city}
+        </p>
       </div>
 
       {/* =======================================================================
-          SUBTLE ANIMATED SCROLL CUE (Guaranteed Visible on All Mobile Devices)
+          ANIMATED SCROLL CUE
           ======================================================================= */}
       <div
         ref={scrollCueRef}
@@ -284,10 +251,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
           type="button"
           onClick={scrollToInvitation}
           className="flex flex-col items-center gap-1 text-pearl-100/75 hover:text-pearl transition-colors cursor-pointer group"
-          aria-label="Scroll to explore invitation details"
+          aria-label="Scroll to read wedding invitation letter"
         >
           <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] font-medium text-gold-shimmer">
-            Scroll to explore
+            Read Invitation Letter
           </span>
           <ChevronDown className="w-4 h-4 text-gold group-hover:translate-y-1 transition-transform animate-bounce" />
         </button>

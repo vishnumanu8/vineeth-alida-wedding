@@ -4,20 +4,29 @@ A complete, production-ready, standalone digital wedding reception invitation we
 
 Designed with **95% modern wedding elegance and 5% playful personality**, this application delivers an unforgettable first impression, an immersive full-screen opening, and effortless usability for all guests—from friends on smartphones to parents and senior family members.
 
+> **🌿 Editions & Git Branches:**
+> - **`main`**: Original cinematic photo edition with high-contrast couple portraits and dynamic memory slider.
+> - **`WeddingInvitationNoImage`**: **"The Living Invitation Letter" edition** — Completely removes personal couple/group photos and replaces them with an animated gold monogram, tactile digital parchment invitation letter, live countdown clock, heraldic botanical crests, and a delightful bottom showcase of the bride's two pet dogs (`Vineeth_Alida_Additional_image.jpeg`). See [`docs/WeddingInvitationNoImage.md`](docs/WeddingInvitationNoImage.md).
+
 ---
 
 ## 🌟 Key Features & Highlights
 
 - **Cinematic Double-Door Parting Reveal**:
   - Two majestic botanical-green panels parted down the center seam with restrained gold accents and a royal `V & A` crest.
-  - Minimal, intuitive interaction cue: `⟨ Tap to Enter ⟩`.
+  - Minimal, intuitive interaction cue: `⟨ Tap to open ⟩`.
   - Zero loading delay: Instantly parts left and right via GPU-accelerated CSS 3D transforms (`translate3d`), with background music beginning immediately.
-  - The full-screen hero couple screen is pre-rendered underneath, immersing guests the moment the doors part.
-- **Unforgettable Full-Screen Hero Screen**:
-  - Full-viewport (`100dvh`) atmospheric couple portrait with dark botanical vignetting.
-  - Minimal, app-like composition: Couple names, short invitation note, reception date badge, and the `Dubai ✈ Kerala` travel route.
-  - Natural audio control integrated discreetly in the top-right corner—never floating or covering content.
-  - Gentle scroll cue: *Reception Details ↓*.
+- **The Living Invitation Letter & Animated Monogram**:
+  - Custom SVG Gold Monogram (`V & A`) with self-drawing stroke animation (`stroke-dashoffset`).
+  - Layered tactile digital parchment card with wax seal crest and scroll-triggered prose reveals.
+  - Live real-time countdown timer to Thursday, 7 January 2027 at 6:00 PM IST.
+- **Heraldic Botanical Couple Profiles**:
+  - Exquisite botanical laurel emblems with personalized initials ('V' and 'A'), family heritage notes, and personality quotes.
+  - Interactive **Dubai ✈ Kerala Flight Route** with scroll-linked animated airliner silhouette, contrail particles, and travel notes.
+- **Meet the Four-Legged VIPs (Pet Dogs Showcase)**:
+  - Genuine, uncropped presentation of the beloved family dogs near the bottom (`Vineeth_Alida_Additional_image.jpeg`).
+  - Animated stepping paw print trail on scroll.
+  - Interactive "Send Love & Paws" button triggering floating hearts/paws and gold confetti bursts.
 - **Pure Native Touch Scrolling (Zero Lag)**:
   - 100% native momentum scrolling preserved without scroll hijacking, forced snapping, or heavy scroll-linked state updates.
   - Smooth background transitions from deep botanical green to warm pearl and champagne.
@@ -29,12 +38,6 @@ Designed with **95% modern wedding elegance and 5% playful personality**, this a
     - **Add to Calendar** (Google Calendar & Apple/Outlook `.ics`) in the Reception Section.
     - **Copy Address** in the Reception Section.
     - **Send Wishes via WhatsApp** with celebratory confetti in the Wishes Section.
-- **Genuine Curated Editorial Photography**:
-  - Real high-resolution, magazine-grade wedding editorial photography in `public/images/`.
-  - No blank green panels or fabricated fake portraits.
-  - Resilient `WeddingImage` component with an elegant gold & botanical monogram fallback.
-- **Live Countdown Timer**:
-  - Accurate countdown to Sunday, 29 November 2026 with completed-event state.
 - **Personalized Guest Greetings**:
   - Supports `?guest=Suresh%20%26%20Family` in the URL to display personalized greetings on the opening doors and hero screen, while pre-filling the WhatsApp blessing form.
 
