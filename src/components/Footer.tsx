@@ -26,50 +26,14 @@ export const Footer: React.FC = () => {
     const shareTitle = `Wedding Reception Invitation — ${couple.combinedNames}`;
     const shareText = `*Wedding Reception Invitation — ${couple.combinedNames}* 💐\n\nYou are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} at ${reception.venueName}, ${reception.city}.\n\nView digital invitation & directions:\n${shareUrl}`;
 
-    // Load actual invitation image file for native media sharing
-    const imageUrl = metadata?.ogImage || '/og-image-letter.png';
-    let imageFile: File | null = null;
-    try {
-      const res = await fetch(imageUrl);
-      if (res.ok) {
-        const blob = await res.blob();
-        imageFile = new File([blob], 'Vineeth-Alida-Wedding-Invitation.png', {
-          type: blob.type || 'image/png',
-        });
-      }
-    } catch {
-      // Image fetch fallback
-    }
-
-    // 1. Primary: Native Web Share API with REAL IMAGE FILE (iOS Safari, Android Chrome)
-    // Attaches the actual wedding invitation photo directly into WhatsApp with the invitation caption!
-    if (imageFile && navigator.canShare) {
-      try {
-        const fileShareData = {
-          files: [imageFile],
-          title: shareTitle,
-          text: shareText,
-        };
-        if (navigator.canShare(fileShareData)) {
-          await navigator.share(fileShareData);
-          setSharing(false);
-          return;
-        }
-      } catch (err) {
-        // If user cancelled the share dialog, do not open anything
-        if ((err as Error)?.name === 'AbortError') {
-          setSharing(false);
-          return;
-        }
-      }
-    }
-
-    // 2. Secondary: Native Share with Link (if file sharing not supported on this browser)
+    // 1. Primary: Native Web Share API with URL Link (iOS Safari, Android Chrome)
+    // Sharing as a URL link instructs WhatsApp to generate an interactive Rich Card Preview.
+    // Tapping anywhere on the preview card (including the image) will navigate directly to the website!
     if (navigator.share) {
       try {
         await navigator.share({
           title: shareTitle,
-          text: `You are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} at ${reception.venueName}, ${reception.city}.`,
+          text: `*Wedding Reception Invitation — ${couple.combinedNames}* 💐\n\nYou are cordially invited to celebrate the wedding reception of Vineeth & Alida on ${reception.formattedDate} at ${reception.venueName}, ${reception.city}.\n\nView digital invitation & directions:`,
           url: shareUrl,
         });
         setSharing(false);
@@ -83,7 +47,7 @@ export const Footer: React.FC = () => {
       }
     }
 
-    // 3. Fallback: Direct WhatsApp Universal link
+    // 2. Fallback: Direct WhatsApp Universal link with full message and URL
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
 
     const isMobile =
@@ -130,8 +94,8 @@ export const Footer: React.FC = () => {
           </button>
 
           <a
-            href="/og-image-letter.png"
-            download="Vineeth-Alida-Wedding-Invitation.png"
+            href="/og-image-letter.jpg"
+            download="Vineeth-Alida-Wedding-Invitation.jpg"
             className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-champagne-light/60 hover:bg-champagne border border-gold/25 text-xs font-medium text-slate hover:text-botanical transition-all cursor-pointer min-h-[44px]"
             title="Download invitation card monogram"
           >

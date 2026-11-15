@@ -244,7 +244,8 @@ const htmlContent = `<!DOCTYPE html>
 
 const tempHtmlPath = '/tmp/og-simple-template.html';
 const outputPngPath = resolve(rootDir, 'public/og-image-letter.png');
-const outputJpgPath = resolve(rootDir, 'public/images/og-invitation.jpg');
+const outputJpgPath = resolve(rootDir, 'public/og-image-letter.jpg');
+const legacyJpgPath = resolve(rootDir, 'public/images/og-invitation.jpg');
 
 writeFileSync(tempHtmlPath, htmlContent, 'utf-8');
 
@@ -280,10 +281,11 @@ out.extend(struct.pack('>I', 0) + b'IEND' + struct.pack('>I', zlib.crc32(b'IEND'
 with open('${outputPngPath}', 'wb') as f: f.write(out)
 "`);
 
-// Also update fallback JPEG
+// Generate JPEGs for fastest WhatsApp link unfurling
 try {
   execSync(`sips -s format jpeg "${outputPngPath}" --out "${outputJpgPath}"`, { stdio: 'inherit' });
-  console.log('Updated fallback JPEG:', outputJpgPath);
+  execSync(`sips -s format jpeg "${outputPngPath}" --out "${legacyJpgPath}"`, { stdio: 'inherit' });
+  console.log('Updated JPEGs:', outputJpgPath, legacyJpgPath);
 } catch (e) {
   console.warn(e.message);
 }
