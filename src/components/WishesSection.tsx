@@ -11,7 +11,7 @@ interface WishesSectionProps {
 export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }) => {
   const { wishes, couple } = weddingConfig;
 
-  // Dedicated phone mapping for Vineeth and Alida:
+  // Dedicated phone mapping for Alida and Vineeth:
   // Strictly prioritize their individual configured phone numbers
   const groomPhone =
     couple.groom.phone ||
@@ -132,7 +132,7 @@ export const WishesSection: React.FC<WishesSectionProps> = ({ initialGuestName }
             Send Your Warm Wishes
           </h2>
           <p className="text-xs sm:text-sm text-[#E5C158] mt-1.5 max-w-md mx-auto tracking-wide font-sans">
-            Your heartfelt words and prayers are the greatest gift to Vineeth &amp; Alida.
+            Your heartfelt words and prayers are the greatest gift to Alida &amp; Vineeth.
           </p>
         </motion.div>
 

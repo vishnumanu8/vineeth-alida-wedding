@@ -195,3 +195,40 @@ Executed a complete color theme transformation across the entire digital invitat
    - Updated `scripts/generate-og-image.mjs` and `public/og-image-letter.svg` with the Midnight Sapphire velvet gradient `radial-gradient(circle at 50% 45%, #162B66 0%, #0F1D47 48%, #070D21 100%)`.
    - Regenerated `public/og-image-letter.png` (298 KB, under 300 KB requirement) and `public/og-image-letter.jpg` / `public/images/og-invitation.jpg` (66 KB) with Google Chrome headless screenshot and compression.
 
+---
+
+## 💍 Phase 15: Final UI Refinements — Subtle Couple Landing Background, Compact Pets Feature & Bride-First Name Order
+
+Executed targeted refinements adhering strictly to branch boundaries and preserving existing layout structures and physics:
+
+1. **Subtle Couple Photography Background on Landing Page (`HeroSection.tsx`):**
+   - Integrated `public/images/couple.jpg` as a subtle, elegant background strictly scoped to the Hero section.
+   - Tuned opacity to ~42% (within the 35–50% requested range / 58% transparent) with multiple blending layers:
+     - Midnight Sapphire tint overlay (`bg-[#0B1325]/55`).
+     - Soft radial vignette keeping faces natural while deepening periphery (`radial-gradient`).
+     - Bottom gradient melt (`from-[#0B1325] via-[#0B1325]/85 to-transparent`).
+   - Smooth entrance after door opening: GSAP timeline smoothly fades image into view (`duration: 1.4s, ease: power2.out`).
+   - Scroll-linked fade: GSAP ScrollTrigger synchronises opacity with scrolling, smoothly fading the background to 0 as the guest scrolls away, and restoring it naturally on scroll back.
+
+2. **Compact & Elegant "And Three Very Special Guests" Feature (`PetVipSection.tsx`):**
+   - Replaced the large vertical full-screen layout with an elegant, compact feature card.
+   - Reused the authentic photograph of the bride's dogs (`Vineeth_Alida_Additional_image.jpeg`) without modifying or replacing the animals.
+   - Concept: **"And Three Very Special Guests"** with playful subtitle *"Patiently counting down the days with happy tail wags & boundless love"*.
+   - Compact framed photograph (`w-36 h-36 sm:w-44 sm:h-44`) with gilded borders and corner filigrees.
+   - Subtle 6-step animated golden paw-print trail leading softly into the card.
+   - Gentle scroll reveal using Framer Motion (`whileInView`).
+
+3. **Bride-First Name Order ("Alida & Vineeth"):**
+   - Applied **Alida & Vineeth** and **A & V** consistently across all touchpoints:
+     - Launch aperture screen: Monogram `A & V` ligature and `Alida & Vineeth` subtitle.
+     - Animated crest hero: Self-drawing letters `A` on left and `V` on right with `Alida & Vineeth` main title.
+     - Formal Invitation Letter: Bride (Adv. Alida M Vinod and parents) paired first, followed by Groom (Vineeth M and parents).
+     - Wax seal emblem: `A & V 2027`.
+     - Journey Card signature quotes: Alida's quote card first, Vineeth's quote card second.
+     - Wishes Section: Alida as primary default recipient, updated blessings prose.
+     - Footer: `Alida & Vineeth`, `A & V` monogram, and download filename `Alida-Vineeth-Wedding-Invitation.jpg`.
+     - Open Graph metadata and Twitter cards in `index.html`.
+     - Favicon: `A&V`.
+     - Social preview cards: Regenerated `og-image-sapphire.jpg` and `og-image-letter.jpg` with `Alida & Vineeth`.
+
+

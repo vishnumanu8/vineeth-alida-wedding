@@ -45,7 +45,7 @@ export function downloadIcsFile(params: CalendarEventParams, filename = 'vineeth
   const icsContent = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Vineeth & Alida//Wedding Reception Invitation//EN',
+    'PRODID:-//Alida & Vineeth//Wedding Reception Invitation//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',
@@ -61,7 +61,7 @@ export function downloadIcsFile(params: CalendarEventParams, filename = 'vineeth
     'BEGIN:VALARM',
     'TRIGGER:-P1D',
     'ACTION:DISPLAY',
-    'DESCRIPTION:Reminder: Wedding Reception of Vineeth & Alida tomorrow',
+    'DESCRIPTION:Reminder: Wedding Reception of Alida & Vineeth tomorrow',
     'END:VALARM',
     'END:VEVENT',
     'END:VCALENDAR',

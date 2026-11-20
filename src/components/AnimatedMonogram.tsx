@@ -82,7 +82,7 @@ export const AnimatedMonogram: React.FC = () => {
         ref={svgRef}
         viewBox="0 0 280 200"
         className="w-56 sm:w-72 h-auto overflow-visible"
-        aria-label="V & A Monogram with botanical ornaments"
+        aria-label="A & V Monogram with botanical ornaments"
       >
         <defs>
           <linearGradient id="monoGold" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -194,7 +194,7 @@ export const AnimatedMonogram: React.FC = () => {
           strokeLinecap="round"
         />
 
-        {/* V letter */}
+        {/* A letter */}
         <text
           className="mono-letter"
           x="90"
@@ -206,7 +206,7 @@ export const AnimatedMonogram: React.FC = () => {
           fontWeight="500"
           filter="url(#goldGlow)"
         >
-          V
+          A
         </text>
 
         {/* & ampersand */}
@@ -223,7 +223,7 @@ export const AnimatedMonogram: React.FC = () => {
           &amp;
         </text>
 
-        {/* A letter */}
+        {/* V letter */}
         <text
           className="mono-letter"
           x="192"
@@ -235,7 +235,7 @@ export const AnimatedMonogram: React.FC = () => {
           fontWeight="500"
           filter="url(#goldGlow)"
         >
-          A
+          V
         </text>
 
         {/* Ornamental underline curve */}

@@ -280,7 +280,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
           handleEnter();
         }
       }}
-      aria-label="Tap anywhere to open Vineeth & Alida's wedding invitation"
+      aria-label="Tap anywhere to open Alida & Vineeth's wedding invitation"
       style={{
         top: 0,
         left: 0,
@@ -424,7 +424,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
 
       {/* =======================================================================
           THE MIDNIGHT SAPPHIRE APERTURE: MINIMAL, BESPOKE LAUNCH CONTENT
-          - Custom SVG V&A ligature on ONE single line (immune to text wrapping)
+          - Custom SVG A&V ligature on ONE single line (immune to text wrapping)
           - "A celebration awaits"
           - Subtle "Tap to open" cue
           - Zero repeated dates, venues, or duplicate text
@@ -442,14 +442,14 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
           <span className="w-6 h-[1px] bg-gradient-to-l from-transparent to-gold/40" />
         </div>
 
-        {/* Center: Bespoke V&A SVG Ligature & Minimal Greeting */}
+        {/* Center: Bespoke A&V SVG Ligature & Minimal Greeting */}
         <div className="flex flex-col items-center my-auto px-4 max-w-xs">
-          {/* Custom V&A SVG Ligature - Aligned on one line, zero wrapping */}
+          {/* Custom A&V SVG Ligature - Aligned on one line, zero wrapping */}
           <div className="mb-4">
             <svg
               viewBox="0 0 120 40"
               className="w-28 sm:w-32 h-auto mx-auto overflow-visible drop-shadow-md"
-              aria-label="V and A Monogram"
+              aria-label="A and V Monogram"
             >
               <text
                 x="60"
@@ -458,7 +458,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
                 className="font-display font-medium fill-gold-shimmer select-none"
                 style={{ fontSize: '26px', letterSpacing: '0.18em' }}
               >
-                V<tspan className="font-script text-[22px] fill-gold" dx="2" dy="-2">&amp;</tspan><tspan dx="2">A</tspan>
+                A<tspan className="font-script text-[22px] fill-gold" dx="2" dy="-2">&amp;</tspan><tspan dx="2">V</tspan>
               </text>
               {/* Delicate ornamental curve below */}
               <path
@@ -484,7 +484,7 @@ export const OpeningDoors: React.FC<OpeningDoorsProps> = ({
           </h2>
 
           <p className="text-[11px] sm:text-xs text-pearl-100/60 font-sans tracking-[0.2em] uppercase font-light">
-            Vineeth &amp; Alida
+            Alida &amp; Vineeth
           </p>
 
           {/* Guest Personalization if provided via URL */}

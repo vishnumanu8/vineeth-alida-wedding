@@ -142,9 +142,9 @@ export const weddingConfig: WeddingConfig = {
       originCity: "Kerala",
       phone: "917510165607", // Alida's Direct WhatsApp Number
     },
-    monogram: "V & A",
-    combinedNames: "Vineeth & Alida",
-    hashtag: "#VineethWedsAlida",
+    monogram: "A & V",
+    combinedNames: "Alida & Vineeth",
+    hashtag: "#AlidaWedsVineeth",
     originJourney: {
       from: "Dubai",
       to: "Kerala",
@@ -155,9 +155,9 @@ export const weddingConfig: WeddingConfig = {
   family: {
     invitationHeadline: "Together with our families",
     invitationMessage:
-      "We cordially invite you to join us for an evening of celebration, joyful laughter, and dinner as we celebrate the wedding reception of Vineeth & Alida.",
+      "We cordially invite you to join us for an evening of celebration, joyful laughter, and dinner as we celebrate the wedding reception of Alida & Vineeth.",
     warmClosing: "With love, prayers, and heartfelt anticipation",
-    hosts: ["The Parents & Family of Vineeth", "The Parents & Family of Alida"],
+    hosts: ["The Parents & Family of Alida", "The Parents & Family of Vineeth"],
   },
 
   reception: {
@@ -177,9 +177,9 @@ export const weddingConfig: WeddingConfig = {
     // Verified Google Maps Place & Directions URL
     googleMapsUrl: "https://maps.google.com/?cid=2116222744221680343",
     calendarDetails: {
-      title: "Wedding Reception of Vineeth & Alida",
+      title: "Wedding Reception of Alida & Vineeth",
       description:
-        "Join Vineeth and Alida for an evening of celebration, dining, and blessings at their wedding reception.",
+        "Join Alida and Vineeth for an evening of celebration, dining, and blessings at their wedding reception.",
       location:
         "Kariyilakallu Lake View, Nedungolam, Paravoor, Kerala 691334",
     },
@@ -187,38 +187,38 @@ export const weddingConfig: WeddingConfig = {
 
   pets: {
     enabled: true,
-    sectionBadge: "✨ SPECIAL PAW-TY VIPs",
-    title: "Our Four-Legged VIPs",
-    subtitle: "Stepping into celebration with boundless love & joyful paws",
+    sectionBadge: "🐾 SPECIAL GUESTS",
+    title: "And Three Very Special Guests",
+    subtitle: "Patiently counting down the days with happy tail wags & boundless love",
     description:
-      "An inseparable part of our family story, patiently counting down the days with happy tail wags to celebrate Vineeth & Alida's new chapter together.",
+      "An inseparable part of our family story, patiently counting down the days with happy tail wags to celebrate Alida & Vineeth's new chapter together.",
     image: "/images/Vineeth_Alida_Additional_image.jpeg",
-    imageAlt: "Vineeth & Alida's beloved family dogs",
+    imageAlt: "Alida & Vineeth's beloved family dogs",
   },
 
   wishes: {
     enabled: true,
     recipients: [
       {
-        id: "vineeth",
-        name: "Vineeth",
-        role: "Groom",
-        phone: "917025987500", // Vineeth's WhatsApp Number (editable)
-        label: "Vineeth (Groom)",
-      },
-      {
         id: "alida",
         name: "Alida",
         role: "Bride",
-        phone: "917510165607", // Alida's WhatsApp Number (editable)
+        phone: "917510165607", // Alida's Direct WhatsApp Number
         label: "Alida (Bride)",
+      },
+      {
+        id: "vineeth",
+        name: "Vineeth",
+        role: "Groom",
+        phone: "917025987500", // Vineeth's Direct WhatsApp Number
+        label: "Vineeth (Groom)",
       },
     ],
     whatsappNumber: "917025987500",
-    defaultRecipientName: "Vineeth & Alida",
+    defaultRecipientName: "Alida & Vineeth",
     presetMessages: [
       "Wishing you a lifetime of endless love, joyful laughter, and abundant blessings!",
-      "Congratulations Vineeth & Alida! So thrilled to celebrate your special evening with you!",
+      "Congratulations Alida & Vineeth! So thrilled to celebrate your special evening with you!",
       "May your new journey together be filled with harmony, prosperity, and happiness!",
       "Heartfelt congratulations! Sending all our prayers and warmest love to both families!",
     ],
@@ -238,9 +238,9 @@ export const weddingConfig: WeddingConfig = {
   },
 
   metadata: {
-    siteTitle: "Vineeth & Alida — Wedding Reception Invitation",
+    siteTitle: "Alida & Vineeth — Wedding Reception Invitation",
     siteDescription:
-      "Together with their families, Vineeth and Alida warmly invite you to celebrate their wedding reception on Thursday, 7 January 2027.",
+      "Together with their families, Alida and Vineeth warmly invite you to celebrate their wedding reception on Thursday, 7 January 2027.",
     siteUrl: "https://vineeth-alida.vercel.app/",
     ogImage: "/og-image-sapphire.jpg",
     themeColor: "#0B1325",

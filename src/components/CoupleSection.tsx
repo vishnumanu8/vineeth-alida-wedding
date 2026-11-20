@@ -293,24 +293,6 @@ export const CoupleSection: React.FC = () => {
 
                 {/* Dual Quote Cards */}
                 <div className="w-full flex flex-col gap-2.5">
-                  {/* Vineeth Quote */}
-                  <div className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 rounded-2xl bg-[#FAF6EE] border border-gold/30 shadow-xs text-left">
-                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#D4A359] to-[#8C6D37] text-[#FFFDF7] flex items-center justify-center font-display font-bold text-[11px] shrink-0 shadow-xs">
-                      V
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-baseline gap-1.5 flex-wrap">
-                        <span className="font-display font-semibold text-[12px] sm:text-[13px] text-[#0B1325] tracking-tight">
-                          {couple.groom.name}
-                        </span>
-                        <span className="text-gold/70 text-[10px]">✦</span>
-                        <span className="font-serif italic text-[11px] sm:text-xs text-[#16255C] leading-snug">
-                          &ldquo;{couple.groom.oneLiner}&rdquo;
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
                   {/* Alida Quote */}
                   <div className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 rounded-2xl bg-[#FAF6EE] border border-gold/30 shadow-xs text-left">
                     <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#D4A359] to-[#8C6D37] text-[#FFFDF7] flex items-center justify-center font-display font-bold text-[11px] shrink-0 shadow-xs">
@@ -324,6 +306,24 @@ export const CoupleSection: React.FC = () => {
                         <span className="text-gold/70 text-[10px]">✦</span>
                         <span className="font-serif italic text-[11px] sm:text-xs text-[#16255C] leading-snug">
                           &ldquo;{couple.bride.oneLiner}&rdquo;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Vineeth Quote */}
+                  <div className="flex items-center gap-2.5 px-3 sm:px-4 py-2.5 rounded-2xl bg-[#FAF6EE] border border-gold/30 shadow-xs text-left">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#D4A359] to-[#8C6D37] text-[#FFFDF7] flex items-center justify-center font-display font-bold text-[11px] shrink-0 shadow-xs">
+                      V
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-baseline gap-1.5 flex-wrap">
+                        <span className="font-display font-semibold text-[12px] sm:text-[13px] text-[#0B1325] tracking-tight">
+                          {couple.groom.name}
+                        </span>
+                        <span className="text-gold/70 text-[10px]">✦</span>
+                        <span className="font-serif italic text-[11px] sm:text-xs text-[#16255C] leading-snug">
+                          &ldquo;{couple.groom.oneLiner}&rdquo;
                         </span>
                       </div>
                     </div>

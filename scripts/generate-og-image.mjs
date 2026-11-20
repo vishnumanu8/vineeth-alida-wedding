@@ -11,7 +11,7 @@ const htmlContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Vineeth & Alida — Wedding Invitation Card</title>
+  <title>Alida & Vineeth — Wedding Invitation Card</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -201,20 +201,20 @@ const htmlContent = `<!DOCTYPE html>
         <path d="M 188 70 Q 185 50 172 38 Q 178 52 176 70" stroke="url(#goldGradient)" stroke-width="1.2" fill="none" stroke-linecap="round" />
         <path d="M 188 70 Q 185 90 172 102 Q 178 88 176 70" stroke="url(#goldGradient)" stroke-width="1.2" fill="none" stroke-linecap="round" />
 
-        <!-- Monogram Letter V -->
-        <text x="96" y="85" text-anchor="middle" font-size="52" font-weight="600" fill="url(#goldGradient)" font-family="'Cormorant Garamond', Georgia, serif" filter="url(#monogramGlow)">V</text>
+        <!-- Monogram Letter A -->
+        <text x="96" y="85" text-anchor="middle" font-size="52" font-weight="600" fill="url(#goldGradient)" font-family="'Cormorant Garamond', Georgia, serif" filter="url(#monogramGlow)">A</text>
         
         <!-- Ampersand -->
         <text x="120" y="80" text-anchor="middle" font-size="36" font-weight="400" fill="#F0D49E" font-family="'Great Vibes', cursive" filter="url(#monogramGlow)">&amp;</text>
         
-        <!-- Monogram Letter A -->
-        <text x="144" y="85" text-anchor="middle" font-size="52" font-weight="600" fill="url(#goldGradient)" font-family="'Cormorant Garamond', Georgia, serif" filter="url(#monogramGlow)">A</text>
+        <!-- Monogram Letter V -->
+        <text x="144" y="85" text-anchor="middle" font-size="52" font-weight="600" fill="url(#goldGradient)" font-family="'Cormorant Garamond', Georgia, serif" filter="url(#monogramGlow)">V</text>
       </svg>
     </div>
 
     <!-- Couple Names -->
     <h1 class="names">
-      Vineeth <span class="amp">&amp;</span> Alida
+      Alida <span class="amp">&amp;</span> Vineeth
     </h1>
 
     <!-- Divider -->

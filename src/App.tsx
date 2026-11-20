@@ -52,7 +52,7 @@ export const App: React.FC = () => {
       {/* 2. Main Wedding Invitation in Natural Document Flow */}
       <main className="flex-1 w-full overflow-x-hidden relative z-20">
         {/* Full-Screen Animated Monogram & Kinetic Typography Hero */}
-        <HeroSection guestName={guestName} />
+        <HeroSection guestName={guestName} hasOpened={hasOpenedDoors} />
 
         {/* Clean Ornamental Golden Thread Divider */}
         <GoldenThreadDivider />

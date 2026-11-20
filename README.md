@@ -1,32 +1,33 @@
-# Vineeth & Alida — Modern Cinematic Wedding Reception Invitation 💍💐
+# Alida & Vineeth — Modern Cinematic Wedding Reception Invitation 💍💐
 
-A complete, production-ready, standalone digital wedding reception invitation web application for **Vineeth (Groom) and Alida (Bride)**.
+A complete, production-ready, standalone digital wedding reception invitation web application for **Alida (Bride) and Vineeth (Groom)**.
 
 Designed with **95% modern wedding elegance and 5% playful personality**, this application delivers an unforgettable first impression, an immersive full-screen opening, and effortless usability for all guests—from friends on smartphones to parents and senior family members.
 
 > **🌿 Editions & Git Branches:**
 >
 > - **`main`**: Original cinematic photo edition with high-contrast couple portraits and dynamic memory slider.
-> - **`WeddingInvitationNoImage`**: **"The Living Invitation Letter" edition** — Completely removes personal couple/group photos and replaces them with an animated gold monogram, tactile digital parchment invitation letter, live countdown clock, heraldic botanical crests, and a delightful bottom showcase of the bride's two pet dogs (`Vineeth_Alida_Additional_image.jpeg`). See [`docs/WeddingInvitationNoImage.md`](docs/WeddingInvitationNoImage.md).
+> - **`WeddingInvitationNoImage`**: **"The Living Invitation Letter" edition** — Features an evening Midnight Sapphire & Champagne Gold theme, subtle couple photography background on the landing page, animated gold monogram (`A & V`), tactile digital parchment invitation letter, live countdown clock, heraldic crests, and a compact, delightful showcase of the bride's dogs ("And Three Very Special Guests"). See [`docs/WeddingInvitationNoImage.md`](docs/WeddingInvitationNoImage.md).
 
 ---
 
 ## 🌟 Key Features & Highlights
 
 - **Cinematic Double-Door Parting Reveal**:
-  - Two majestic botanical-green panels parted down the center seam with restrained gold accents and a royal `V & A` crest.
+  - Two majestic Midnight Sapphire panels parted down the center seam with restrained gold accents and a royal `A & V` crest.
   - Minimal, intuitive interaction cue: `⟨ Tap to open ⟩`.
   - Zero loading delay: Instantly parts left and right via GPU-accelerated CSS 3D transforms (`translate3d`), with background music beginning immediately.
 - **The Living Invitation Letter & Animated Monogram**:
-  - Custom SVG Gold Monogram (`V & A`) with self-drawing stroke animation (`stroke-dashoffset`).
-  - Layered tactile digital parchment card with wax seal crest and scroll-triggered prose reveals.
-  - Live real-time countdown timer to Thursday, 7 January 2027 at 6:00 PM IST.
+  - Custom SVG Gold Monogram (`A & V`) with self-drawing stroke animation (`stroke-dashoffset`).
+  - Subtle couple photography background on landing page, synchronised to fade smoothly with scroll.
+  - Layered tactile digital parchment card with wax seal crest and scroll-triggered prose reveals, with bride (Alida) listed first.
+  - Live real-time countdown timer to Thursday, 7 January 2027 at 5:30 PM IST.
 - **Heraldic Botanical Couple Profiles**:
-  - Exquisite botanical laurel emblems with personalized initials ('V' and 'A'), family heritage notes, and personality quotes.
+  - Exquisite botanical laurel emblems with personalized initials ('A' and 'V'), family heritage notes, and personality quotes.
   - Interactive **Dubai ✈ Kerala Flight Route** with scroll-linked animated airliner silhouette, contrail particles, and travel notes.
-- **Meet the Four-Legged VIPs (Pet Dogs Showcase)**:
+- **And Three Very Special Guests (Pet Dogs Feature)**:
   - Genuine, uncropped presentation of the beloved family dogs near the bottom (`Vineeth_Alida_Additional_image.jpeg`).
-  - Animated stepping paw print trail on scroll.
+  - Compact, elegant framed card with subtle animated stepping paw print trail on scroll.
   - Interactive "Send Love & Paws" button triggering floating hearts/paws and gold confetti bursts.
 - **Pure Native Touch Scrolling (Zero Lag)**:
   - 100% native momentum scrolling preserved without scroll hijacking, forced snapping, or heavy scroll-linked state updates.

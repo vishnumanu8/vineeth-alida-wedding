@@ -9,12 +9,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface HeroSectionProps {
   guestName?: string | null;
+  hasOpened?: boolean;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ guestName, hasOpened }) => {
   const { couple, reception } = weddingConfig;
 
   const heroRef = useRef<HTMLElement>(null);
+  const bgContainerRef = useRef<HTMLDivElement>(null);
+  const bgImageRef = useRef<HTMLImageElement>(null);
   const shimmerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -24,9 +27,44 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
   const venueLineRef = useRef<HTMLParagraphElement>(null);
   const scrollCueRef = useRef<HTMLDivElement>(null);
 
+  // Smooth entrance of couple background image when doors open
+  useEffect(() => {
+    // If hasOpened is explicitly false (doors closed), wait until it becomes true
+    if (hasOpened === false) return;
+
+    if (bgImageRef.current) {
+      gsap.fromTo(
+        bgImageRef.current,
+        { opacity: 0, scale: 1.05 },
+        {
+          opacity: 0.45,
+          scale: 1,
+          duration: 1.4,
+          ease: 'power2.out',
+        }
+      );
+    }
+  }, [hasOpened]);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (!heroRef.current) return;
+
+      // Synchronise couple background opacity with scrolling:
+      // Fades to 0 smoothly as user scrolls away from hero, restores naturally when scrolling back
+      if (bgContainerRef.current) {
+        gsap.to(bgContainerRef.current, {
+          opacity: 0,
+          y: 40,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: 'top top',
+            end: '85% top',
+            scrub: true,
+          },
+        });
+      }
 
       const tl = gsap.timeline({ delay: 0.3 });
 
@@ -122,21 +160,45 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
         maxHeight: '100dvh',
       }}
       className="relative w-full h-[100dvh] min-h-[100dvh] max-h-[100dvh] flex flex-col justify-between items-center text-center px-4 sm:px-8 select-none overflow-hidden bg-transparent cursor-pointer pt-[max(0.75rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))]"
-      aria-label="Vineeth & Alida Wedding Reception Hero"
+      aria-label="Alida & Vineeth Wedding Reception Hero"
     >
       {/* =======================================================================
-          LIVING INVITATION CANVAS: MIDNIGHT SAPPHIRE & GOLD PARTICLES (NO PHOTOS)
+          COUPLE PHOTOGRAPHY BACKGROUND LAYER (SUBTLE, SCOPED TO HERO & FADES ON SCROLL)
           ======================================================================= */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-        {/* Subtle radial midnight sapphire illumination */}
+      <div
+        ref={bgContainerRef}
+        className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0 will-change-[opacity,transform]"
+      >
+        <img
+          ref={bgImageRef}
+          src="/images/couple.jpg"
+          alt="Alida & Vineeth"
+          className="w-full h-full object-cover object-[center_25%] will-change-[opacity,transform] select-none opacity-0"
+          loading="eager"
+          // @ts-expect-error - fetchpriority is standard in modern browsers
+          fetchpriority="high"
+        />
+
+        {/* Soft radial vignette keeping faces luminous while blending periphery into Midnight Sapphire */}
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(ellipse 80% 65% at 50% 45%, rgba(17, 29, 74, 0.75) 0%, rgba(11, 19, 37, 0.9) 70%, rgba(6, 10, 20, 0.95) 100%)',
+              'radial-gradient(ellipse 85% 75% at 50% 35%, transparent 0%, rgba(11, 19, 37, 0.35) 60%, #0B1325 100%)',
           }}
         />
 
+        {/* Bottom gradient smoothly melting into the subsequent section */}
+        <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#0B1325] via-[#0B1325]/80 to-transparent pointer-events-none" />
+
+        {/* Top gradient for status bar contrast */}
+        <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-[#0B1325]/75 to-transparent pointer-events-none" />
+      </div>
+
+      {/* =======================================================================
+          LIVING INVITATION CANVAS: SHIMMER & CORNER ACCENTS
+          ======================================================================= */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
         {/* Delicate golden sweep beam on tap */}
         <div
           ref={shimmerRef}
@@ -153,9 +215,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
         <div className="absolute top-4 right-4 w-10 h-10 border-t border-r border-gold/30 pointer-events-none" />
         <div className="absolute bottom-4 left-4 w-10 h-10 border-b border-l border-gold/30 pointer-events-none" />
         <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-gold/30 pointer-events-none" />
-
-        {/* Bottom gradient merging into next section */}
-        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-[#0B1325] to-transparent pointer-events-none" />
       </div>
 
       {/* =======================================================================
@@ -206,11 +265,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ guestName }) => {
             ref={namesLineRef}
             className="font-display text-[clamp(2.3rem,8vw,4.6rem)] font-light text-pearl tracking-tight leading-tight drop-shadow-[0_3px_14px_rgba(0,0,0,0.92)]"
           >
-            {couple.groom.name}{' '}
+            {couple.bride.name}{' '}
             <span className="font-script text-2xl sm:text-5xl md:text-6xl text-gold font-normal px-1">
               &amp;
             </span>{' '}
-            {couple.bride.name}
+            {couple.groom.name}
           </h1>
         </div>
 

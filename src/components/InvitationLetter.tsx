@@ -137,7 +137,7 @@ export const InvitationLetter: React.FC = () => {
             />
           </svg>
 
-          {/* Wax Seal Motif: V & A 2027 */}
+          {/* Wax Seal Motif: A & V 2027 */}
           <div className="relative z-10 mx-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#932525] via-[#A83232] to-[#6E1A1A] p-1 shadow-lg flex items-center justify-center mb-5 border border-gold/40">
             <div className="w-full h-full rounded-full border border-gold/50 flex flex-col items-center justify-center text-pearl">
               <span className="font-display text-sm sm:text-base font-bold tracking-widest text-[#F0D49E]">
@@ -174,13 +174,13 @@ export const InvitationLetter: React.FC = () => {
             transition={{ duration: 0.7 }}
             className="flex flex-col items-center max-w-lg mx-auto"
           >
-            {/* Groom Name & Parents */}
+            {/* Bride Name & Parents */}
             <div className="flex flex-col items-center">
               <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-botanical tracking-tight leading-tight">
-                {couple.groom.fullName}
+                {couple.bride.fullName}
               </h3>
               <p className="font-display italic text-sm sm:text-base text-slate mt-1.5 font-medium">
-                {couple.groom.familyNote}
+                {couple.bride.familyNote}
               </p>
             </div>
 
@@ -193,13 +193,13 @@ export const InvitationLetter: React.FC = () => {
               <span className="h-[1px] w-12 sm:w-20 bg-gradient-to-r from-transparent via-gold to-transparent" />
             </div>
 
-            {/* Bride Name & Parents */}
+            {/* Groom Name & Parents */}
             <div className="flex flex-col items-center">
               <h3 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-botanical tracking-tight leading-tight">
-                {couple.bride.fullName}
+                {couple.groom.fullName}
               </h3>
               <p className="font-display italic text-sm sm:text-base text-slate mt-1.5 font-medium">
-                {couple.bride.familyNote}
+                {couple.groom.familyNote}
               </p>
             </div>
           </motion.div>
